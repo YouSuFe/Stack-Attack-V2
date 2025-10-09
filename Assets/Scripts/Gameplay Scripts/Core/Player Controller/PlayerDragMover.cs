@@ -11,19 +11,19 @@ public class PlayerDragMover : MonoBehaviour
     [SerializeField] private float moveSpeed = 20f;                 // units per second toward target
     [SerializeField] private Vector2 xBounds = new Vector2(-3.5f, 3.5f);
 
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D playerRigidBody2D;
     private bool isDragging;
     private float startOffsetX;
     private float targetX;
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        playerRigidBody2D = GetComponent<Rigidbody2D>();
         if (gameplayCamera == null) gameplayCamera = Camera.main;
 
         // Ensure recommended RB2D setup (can also be set in Inspector)
-        rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
-        rigidbody2D.interpolation = RigidbodyInterpolation2D.Interpolate;
+        playerRigidBody2D.bodyType = RigidbodyType2D.Kinematic;
+        playerRigidBody2D.interpolation = RigidbodyInterpolation2D.Interpolate;
         targetX = transform.position.x;
     }
 
@@ -52,17 +52,17 @@ public class PlayerDragMover : MonoBehaviour
     private void FixedUpdate()
     {
         // Move horizontally toward targetX using physics-friendly motion
-        Vector2 position = rigidbody2D.position;
+        Vector2 position = playerRigidBody2D.position;
         float maxStep = moveSpeed * Time.fixedDeltaTime;
         float newX = Mathf.MoveTowards(position.x, targetX, maxStep);
-        rigidbody2D.MovePosition(new Vector2(newX, position.y));
+        playerRigidBody2D.MovePosition(new Vector2(newX, position.y));
     }
 
     private void HandleDragStarted(Vector2 screenPosition)
     {
         isDragging = true;
         float pointerWorldX = ScreenToWorldX(screenPosition);
-        startOffsetX = rigidbody2D.position.x - pointerWorldX; // preserve grip offset
+        startOffsetX = playerRigidBody2D.position.x - pointerWorldX; // preserve grip offset
         targetX = Mathf.Clamp(pointerWorldX + startOffsetX, xBounds.x, xBounds.y);
     }
 
@@ -90,6 +90,18 @@ public class PlayerDragMover : MonoBehaviour
 
         Vector3 world = gameplayCamera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, zDistance));
         return world.x;
+    }
+
+    public void EnablePlayerInput()
+    {
+        if (inputReader != null)
+            inputReader.EnableInput();
+    }
+
+    public void DisablePlayerInput()
+    {
+        if (inputReader != null)
+            inputReader.DisableInput();
     }
 
     public void SetBounds(Vector2 newBounds) => xBounds = newBounds;
