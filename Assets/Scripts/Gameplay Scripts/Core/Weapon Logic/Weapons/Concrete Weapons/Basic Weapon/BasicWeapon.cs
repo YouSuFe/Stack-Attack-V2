@@ -63,7 +63,15 @@ public class BasicWeapon : BaseWeapon
             // spawn
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
-            Instantiate(projectilePrefab, worldPos, rot);
+            GameObject go = Instantiate(projectilePrefab, worldPos, rot);
+
+            int damage = 1; // for now fixed; we can data-drive this later per weapon/upgrade
+            int pierce = GetPiercing();
+
+            if (go.TryGetComponent<IProjectile>(out var projectile))
+            {
+                projectile.Initialize(GetOwner() != null ? GetOwner() : gameObject, damage, pierce);
+            }
 
             index++;
         }
