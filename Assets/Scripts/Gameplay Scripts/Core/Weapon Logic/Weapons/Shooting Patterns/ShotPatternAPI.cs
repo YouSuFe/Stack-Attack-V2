@@ -47,11 +47,30 @@ public struct PatternContext
     public float horizontalSpacing;  // world-units between neighbors in a row
     public float rowVerticalOffset;  // extra vertical delta between rows (if you use rows)
 
-    public PatternContext(Transform origin, float spacing, float rowYOffset)
+    // --- for alternating/missile patterns ---
+    public Transform leftMuzzle;        // if null, pattern will use alternateSideOffsetX
+    public Transform rightMuzzle;       // if null, pattern will use alternateSideOffsetX
+    public float alternateSideOffsetX;  // fallback X offset if no muzzle transforms
+
+    // Fan step angle (degrees) for Kunai
+    public float fanStepDegrees;
+
+    public PatternContext(
+       Transform origin,
+       float spacing,
+       float rowYOffset,
+       Transform left = null,
+       Transform right = null,
+       float altSideOffsetX = 0.6f,
+       float fanStepDeg = 5f)
     {
         fireOrigin = origin;
         horizontalSpacing = spacing;
         rowVerticalOffset = rowYOffset;
+        leftMuzzle = left;
+        rightMuzzle = right;
+        alternateSideOffsetX = altSideOffsetX;
+        fanStepDegrees = fanStepDeg;
     }
 }
 
