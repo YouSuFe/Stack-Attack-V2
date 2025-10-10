@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class MissileWeapon : BaseWeapon
 {
-    [Header("Firing Origin & Muzzles")]
-    [SerializeField] private Transform fireOrigin;
-    [SerializeField] private Transform leftMuzzleTransform;   // optional but recommended
-    [SerializeField] private Transform rightMuzzleTransform;  // optional but recommended
-    [SerializeField] private float fallbackSideOffsetX = 0.6f;
 
     [Header("Damage")]
     [SerializeField] private int damagePerMissile = 2;
+
+    private Transform fireOrigin;
+    private Transform leftMuzzleTransform;
+    private Transform rightMuzzleTransform;
+    private float fallbackSideOffsetX = 0.6f;
+
+    public void Init(Transform fireOrigin, Transform leftMuzzle, Transform rightMuzzle, float fallbackSideOffsetX)
+    {
+        this.fireOrigin = fireOrigin;
+        this.leftMuzzleTransform = leftMuzzle;
+        this.rightMuzzleTransform = rightMuzzle;
+        this.fallbackSideOffsetX = fallbackSideOffsetX;
+    }
 
     protected override float ExecuteFirePattern()
     {
@@ -81,5 +89,3 @@ public class MissileWeapon : BaseWeapon
         }
     }
 }
-
-

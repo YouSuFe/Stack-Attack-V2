@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class BasicWeapon : BaseWeapon
 {
-    [Header("Firing Origin & Layout")]
-    [SerializeField] private Transform fireOrigin;          // usually a child at player’s muzzle
-    [SerializeField] private float horizontalSpacing = 0.7f;
-    [SerializeField] private float secondRowVerticalOffset = 0.15f; // for OverflowResolution.Rows
 
+    [Header("Basic Damage")]
+    [SerializeField] private int damagePerBasic = 1;         // simple per-shot damage
+
+    private Transform fireOrigin;
+    private float horizontalSpacing = 0.7f;
+    private float secondRowVerticalOffset = 0.15f;
+
+    /// <summary>Called by WeaponDriver when equipping. Injects scene mounts.</summary>
+    public void Init(Transform fireOrigin, float horizontalSpacing, float secondRowVerticalOffset)
+    {
+        this.fireOrigin = fireOrigin;
+        this.horizontalSpacing = horizontalSpacing;
+        this.secondRowVerticalOffset = secondRowVerticalOffset;
+    }
     protected override float ExecuteFirePattern()
     {
         var def = GetDefinition();
@@ -65,7 +75,7 @@ public class BasicWeapon : BaseWeapon
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
             GameObject go = Instantiate(projectilePrefab, worldPos, rot);
 
-            int damage = 1; // for now fixed; we can data-drive this later per weapon/upgrade
+            int damage = damagePerBasic; // for now fixed; we can data-drive this later per weapon/upgrade
             int pierce = GetPiercing();
 
             if (go.TryGetComponent<IProjectile>(out var projectile))
