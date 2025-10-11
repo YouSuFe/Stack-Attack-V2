@@ -16,7 +16,7 @@ public class PlayerDamageCollisionHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other == null || !playerHealth.IsAlive) return;
+        if (other == null || !playerHealth.IsAlive || other.CompareTag("Projectile")) return;
 
         // 1) Apply incoming damage
         if (other.TryGetComponent<IDamageDealer>(out var dealer))

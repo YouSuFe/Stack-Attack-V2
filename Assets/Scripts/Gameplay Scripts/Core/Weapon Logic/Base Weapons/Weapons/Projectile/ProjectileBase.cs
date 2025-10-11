@@ -76,8 +76,10 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Don't hit our owner
-        if (owner != null && other.gameObject == owner)
+        if ((owner != null && other.gameObject == owner) || other.CompareTag("Projectile") || other.CompareTag("Player"))
+        {
             return;
+        }
 
         if (!other.TryGetComponent<IDamageable>(out var target))
             return;

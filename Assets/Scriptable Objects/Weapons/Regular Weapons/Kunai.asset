@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b6c11962a684cf29a306c3ccb7c9c9, type: 3}
+  m_Name: Kunai
+  m_EditorClassIdentifier: 
+  weaponType: 2
+  displayName: Kunai
+  projectilePrefab: {fileID: 7468544236867463896, guid: 12def424d3e404288a8ef4cc6d2428c4, type: 3}
+  projectileMotionType: 0
+  hitCountPolicy: 0
+  patternType: 2
+  baseFireRatePerSecond: 0.7
+  baseProjectileAmount: 3
+  basePiercing: 0
+  supportsAutoFire: 1
+  horizontalSimultaneousLimit: 6
+  overflowResolution: 1
+  sequentialShotIntervalSeconds: 0.05
+  alternatingBurstIntervalSeconds: 0.1
+  maxFanAngleTotalDegrees: 30

@@ -166,17 +166,23 @@ public class WeaponDriver : MonoBehaviour
     /// </summary>
     public void OnShootPressed(bool isPressed)
     {
-        if (!canAttack) return;
+        Debug.Log($"OnShootPressed(isPressed:{isPressed}) called. canAttack={canAttack}, equippedInOrder.Count={equippedInOrder.Count}");
+
+        if (!canAttack)
+        {
+            Debug.Log("OnShootPressed: Global gate canAttack==false -> ignoring input.");
+            return;
+        }
 
         if (isPressed)
         {
-            // Always fire once on press to get immediate feedback,
-            // and also start auto-fire for weapons that support it.
+            Debug.Log("OnShootPressed: PRESS detected -> FireOnceAll() for immediate feedback, then StartAutoFireAll().");
             FireOnceAll();
             StartAutoFireAll();
         }
         else
         {
+            Debug.Log("OnShootPressed: RELEASE detected -> StopAutoFireAll().");
             StopAutoFireAll();
         }
     }

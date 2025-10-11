@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 /// Very basic test enemy for validating damage, invulnerability, and instant-kill.
-/// Moves toward the player each frame and damages them on contact.
+/// Moves toward the player and deals contact damage on trigger overlap.
+/// Also takes damage from your projectiles (IDamageable).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
@@ -12,20 +14,30 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
     [SerializeField] private int contactDamage = 1;
     [SerializeField] private float moveSpeed = 2f;
 
+    [Header("Contact Damage")]
+    [Tooltip("Seconds between successive hits to the SAME target while staying in contact.")]
+    [SerializeField] private float contactDamageCooldownSeconds = 0.5f;
+    [Tooltip("If true, only damage objects tagged 'Player'. If false, damage any IDamageable.")]
+    [SerializeField] private bool onlyHitPlayerTag = true;
+
     [Header("Visuals")]
-    [SerializeField] private GameObject deathEffect; // optional prefab (particle, sprite flash, etc.)
+    [SerializeField] private GameObject deathEffect; // optional
 
     private Transform playerTarget;
     private Collider2D enemyCollider2D;
+    private readonly Dictionary<int, float> lastHitTimeByTargetId = new Dictionary<int, float>();
 
-    public bool IsAlive => health > 0;
+    // ---- IDamageDealer ----
     public int DamageAmount => contactDamage;
     public GameObject Owner => gameObject;
+
+    // Convenience
+    public bool IsAlive => health > 0;
 
     private void Awake()
     {
         enemyCollider2D = GetComponent<Collider2D>();
-        enemyCollider2D.isTrigger = true; // so we use trigger logic (same as player)
+        enemyCollider2D.isTrigger = true; // using trigger-based contact damage
     }
 
     private void Start()
@@ -47,11 +59,15 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
-    public void TakeDamage(int damageAmount, GameObject damageSource)
+    // ---- IDamageable ----
+    public void TakeDamage(int damageAmount, GameObject damageSource = null)
     {
         if (!IsAlive) return;
 
-        health -= Mathf.Max(1, damageAmount);
+        int applied = Mathf.Max(1, damageAmount);
+        health -= applied;
+
+        Debug.Log($"[TestEnemy] Took {applied} dmg from {(damageSource != null ? damageSource.name : "Unknown")} | HP: {health}");
 
         if (health <= 0)
         {
@@ -59,18 +75,59 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
         }
     }
 
+    public void TakeInstantKill(bool ignoreInvulnerability = true)
+    {
+        if (!IsAlive) return;
+        health = 0;
+        Die(null);
+    }
+
     private void Die(GameObject killer)
     {
         if (deathEffect != null)
             Instantiate(deathEffect, transform.position, Quaternion.identity);
 
-        Debug.Log($"{this.name} is killed by {killer.name}");
-
+        Debug.Log($"{name} is killed by {(killer != null ? killer.name : "Unknown")}");
         Destroy(gameObject);
     }
 
+    // ---- Contact damage to player (or any IDamageable if allowed) ----
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"{gameObject.name} is collided with {other.name}");
+        TryDealContactDamage(other);
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        TryDealContactDamage(other);
+    }
+
+    private void TryDealContactDamage(Collider2D other)
+    {
+        if (!IsAlive) return;
+
+        // Optional: restrict to Player tag
+        if (onlyHitPlayerTag && !other.CompareTag("Player"))
+            return;
+
+        // Must have an IDamageable to hurt
+        if (!other.TryGetComponent<IDamageable>(out var damageable))
+            return;
+
+        // Throttle per-target using instance ID
+        int targetId = other.transform.root.GetInstanceID();
+        float now = Time.time;
+
+        if (!lastHitTimeByTargetId.TryGetValue(targetId, out float lastTime))
+            lastTime = -999f;
+
+        if (now - lastTime >= contactDamageCooldownSeconds)
+        {
+            lastHitTimeByTargetId[targetId] = now;
+
+            // Deal damage as an IDamageDealer (Owner = this enemy)
+            damageable.TakeDamage(Mathf.Max(1, contactDamage), Owner);
+            Debug.Log($"[TestEnemy] Dealt {contactDamage} contact dmg to {other.name}");
+        }
     }
 }

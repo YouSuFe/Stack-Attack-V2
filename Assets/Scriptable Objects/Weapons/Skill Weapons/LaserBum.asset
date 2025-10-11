@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b9a3edc171d41dfa25ac93d7b98007, type: 3}
+  m_Name: LaserBum
+  m_EditorClassIdentifier: 
+  specialSkillType: 0
+  requiredCharge: 25
+  activeDurationSeconds: 1
+  damageMode: 0
+  damagePerTick: 20
+  tickIntervalSeconds: 1
+  maxRange: 12
+  beamRadius: 1
+  damageMask:
+    serializedVersion: 2
+    m_Bits: 64
+  beamVisualPrefab: {fileID: 7537136635215886244, guid: 53681a9918c694968abd4eb4a4da4960, type: 3}
+  countOncePerActivation: 1
