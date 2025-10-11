@@ -59,31 +59,39 @@ public class BasicWeapon : BaseWeapon
     private IEnumerator FireScheduleCoroutine(GameObject projectilePrefab, List<ShotCommand> schedule)
     {
         float baseTime = Time.time;
-        int index = 0;
 
-        while (index < schedule.Count)
+        for (int i = 0; i < schedule.Count; i++)
         {
-            ShotCommand cmd = schedule[index];
+            ShotCommand cmd = schedule[i];
 
             float targetTime = baseTime + cmd.timeOffsetSeconds;
-            // wait until it's time to spawn this command
+
+            // Wait until it's time to spawn this command
             while (Time.time < targetTime)
                 yield return null;
 
-            // spawn
+            // Spawn
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
             GameObject go = Instantiate(projectilePrefab, worldPos, rot);
 
-            int damage = damagePerBasic; // for now fixed; we can data-drive this later per weapon/upgrade
+            HitCountPolicy policy = GetDefinition() != null
+                ? GetDefinition().HitCountPolicy
+                : HitCountPolicy.OncePerTargetPerProjectile;
+
+            int damage = damagePerBasic; // fixed for now, can be data-driven later
             int pierce = GetPiercing();
 
             if (go.TryGetComponent<IProjectile>(out var projectile))
             {
-                projectile.Initialize(GetOwner() != null ? GetOwner() : gameObject, damage, pierce);
+                projectile.Initialize(
+                    GetOwner() != null ? GetOwner() : gameObject,
+                    damage,
+                    pierce,
+                    policy
+                );
             }
-
-            index++;
         }
+
     }
 }

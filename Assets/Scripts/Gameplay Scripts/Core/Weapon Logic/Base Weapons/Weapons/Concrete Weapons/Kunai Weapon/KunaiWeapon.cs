@@ -70,11 +70,22 @@ public class KunaiWeapon : BaseWeapon
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
             GameObject go = Instantiate(projectilePrefab, worldPos, rot);
 
-            int pierce = GetPiercing();
-            int damage = damagePerKunai;
+            HitCountPolicy policy = GetDefinition() != null
+                    ? GetDefinition().HitCountPolicy
+                    : HitCountPolicy.OncePerTargetPerProjectile;
 
-            if (go.TryGetComponent<IProjectile>(out var proj))
-                proj.Initialize(GetOwner() != null ? GetOwner() : gameObject, damage, pierce);
+            int damage = damagePerKunai; // for now fixed; we can data-drive this later per weapon/upgrade
+            int pierce = GetPiercing();
+
+            if (go.TryGetComponent<IProjectile>(out var projectile))
+            {
+                projectile.Initialize(
+                    GetOwner() != null ? GetOwner() : gameObject,
+                    damage,
+                    pierce,
+                    policy
+                );
+            }
         }
     }
 }

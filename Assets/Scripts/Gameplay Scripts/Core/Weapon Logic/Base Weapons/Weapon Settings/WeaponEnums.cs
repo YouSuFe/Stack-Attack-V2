@@ -36,3 +36,12 @@ public enum WeaponUpgradeScope
     AllWeapons,
     SpecificWeapon
 }
+
+public enum HitCountPolicy
+{
+    /// <summary>Count a hit only once per target for the life of a single projectile.</summary>
+    OncePerTargetPerProjectile,
+
+    /// <summary>Count every distinct OnTriggerEnter (re-hits are allowed, e.g., boomerang).</summary>
+    CountEveryEntry
+}

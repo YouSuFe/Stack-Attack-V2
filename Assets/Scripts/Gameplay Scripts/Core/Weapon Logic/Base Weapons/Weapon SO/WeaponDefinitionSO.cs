@@ -17,6 +17,9 @@ public class WeaponDefinitionSO : ScriptableObject
     [Tooltip("Determines how the projectile moves once fired (Linear or Sine).")]
     [SerializeField] private ProjectileMotionType projectileMotionType = ProjectileMotionType.Linear;
 
+    [Tooltip("How hits from this weapon are counted for charge filling.")]
+    [SerializeField] private HitCountPolicy hitCountPolicy = HitCountPolicy.OncePerTargetPerProjectile;
+
     [Header("Pattern")]
     [Tooltip("Defines how the weapon fires projectiles (StraightLine, AlternatingBurst, FanSequential).")]
     [SerializeField] private WeaponPatternType patternType = WeaponPatternType.StraightLine;
@@ -56,6 +59,7 @@ public class WeaponDefinitionSO : ScriptableObject
 
     public GameObject ProjectilePrefab => projectilePrefab;
     public ProjectileMotionType ProjectileMotionType => projectileMotionType;
+    public HitCountPolicy HitCountPolicy => hitCountPolicy;
 
     public WeaponPatternType PatternType => patternType;
 

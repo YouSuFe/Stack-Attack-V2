@@ -73,12 +73,22 @@ public class MissileWeapon : BaseWeapon
             Quaternion rot = fireOrigin.rotation;
             GameObject go = Instantiate(projectilePrefab, worldPos, rot);
 
-            // Initialize projectile (owner, damage, pierce)
+            HitCountPolicy policy = GetDefinition() != null
+                    ? GetDefinition().HitCountPolicy
+                    : HitCountPolicy.OncePerTargetPerProjectile;
+
+            int damage = damagePerMissile; // for now fixed; we can data-drive this later per weapon/upgrade
             int pierce = GetPiercing();
-            int damage = damagePerMissile;
 
             if (go.TryGetComponent<IProjectile>(out var projectile))
-                projectile.Initialize(GetOwner() != null ? GetOwner() : gameObject, damage, pierce);
+            {
+                projectile.Initialize(
+                    GetOwner() != null ? GetOwner() : gameObject,
+                    damage,
+                    pierce,
+                    policy
+                );
+            }
 
             // Mirror sine phase by side: left (x<0) => π, right => 0
             if (go.TryGetComponent<SineMissileProjectile>(out var sine))
