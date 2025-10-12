@@ -52,11 +52,11 @@ public class MissileWeapon : BaseWeapon
         if (schedule.Count > 0)
             burstDuration = Mathf.Max(0f, schedule[schedule.Count - 1].timeOffsetSeconds);
 
-        StartCoroutine(FireScheduleCoroutine(def.ProjectilePrefab, schedule));
+        StartCoroutine(FireScheduleCoroutine(schedule));
         return burstDuration;
     }
 
-    private IEnumerator FireScheduleCoroutine(GameObject projectilePrefab, List<ShotCommand> schedule)
+    private IEnumerator FireScheduleCoroutine(List<ShotCommand> schedule)
     {
         float baseTime = Time.time;
 
@@ -71,31 +71,31 @@ public class MissileWeapon : BaseWeapon
             // Spawn at the fireOrigin + local offset (which points to the left/right muzzle)
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);
             Quaternion rot = fireOrigin.rotation;
-            GameObject go = Instantiate(projectilePrefab, worldPos, rot);
+
+            ProjectileBase projectileBase = SpawnProjectile(GetDefinition(), worldPos, rot);
+            if (projectileBase == null)
+                continue;
 
             HitCountPolicy policy = GetDefinition() != null
-                    ? GetDefinition().HitCountPolicy
-                    : HitCountPolicy.OncePerTargetPerProjectile;
+                ? GetDefinition().HitCountPolicy
+                : HitCountPolicy.OncePerTargetPerProjectile;
 
-            int damage = damagePerMissile; // for now fixed; we can data-drive this later per weapon/upgrade
-            int pierce = GetPiercing();
-
-            if (go.TryGetComponent<IProjectile>(out var projectile))
-            {
-                projectile.Initialize(
-                    GetOwner() != null ? GetOwner() : gameObject,
-                    damage,
-                    pierce,
-                    policy
-                );
-            }
+            IProjectile projectile = (IProjectile)projectileBase;
+            projectile.Initialize(
+                owner: GetOwner() != null ? GetOwner() : gameObject,
+                damageAmount: damagePerMissile,
+                piercing: GetPiercing(),
+                policy: policy
+            );
 
             // Mirror sine phase by side: left (x<0) => π, right => 0
-            if (go.TryGetComponent<SineMissileProjectile>(out var sine))
+            SineMissileProjectile sine = projectileBase as SineMissileProjectile;
+            if (sine != null)
             {
                 float phase = (cmd.localOffset.x < 0f) ? Mathf.PI : 0f;
                 sine.SetPhaseOffsetRadians(phase);
             }
         }
     }
+
 }

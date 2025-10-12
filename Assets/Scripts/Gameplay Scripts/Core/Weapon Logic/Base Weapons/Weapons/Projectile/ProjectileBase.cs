@@ -24,6 +24,37 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     // Used only when policy == OncePerTargetPerProjectile
     private readonly HashSet<int> countedTargets = new HashSet<int>();
 
+    // ---------------------------
+    // Optional: pooling support
+    // ---------------------------
+
+    // If you use the pooling service, it will call BindPool(...) once when the instance is created.
+    // If you are not pooling, ReturnToPool() simply disables the object as a safe fallback.
+    private ProjectilePoolService poolService;   // assigned once by the pool
+    private ProjectileBase prefabKey;            // prefab identity for this instance (pool key)
+
+    /// <summary>Bound by the pool when the instance is first created.</summary>
+    public void BindPool(ProjectilePoolService service, ProjectileBase prefab)
+    {
+        poolService = service;
+        prefabKey = prefab;
+    }
+
+    /// <summary>Called by the pool on every Get(). Reset per-shot state here.</summary>
+    public virtual void OnSpawnFromPool()
+    {
+        lifeTimer = 0f;
+        countedTargets.Clear();
+        // If you ignore owner collisions or have other per-shot guards, re-apply them here.
+    }
+
+    /// <summary>Called by the pool on every Release(). Clean visuals here if needed.</summary>
+    public virtual void OnReturnToPool()
+    {
+        // Example: trailRenderer?.Clear(); particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
+
+
     // ---- IDamageDealer ----
     public int DamageAmount => damageAmount;
     public GameObject Owner => owner != null ? owner : gameObject;
@@ -56,7 +87,9 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.isTrigger = true;
 
+        lifeTimer = 0f;
         remainingPiercing = startingPiercing;
+        countedTargets.Clear();
     }
 
     protected virtual void Update()
@@ -112,7 +145,7 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
         }
         else
         {
-            Destroy(gameObject);
+            ReturnToPool();
         }
     }
 
@@ -126,5 +159,22 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
             return comp.transform.root.GetInstanceID();
 
         return col.GetInstanceID();
+    }
+
+    /// <summary>
+    /// Return this instance to its pool (if any). Safe fallback disables the GameObject.
+    /// </summary>
+    protected void ReturnToPool()
+    {
+        if (poolService != null)
+        {
+            poolService.Despawn(this);
+        }
+        else
+        {
+            // If not pooled, disabling avoids GC churn and lets you still inspect state in playmode.
+            // If you really want the old behavior, swap to Destroy(gameObject) here.
+            gameObject.SetActive(false);
+        }
     }
 }

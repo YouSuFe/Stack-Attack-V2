@@ -49,11 +49,11 @@ public class KunaiWeapon : BaseWeapon
         if (schedule.Count > 0)
             burstDuration = Mathf.Max(0f, schedule[schedule.Count - 1].timeOffsetSeconds);
 
-        StartCoroutine(FireScheduleCoroutine(def.ProjectilePrefab, schedule));
+        StartCoroutine(FireScheduleCoroutine(schedule));
         return burstDuration;
     }
 
-    private IEnumerator FireScheduleCoroutine(GameObject projectilePrefab, List<ShotCommand> schedule)
+    private IEnumerator FireScheduleCoroutine(List<ShotCommand> schedule)
     {
         float baseTime = Time.time;
 
@@ -65,27 +65,25 @@ public class KunaiWeapon : BaseWeapon
             while (Time.time < targetTime)
                 yield return null;
 
+            // Spawn from the fire origin with the scheduled rotation
             Vector3 worldPos = fireOrigin.position;
-            // Rotate around Z so that local +Y points along the desired angle
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
-            GameObject go = Instantiate(projectilePrefab, worldPos, rot);
+
+            ProjectileBase projectileBase = SpawnProjectile(GetDefinition(), worldPos, rot);
+            if (projectileBase == null)
+                continue;
 
             HitCountPolicy policy = GetDefinition() != null
-                    ? GetDefinition().HitCountPolicy
-                    : HitCountPolicy.OncePerTargetPerProjectile;
+                ? GetDefinition().HitCountPolicy
+                : HitCountPolicy.OncePerTargetPerProjectile;
 
-            int damage = damagePerKunai; // for now fixed; we can data-drive this later per weapon/upgrade
-            int pierce = GetPiercing();
-
-            if (go.TryGetComponent<IProjectile>(out var projectile))
-            {
-                projectile.Initialize(
-                    GetOwner() != null ? GetOwner() : gameObject,
-                    damage,
-                    pierce,
-                    policy
-                );
-            }
+            IProjectile projectile = (IProjectile)projectileBase;
+            projectile.Initialize(
+                owner: GetOwner() != null ? GetOwner() : gameObject,
+                damageAmount: damagePerKunai,
+                piercing: GetPiercing(),
+                policy: policy
+            );
         }
     }
 }

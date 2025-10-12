@@ -15,6 +15,11 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
     [Header("State")]
     [SerializeField] private bool canAttack = true;
 
+    [Header("Pooling")]
+    private ProjectilePoolService projectilePoolService;
+    [Tooltip("How many instances to prewarm for this weapon's projectile when equipped.")]
+    [SerializeField] private int prewarmCount = 32;
+
     private GameObject owner;
     private float nextFireTimeSeconds;
     private Coroutine autoFireCoroutine;
@@ -22,6 +27,13 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
     public WeaponType WeaponType => weaponDefinition != null ? weaponDefinition.WeaponType : WeaponType.Basic;
     public bool CanAutoFire => autoFireEnabled;
     public bool IsReadyToFire => Time.time >= nextFireTimeSeconds && canAttack;
+
+
+    /// <summary>Called by WeaponDriver immediately after creation.</summary>
+    public void SetProjectilePoolService(ProjectilePoolService service)
+    {
+        projectilePoolService = service;
+    }
 
     public void Initialize(WeaponDefinitionSO definition, GameObject newOwner)
     {
@@ -33,8 +45,38 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
         piercing = definition.BasePiercing;
         autoFireEnabled = definition.SupportsAutoFire;
 
+        EnsureProjectilePool(definition);
+
         OnInitialized(definition, newOwner);
     }
+
+    /// <summary>Ensure the pool exists for this weapon's projectile prefab and optionally prewarm.</summary>
+    protected void EnsureProjectilePool(WeaponDefinitionSO definition)
+    {
+        if (definition == null || definition.ProjectilePrefab == null || projectilePoolService == null)
+            return;
+
+        ProjectileBase projectileBasePrefab = definition.ProjectilePrefab.GetComponent<ProjectileBase>();
+        if (projectileBasePrefab == null) return;
+
+        projectilePoolService.EnsurePool(projectileBasePrefab, Mathf.Max(0, prewarmCount));
+    }
+
+    /// <summary>Spawn a projectile via pool (preferred). Falls back to Instantiate if service is missing.</summary>
+    protected ProjectileBase SpawnProjectile(WeaponDefinitionSO definition, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        ProjectileBase projectileBasePrefab = definition != null && definition.ProjectilePrefab != null
+            ? definition.ProjectilePrefab.GetComponent<ProjectileBase>()
+            : null;
+
+        if (projectileBasePrefab != null && projectilePoolService != null)
+            return projectilePoolService.Spawn(projectileBasePrefab, position, rotation, parent);
+
+        // Fallback (useful in tests if pool not set yet)
+        GameObject gameObject = Instantiate(definition.ProjectilePrefab, position, rotation, parent);
+        return gameObject.GetComponent<ProjectileBase>();
+    }
+
 
     protected virtual void OnInitialized(WeaponDefinitionSO definition, GameObject newOwner) { }
 

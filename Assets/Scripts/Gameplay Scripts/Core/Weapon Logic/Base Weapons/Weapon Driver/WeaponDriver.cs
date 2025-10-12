@@ -14,6 +14,10 @@ public class WeaponDriver : MonoBehaviour
     [SerializeField] private WeaponMounts weaponMounts;   // Assign on Player
     [SerializeField] private WeaponCatalog weaponCatalog; // Assign catalog asset
 
+    [Header("Services")]
+    [Tooltip("Global projectile pool service present in the scene.")]
+    [SerializeField] private ProjectilePoolService projectilePoolService;
+
     [Header("Global Gate")]
     [SerializeField] private bool canAttack = true;       // Treasure rooms, cutscenes, etc.
 
@@ -60,6 +64,10 @@ public class WeaponDriver : MonoBehaviour
             Debug.LogError($"WeaponDriver.Equip: No component mapping for {type}");
             return null;
         }
+
+        // Inject pool service if this is a BaseWeapon
+        if (newWeapon is BaseWeapon baseWeaponForPool)
+            baseWeaponForPool.SetProjectilePoolService(projectilePoolService);
 
         // Initialize runtime with data + owner
         newWeapon.Initialize(definition, gameObject);

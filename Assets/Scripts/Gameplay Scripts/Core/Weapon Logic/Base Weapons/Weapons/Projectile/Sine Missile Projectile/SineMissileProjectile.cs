@@ -15,25 +15,23 @@ public class SineMissileProjectile : ProjectileBase
     private Vector2 forwardDirection;
     private Vector2 perpendicularDirection;
 
-    protected override void Awake()
+    public override void OnSpawnFromPool()
     {
-        base.Awake();
+        base.OnSpawnFromPool();
+        elapsed = 0f;
         startPosition = transform.position;
-
-        // Capture initial world directions from local up
         forwardDirection = (Vector2)transform.up.normalized;
-        perpendicularDirection = new Vector2(-forwardDirection.y, forwardDirection.x); // 90° left
+        perpendicularDirection = new Vector2(-forwardDirection.y, forwardDirection.x);
     }
 
-    protected override void TickMotion(float dt)
-    {
-        elapsed += dt;
 
+    protected override void TickMotion(float deltaTime)
+    {
+        elapsed += deltaTime;
         float forwardDist = forwardSpeed * elapsed;
         float lateral = sineAmplitude * Mathf.Sin(2f * Mathf.PI * sineFrequencyHz * elapsed + phaseOffsetRadians);
-
-        Vector2 pos = (Vector2)startPosition + forwardDirection * forwardDist + perpendicularDirection * lateral;
-        transform.position = pos;
+        Vector2 position = (Vector2)startPosition + forwardDirection * forwardDist + perpendicularDirection * lateral;
+        transform.position = position;
     }
 
     public void SetPhaseOffsetRadians(float radians)

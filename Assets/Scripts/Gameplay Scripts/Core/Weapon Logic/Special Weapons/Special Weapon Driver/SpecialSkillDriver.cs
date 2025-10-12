@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Owns the special-skill state (charge bar, activation window).
@@ -25,9 +26,9 @@ public class SpecialSkillDriver : MonoBehaviour
     private GameObject owner;
 
     // UI events
-    public System.Action<int, int> OnChargeChanged;  // (current, required)
-    public System.Action OnSkillActivated;
-    public System.Action OnSkillEnded;
+    public Action<int, int> OnChargeChanged;  // (current, required)
+    public Action OnSkillActivated;
+    public Action OnSkillEnded;
 
     private void Awake()
     {

@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponMounts: {fileID: 1589703569}
   weaponCatalog: {fileID: 11400000, guid: 20605f0e0dc214657b920cdb09827422, type: 2}
+  projectilePoolService: {fileID: 1875104285}
   canAttack: 1
 --- !u!4 &21140456
 Transform:
@@ -197,7 +198,7 @@ GameObject:
   - component: {fileID: 79928289}
   - component: {fileID: 79928288}
   - component: {fileID: 79928292}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +369,7 @@ GameObject:
   - component: {fileID: 164811447}
   - component: {fileID: 164811446}
   - component: {fileID: 164811450}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,7 +571,7 @@ GameObject:
   - component: {fileID: 252822658}
   - component: {fileID: 252822657}
   - component: {fileID: 252822661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +826,7 @@ GameObject:
   - component: {fileID: 310176248}
   - component: {fileID: 310176247}
   - component: {fileID: 310176251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +997,7 @@ GameObject:
   - component: {fileID: 396374321}
   - component: {fileID: 396374320}
   - component: {fileID: 396374324}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1167,7 +1168,7 @@ GameObject:
   - component: {fileID: 422772278}
   - component: {fileID: 422772277}
   - component: {fileID: 422772281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1338,7 +1339,7 @@ GameObject:
   - component: {fileID: 469010756}
   - component: {fileID: 469010755}
   - component: {fileID: 469010759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1509,7 +1510,7 @@ GameObject:
   - component: {fileID: 481388300}
   - component: {fileID: 481388299}
   - component: {fileID: 481388303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1742,7 +1743,7 @@ GameObject:
   - component: {fileID: 618697159}
   - component: {fileID: 618697158}
   - component: {fileID: 618697162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1944,7 +1945,7 @@ GameObject:
   - component: {fileID: 836229864}
   - component: {fileID: 836229863}
   - component: {fileID: 836229867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2115,7 +2116,7 @@ GameObject:
   - component: {fileID: 863906662}
   - component: {fileID: 863906661}
   - component: {fileID: 863906665}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2319,7 +2320,7 @@ GameObject:
   - component: {fileID: 940947862}
   - component: {fileID: 940947861}
   - component: {fileID: 940947865}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2490,7 +2491,7 @@ GameObject:
   - component: {fileID: 1016384711}
   - component: {fileID: 1016384710}
   - component: {fileID: 1016384714}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2692,7 +2693,7 @@ GameObject:
   - component: {fileID: 1167093015}
   - component: {fileID: 1167093014}
   - component: {fileID: 1167093018}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2863,7 +2864,7 @@ GameObject:
   - component: {fileID: 1178093478}
   - component: {fileID: 1178093477}
   - component: {fileID: 1178093481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3034,7 +3035,7 @@ GameObject:
   - component: {fileID: 1188794179}
   - component: {fileID: 1188794178}
   - component: {fileID: 1188794182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3205,7 +3206,7 @@ GameObject:
   - component: {fileID: 1249588012}
   - component: {fileID: 1249588011}
   - component: {fileID: 1249588015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3424,7 +3425,7 @@ GameObject:
   - component: {fileID: 1367573895}
   - component: {fileID: 1367573894}
   - component: {fileID: 1367573898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3809,7 +3810,7 @@ GameObject:
   - component: {fileID: 1428821167}
   - component: {fileID: 1428821166}
   - component: {fileID: 1428821170}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3980,7 +3981,7 @@ GameObject:
   - component: {fileID: 1519341965}
   - component: {fileID: 1519341964}
   - component: {fileID: 1519341968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4151,7 +4152,7 @@ GameObject:
   - component: {fileID: 1581068769}
   - component: {fileID: 1581068768}
   - component: {fileID: 1581068772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4410,7 +4411,7 @@ GameObject:
   - component: {fileID: 1632425276}
   - component: {fileID: 1632425275}
   - component: {fileID: 1632425279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4668,7 +4669,7 @@ GameObject:
   - component: {fileID: 1768198338}
   - component: {fileID: 1768198337}
   - component: {fileID: 1768198341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4839,7 +4840,7 @@ GameObject:
   - component: {fileID: 1860698317}
   - component: {fileID: 1860698316}
   - component: {fileID: 1860698320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4997,6 +4998,50 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1875104284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875104286}
+  - component: {fileID: 1875104285}
+  m_Layer: 0
+  m_Name: Projectile Pooling Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1875104285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875104284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f0dedd2fa9bb43d1aeab8b47843e0a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1875104286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875104284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.55, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944037501
 GameObject:
   m_ObjectHideFlags: 0
@@ -5010,7 +5055,7 @@ GameObject:
   - component: {fileID: 1944037503}
   - component: {fileID: 1944037502}
   - component: {fileID: 1944037506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5181,7 +5226,7 @@ GameObject:
   - component: {fileID: 1946164025}
   - component: {fileID: 1946164024}
   - component: {fileID: 1946164028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5352,7 +5397,7 @@ GameObject:
   - component: {fileID: 1993692536}
   - component: {fileID: 1993692535}
   - component: {fileID: 1993692539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5660,7 +5705,7 @@ GameObject:
   - component: {fileID: 2044375107}
   - component: {fileID: 2044375106}
   - component: {fileID: 2044375110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5831,7 +5876,7 @@ GameObject:
   - component: {fileID: 2121526630}
   - component: {fileID: 2121526629}
   - component: {fileID: 2121526633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy 1 (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5998,3 +6043,4 @@ SceneRoots:
   - {fileID: 285244438}
   - {fileID: 1285472741}
   - {fileID: 21140456}
+  - {fileID: 1875104286}

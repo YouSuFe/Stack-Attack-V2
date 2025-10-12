@@ -19,6 +19,7 @@ public class BasicWeapon : BaseWeapon
         this.horizontalSpacing = horizontalSpacing;
         this.secondRowVerticalOffset = secondRowVerticalOffset;
     }
+
     protected override float ExecuteFirePattern()
     {
         var def = GetDefinition();
@@ -51,12 +52,12 @@ public class BasicWeapon : BaseWeapon
             burstDuration = Mathf.Max(0f, schedule[schedule.Count - 1].timeOffsetSeconds);
 
         // actually spawn on a coroutine
-        StartCoroutine(FireScheduleCoroutine(def.ProjectilePrefab, schedule));
+        StartCoroutine(FireScheduleCoroutine(schedule));
 
         return burstDuration;
     }
 
-    private IEnumerator FireScheduleCoroutine(GameObject projectilePrefab, List<ShotCommand> schedule)
+    private IEnumerator FireScheduleCoroutine(List<ShotCommand> schedule)
     {
         float baseTime = Time.time;
 
@@ -70,28 +71,27 @@ public class BasicWeapon : BaseWeapon
             while (Time.time < targetTime)
                 yield return null;
 
-            // Spawn
+            // Compute spawn poses
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);
             Quaternion rot = Quaternion.Euler(0f, 0f, cmd.angleDegrees);
-            GameObject go = Instantiate(projectilePrefab, worldPos, rot);
+
+            // Pooled spawn (fallback to Instantiate inside SpawnProjectile if no pool)
+            ProjectileBase projectileBase = SpawnProjectile(GetDefinition(), worldPos, rot);
+            if (projectileBase == null)
+                continue;
 
             HitCountPolicy policy = GetDefinition() != null
                 ? GetDefinition().HitCountPolicy
                 : HitCountPolicy.OncePerTargetPerProjectile;
 
-            int damage = damagePerBasic; // fixed for now, can be data-driven later
-            int pierce = GetPiercing();
+            IProjectile projectile = (IProjectile)projectileBase;
+            projectile.Initialize(
+                owner: GetOwner() != null ? GetOwner() : gameObject,
+                damageAmount: damagePerBasic,
+                piercing : GetPiercing(),
+                policy: policy
+            );
 
-            if (go.TryGetComponent<IProjectile>(out var projectile))
-            {
-                projectile.Initialize(
-                    GetOwner() != null ? GetOwner() : gameObject,
-                    damage,
-                    pierce,
-                    policy
-                );
-            }
         }
-
     }
 }
