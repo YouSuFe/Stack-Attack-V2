@@ -25,6 +25,15 @@ public class WeaponDriver : MonoBehaviour
     private readonly Dictionary<WeaponType, IWeapon> equippedByType = new();
     private readonly List<IWeapon> equippedInOrder = new();
 
+    // Global upgrades that should apply to ALL current and FUTURE weapons
+    [SerializeField]
+    private List<WeaponUpgradeSO> appliedGlobalUpgrades = new List<WeaponUpgradeSO>();
+
+    // Specific-weapon upgrades taken BEFORE the weapon is owned.
+    // Key = WeaponType, Value = list of upgrades to apply when that weapon is equipped.
+    private readonly Dictionary<WeaponType, List<WeaponUpgradeSO>>
+        pendingUpgradesByType = new Dictionary<WeaponType, List<WeaponUpgradeSO>>();
+
     private void Awake()
     {
         if (weaponMounts == null)
@@ -71,6 +80,20 @@ public class WeaponDriver : MonoBehaviour
 
         // Initialize runtime with data + owner
         newWeapon.Initialize(definition, gameObject);
+
+        // Apply ALL previously taken GLOBAL upgrades to this freshly equipped weapon
+        for (int i = 0; i < appliedGlobalUpgrades.Count; i++)
+            newWeapon.ApplyUpgrade(appliedGlobalUpgrades[i]);
+
+        // Apply any PENDING upgrades specific to this weapon type
+        List<WeaponUpgradeSO> pendingList;
+        if (pendingUpgradesByType.TryGetValue(type, out pendingList))
+        {
+            for (int i = 0; i < pendingList.Count; i++)
+                newWeapon.ApplyUpgrade(pendingList[i]);
+
+            pendingUpgradesByType.Remove(type);
+        }
 
         // Respect current global gate
         if (newWeapon is BaseWeapon baseWeapon)
@@ -208,20 +231,34 @@ public class WeaponDriver : MonoBehaviour
 
         if (upgrade.Scope == WeaponUpgradeScope.AllWeapons)
         {
+            // Apply to all currently equipped
             for (int i = 0; i < equippedInOrder.Count; i++)
-            {
-                IWeapon equippedWeapon = equippedInOrder[i];
-                equippedWeapon.ApplyUpgrade(upgrade);
-            }
+                equippedInOrder[i].ApplyUpgrade(upgrade);
+
+            // Record so FUTURE weapons also get this automatically
+            if (!appliedGlobalUpgrades.Contains(upgrade))
+                appliedGlobalUpgrades.Add(upgrade);
+
+            return;
         }
-        else // SpecificWeapon
+
+        // Specific weapon upgrade
+        WeaponType target = upgrade.TargetWeaponType;
+
+        if (equippedByType.TryGetValue(target, out IWeapon owned))
         {
-            if (equippedByType.TryGetValue(upgrade.TargetWeaponType, out IWeapon targetWeapon))
+            owned.ApplyUpgrade(upgrade);
+        }
+        else
+        {
+            // Queue for when this weapon is acquired later
+            List<WeaponUpgradeSO> list;
+            if (!pendingUpgradesByType.TryGetValue(target, out list))
             {
-                targetWeapon.ApplyUpgrade(upgrade);
+                list = new List<WeaponUpgradeSO>();
+                pendingUpgradesByType[target] = list;
             }
-            // If you want upgrades to apply even before a weapon is equipped,
-            // you can add a "pending upgrades cache" keyed by WeaponType and apply them inside Equip(...).
+            list.Add(upgrade);
         }
     }
 

@@ -20,8 +20,8 @@ public enum ProjectileMotionType
 
 public enum WeaponUpgradeType
 {
-    FireRate,              // +% to fire rate (per second)
     ProjectileAmount,      // +N projectiles per trigger
+    FireRate,              // +% to fire rate (per second)
     Piercing               // +N pierces
 }
 
@@ -33,8 +33,16 @@ public enum OverflowResolution
 
 public enum WeaponUpgradeScope
 {
-    AllWeapons,
-    SpecificWeapon
+    SpecificWeapon,
+    AllWeapons
+}
+
+public enum WeaponUpgradeRarity
+{
+    Common = 0,
+    Rare = 1,
+    Epic = 2,
+    Legendary = 3
 }
 
 public enum HitCountPolicy
