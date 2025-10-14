@@ -92,6 +92,8 @@ public class BasicWeapon : BaseWeapon
                 policy: policy
             );
 
+            projectileBase.SetSourceWeapon(WeaponType.Basic);
+
         }
     }
 }

@@ -38,6 +38,11 @@ public class SineMissileProjectile : ProjectileBase
     {
         phaseOffsetRadians = radians;
     }
+
+    public void AddPhaseOffset(float delta)
+    {
+        phaseOffsetRadians += delta;
+    }
 }
 
 

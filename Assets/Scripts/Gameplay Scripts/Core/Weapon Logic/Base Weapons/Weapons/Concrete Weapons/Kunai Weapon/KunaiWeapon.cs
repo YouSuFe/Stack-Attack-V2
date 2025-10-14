@@ -84,6 +84,8 @@ public class KunaiWeapon : BaseWeapon
                 piercing: GetPiercing(),
                 policy: policy
             );
+
+            projectileBase.SetSourceWeapon(WeaponType.Kunai);
         }
     }
 }

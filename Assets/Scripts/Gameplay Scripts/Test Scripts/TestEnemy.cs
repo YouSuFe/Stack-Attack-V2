@@ -63,7 +63,7 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer, IStoppable
     private void Update()
     {
         if (!IsAlive || playerTarget == null || isStopped) return;
-
+        Debug.Log(isStopped + " ----- " + name);
         // Simple chase toward player
         Vector3 current = transform.position;
         Vector3 target = playerTarget.position;

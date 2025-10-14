@@ -8,6 +8,9 @@ public class MissileWeapon : BaseWeapon
     [Header("Damage")]
     [SerializeField] private int damagePerMissile = 2;
 
+    [Header("Angle")]
+    [SerializeField, Range(0f, 5f)] private float angleJitterDegrees = 1.5f;
+
     private Transform fireOrigin;
     private Transform leftMuzzleTransform;
     private Transform rightMuzzleTransform;
@@ -70,7 +73,8 @@ public class MissileWeapon : BaseWeapon
 
             // Spawn at the fireOrigin + local offset (which points to the left/right muzzle)
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);
-            Quaternion rot = fireOrigin.rotation;
+            float zJitter = UnityEngine.Random.Range(-angleJitterDegrees, angleJitterDegrees);
+            Quaternion rot = fireOrigin.rotation * Quaternion.Euler(0f, 0f, zJitter);
 
             ProjectileBase projectileBase = SpawnProjectile(GetDefinition(), worldPos, rot);
             if (projectileBase == null)
@@ -87,6 +91,8 @@ public class MissileWeapon : BaseWeapon
                 piercing: GetPiercing(),
                 policy: policy
             );
+
+            projectileBase.SetSourceWeapon(WeaponType.Missile);
 
             // Mirror sine phase by side: left (x<0) => π, right => 0
             SineMissileProjectile sine = projectileBase as SineMissileProjectile;

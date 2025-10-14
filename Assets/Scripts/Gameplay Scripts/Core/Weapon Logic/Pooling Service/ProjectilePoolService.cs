@@ -153,4 +153,24 @@ public class ProjectilePoolService : MonoBehaviour
 
         callbacks.pool.Release(instance);
     }
+
+    public bool TryGetPrefabForInstance(ProjectileBase instance, out ProjectileBase prefab)
+    {
+        return prefabByInstance.TryGetValue(instance, out prefab);
+    }
+
+    public ProjectileBase SpawnLike(ProjectileBase sourceInstance, Vector3 position, Quaternion rotation, Transform parent = null)
+    {
+        if (sourceInstance == null) return null;
+
+        if (!prefabByInstance.TryGetValue(sourceInstance, out var prefabKey) || prefabKey == null)
+        {
+            // Safety fallback: treat the current object as prefab-like (rare)
+            prefabKey = sourceInstance;
+        }
+
+        // Reuse the normal pooled Spawn(prefab, ...), which calls OnSpawnFromPool internally
+        var clone = Spawn(prefabKey, position, rotation, parent);
+        return clone;
+    }
 }
