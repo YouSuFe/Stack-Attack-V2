@@ -110,8 +110,20 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     protected abstract void TickMotion(float dt);
 
-    protected virtual void OnEnable() { PauseManager.Instance?.Register(this); }
-    protected virtual void OnDisable() { PauseManager.Instance?.Unregister(this); }
+    protected virtual void OnEnable()
+    {
+        PauseManager.Instance?.Register(this);
+        // Sync immediately if we spawned while paused
+        if (PauseManager.Instance != null)
+            isStopped = PauseManager.Instance.IsGameplayStopped;
+        else
+            isStopped = false;
+    }
+
+    protected virtual void OnDisable()
+    {
+        PauseManager.Instance?.Unregister(this);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
