@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,6 +21,7 @@ public class WeaponDriver : MonoBehaviour
 
     [Header("Global Gate")]
     [SerializeField] private bool canAttack = true;       // Treasure rooms, cutscenes, etc.
+    [SerializeField] private float globalFireRateMultiplier = 1f; // 1 = normal
 
     // Runtime equipped weapons (by type and also in a stable list for iteration order)
     private readonly Dictionary<WeaponType, IWeapon> equippedByType = new();
@@ -95,10 +97,14 @@ public class WeaponDriver : MonoBehaviour
             pendingUpgradesByType.Remove(type);
         }
 
-        // Respect current global gate
+        // Respect current global gate AND current global fire-rate boost
         if (newWeapon is BaseWeapon baseWeapon)
+        {
             baseWeapon.SetCanAttack(canAttack);
 
+            // Ensure newly equipped weapon uses the active global boost
+            baseWeapon.SetExternalFireRateMultiplier(globalFireRateMultiplier);
+        }
         equippedByType[type] = newWeapon;
         equippedInOrder.Add(newWeapon);
 
@@ -271,6 +277,35 @@ public class WeaponDriver : MonoBehaviour
 
         foreach (WeaponUpgradeSO upgrade in upgrades)
             ApplyUpgrade(upgrade);
+    }
+
+    public void AddTemporaryGlobalFireRateBoost(float multiplier, float durationSeconds)
+    {
+        if (multiplier <= 0f || durationSeconds <= 0f) return;
+        StartCoroutine(ApplyTemporaryFireRateBoostRoutine(multiplier, durationSeconds));
+    }
+
+    private IEnumerator ApplyTemporaryFireRateBoostRoutine(float multiplier, float durationSeconds)
+    {
+        // Apply
+        globalFireRateMultiplier *= multiplier;
+        PropagateGlobalFireRateMultiplierToWeapons();
+
+        yield return new WaitForSeconds(durationSeconds);
+
+        // Revert
+        globalFireRateMultiplier /= multiplier;
+        PropagateGlobalFireRateMultiplierToWeapons();
+    }
+
+    private void PropagateGlobalFireRateMultiplierToWeapons()
+    {
+        for (int i = 0; i < equippedInOrder.Count; i++)
+        {
+            // Only BaseWeapon needs this; others can ignore
+            if (equippedInOrder[i] is BaseWeapon baseWeapon)
+                baseWeapon.SetExternalFireRateMultiplier(globalFireRateMultiplier);
+        }
     }
 
     // ---------------------------------------------------------------------

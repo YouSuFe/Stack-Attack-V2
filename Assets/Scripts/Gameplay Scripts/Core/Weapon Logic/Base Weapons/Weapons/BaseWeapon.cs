@@ -14,6 +14,7 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
 
     [Header("State")]
     [SerializeField] private bool canAttack = true;
+    [SerializeField] private float externalFireRateMultiplier = 1f; // default 1
 
     [Header("Pooling")]
     private ProjectilePoolService projectilePoolService;
@@ -33,6 +34,11 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
     public void SetProjectilePoolService(ProjectilePoolService service)
     {
         projectilePoolService = service;
+    }
+
+    public void SetExternalFireRateMultiplier(float value)
+    {
+        externalFireRateMultiplier = Mathf.Max(0.01f, value);
     }
 
     public void Initialize(WeaponDefinitionSO definition, GameObject newOwner)
@@ -116,7 +122,8 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
         if (!canAttack) return;
         if (!IsReadyToFire) return;
 
-        float minInterval = fireRatePerSecond > 0f ? 1f / fireRatePerSecond : 0.5f;
+        float effectiveRate = fireRatePerSecond * externalFireRateMultiplier;
+        float minInterval = effectiveRate > 0f ? 1f / effectiveRate : 0.5f;
 
         float burstDuration = ExecuteFirePattern(); // subclass returns actual total time used by the pattern
         nextFireTimeSeconds = Time.time + Mathf.Max(minInterval, burstDuration);

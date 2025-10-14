@@ -136,6 +136,14 @@ public class SpecialSkillDriver : MonoBehaviour
         NotifyChargeChanged();
     }
 
+    public void FillChargeToMax()
+    {
+        if (specialDefinition == null) return;
+        // Set to required charge and notify UI
+        currentCharge = specialDefinition.RequiredCharge;
+        NotifyChargeChanged();
+    }
+
     private void NotifyChargeChanged()
     {
         OnChargeChanged?.Invoke(currentCharge, specialDefinition != null ? specialDefinition.RequiredCharge : 1);
