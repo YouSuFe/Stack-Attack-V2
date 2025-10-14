@@ -1,3 +1,4 @@
+// TestEnemy.cs
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ using UnityEngine;
 /// Also takes damage from your projectiles (IDamageable).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
-public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
+public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer, IStoppable
 {
     [Header("Stats")]
     [SerializeField] private int health = 3;
@@ -27,6 +28,8 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
     private Collider2D enemyCollider2D;
     private readonly Dictionary<int, float> lastHitTimeByTargetId = new Dictionary<int, float>();
 
+    private bool isStopped;
+
     // ---- IDamageDealer ----
     public int DamageAmount => contactDamage;
     public GameObject Owner => gameObject;
@@ -40,6 +43,16 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
         enemyCollider2D.isTrigger = true; // using trigger-based contact damage
     }
 
+    private void OnEnable()
+    {
+        PauseManager.Instance?.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        PauseManager.Instance?.Unregister(this);
+    }
+
     private void Start()
     {
         // Find the player by tag if not manually assigned
@@ -49,7 +62,7 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
 
     private void Update()
     {
-        if (!IsAlive || playerTarget == null) return;
+        if (!IsAlive || playerTarget == null || isStopped) return;
 
         // Simple chase toward player
         Vector3 current = transform.position;
@@ -104,7 +117,7 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
 
     private void TryDealContactDamage(Collider2D other)
     {
-        if (!IsAlive) return;
+        if (!IsAlive || isStopped) return;
 
         // Optional: restrict to Player tag
         if (onlyHitPlayerTag && !other.CompareTag("Player"))
@@ -130,5 +143,18 @@ public class TestEnemy : MonoBehaviour, IDamageable, IDamageDealer
             Debug.Log($"[TestEnemy] Dealt {contactDamage} contact dmg to {other.name}");
         }
     }
-}
 
+    // ------------------------
+    // IStoppable
+    // ------------------------
+
+    public void OnStopGameplay()
+    {
+        isStopped = true;
+    }
+
+    public void OnResumeGameplay()
+    {
+        isStopped = false;
+    }
+}

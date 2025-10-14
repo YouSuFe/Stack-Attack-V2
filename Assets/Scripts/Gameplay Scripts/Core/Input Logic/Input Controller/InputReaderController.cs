@@ -1,3 +1,4 @@
+// InputReaderController.cs
 using UnityEngine;
 
 /// <summary>
@@ -6,7 +7,7 @@ using UnityEngine;
 /// - Forwards drag start/update/end to PlayerDragMover for movement.
 /// - Controls WeaponDriver: press -> fire once + start auto, release -> stop.
 /// </summary>
-public class InputReaderController : MonoBehaviour
+public class InputReaderController : MonoBehaviour, IStoppable
 {
     [Header("References")]
     [SerializeField] private InputReader inputReader;     // ScriptableObject
@@ -15,6 +16,7 @@ public class InputReaderController : MonoBehaviour
     [SerializeField] private SpecialSkillDriver specialSkillDriver;
 
     private bool isSubscribed;
+    private bool inputsWereEnabledBeforeStop;
 
     private void OnEnable()
     {
@@ -24,11 +26,13 @@ public class InputReaderController : MonoBehaviour
             return;
         }
 
+        PauseManager.Instance?.Register(this);
         EnableInputs();
     }
 
     private void OnDisable()
     {
+        PauseManager.Instance?.Unregister(this);
         DisableInputs();
     }
 
@@ -93,5 +97,28 @@ public class InputReaderController : MonoBehaviour
 
         // Stop shooting
         weaponDriver.OnShootPressed(false);
+    }
+
+    // ------------------------
+    // IStoppable
+    // ------------------------
+
+    public void OnStopGameplay()
+    {
+        // Remember whether inputs were enabled to restore later
+        inputsWereEnabledBeforeStop = isSubscribed;
+
+        // Stop firing and end any drag cleanly
+        weaponDriver.OnShootPressed(false);
+        dragMover.ForceEndDrag();
+
+        // Block new input events during UI
+        DisableInputs();
+    }
+
+    public void OnResumeGameplay()
+    {
+        if (inputsWereEnabledBeforeStop)
+            EnableInputs();
     }
 }

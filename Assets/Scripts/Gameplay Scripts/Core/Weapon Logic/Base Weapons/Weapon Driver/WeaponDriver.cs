@@ -9,7 +9,7 @@ using UnityEngine;
 /// - Exposes a small API for input & gating firing
 /// - Routes upgrades to all or specific weapons
 /// </summary>
-public class WeaponDriver : MonoBehaviour
+public class WeaponDriver : MonoBehaviour,IStoppable
 {
     [Header("Scene Mounts & Catalog")]
     [SerializeField] private WeaponMounts weaponMounts;   // Assign on Player
@@ -23,18 +23,24 @@ public class WeaponDriver : MonoBehaviour
     [SerializeField] private bool canAttack = true;       // Treasure rooms, cutscenes, etc.
     [SerializeField] private float globalFireRateMultiplier = 1f; // 1 = normal
 
+    [Header("Boost State(Test Reasons)")]
+    [SerializeField] private float activeBoostMultiplier = 1f; // 1 = none, e.g., 5 for x5
+    [SerializeField] private float activeBoostRemaining = 0f;  // seconds left
+
     // Runtime equipped weapons (by type and also in a stable list for iteration order)
     private readonly Dictionary<WeaponType, IWeapon> equippedByType = new();
     private readonly List<IWeapon> equippedInOrder = new();
 
     // Global upgrades that should apply to ALL current and FUTURE weapons
-    [SerializeField]
-    private List<WeaponUpgradeSO> appliedGlobalUpgrades = new List<WeaponUpgradeSO>();
+    [SerializeField] private List<WeaponUpgradeSO> appliedGlobalUpgrades = new List<WeaponUpgradeSO>();
 
     // Specific-weapon upgrades taken BEFORE the weapon is owned.
     // Key = WeaponType, Value = list of upgrades to apply when that weapon is equipped.
     private readonly Dictionary<WeaponType, List<WeaponUpgradeSO>>
         pendingUpgradesByType = new Dictionary<WeaponType, List<WeaponUpgradeSO>>();
+
+    // --- Pause bookkeeping ---
+    private bool gateBeforeStop;
 
     private void Awake()
     {
@@ -43,6 +49,40 @@ public class WeaponDriver : MonoBehaviour
 
         if (weaponCatalog == null)
             Debug.LogWarning("WeaponDriver: 'weaponCatalog' not assigned.");
+    }
+
+    private void Update()
+    {
+        // Tick only while gameplay is not soft-paused
+        if (activeBoostMultiplier > 1f && activeBoostRemaining > 0f)
+        {
+            // If you haven’t added PauseManager yet, this condition is effectively "true"
+            bool gameplayRunning = PauseManager.Instance == null || !PauseManager.Instance.IsGameplayStopped;
+
+            if (gameplayRunning)
+            {
+                activeBoostRemaining -= Time.deltaTime;
+                if (activeBoostRemaining <= 0f)
+                    EndFireRateBoost();
+            }
+        }
+    }
+
+    // Register for stop/resume notifications
+    private void OnEnable() { PauseManager.Instance?.Register(this); }
+    private void OnDisable() { PauseManager.Instance?.Unregister(this); }
+
+    // Implement IStoppable on the class: public class WeaponDriver : MonoBehaviour, IStoppable
+    public void OnStopGameplay()
+    {
+        gateBeforeStop = canAttack;
+        SetCanAttack(false);           // freeze player weapons & stop autofire
+    }
+
+    public void OnResumeGameplay()
+    {
+        SetCanAttack(gateBeforeStop);  // restore previous gate
+        PropagateGlobalFireRateMultiplierToWeapons(); // ensure fresh weapons still have the current boost
     }
 
     // ---------------------------------------------------------------------
@@ -279,22 +319,39 @@ public class WeaponDriver : MonoBehaviour
             ApplyUpgrade(upgrade);
     }
 
+    /// <summary>
+    /// Start or refresh a global fire-rate boost.
+    /// - Non-stacking: picking again does NOT multiply (no 5x5); it refreshes the timer.
+    /// - If a higher multiplier is picked while a lower one is active, upgrade to the higher value and reset time.
+    /// - Boost time pauses while gameplay is soft-stopped (upgrade UI).
+    /// </summary>
     public void AddTemporaryGlobalFireRateBoost(float multiplier, float durationSeconds)
     {
-        if (multiplier <= 0f || durationSeconds <= 0f) return;
-        StartCoroutine(ApplyTemporaryFireRateBoostRoutine(multiplier, durationSeconds));
+        if (multiplier <= 1f || durationSeconds <= 0f) return;
+
+        // If no boost active, or this one is stronger, apply it now
+        if (activeBoostMultiplier <= 1f || multiplier > activeBoostMultiplier)
+        {
+            activeBoostMultiplier = multiplier;
+            ApplyCurrentBoost();
+        }
+
+        // Always refresh time
+        activeBoostRemaining = durationSeconds;
     }
 
-    private IEnumerator ApplyTemporaryFireRateBoostRoutine(float multiplier, float durationSeconds)
+    private void ApplyCurrentBoost()
     {
-        // Apply
-        globalFireRateMultiplier *= multiplier;
+        // total driver multiplier is just the active boost (1 when none)
+        globalFireRateMultiplier = Mathf.Max(1f, activeBoostMultiplier);
         PropagateGlobalFireRateMultiplierToWeapons();
+    }
 
-        yield return new WaitForSeconds(durationSeconds);
-
-        // Revert
-        globalFireRateMultiplier /= multiplier;
+    private void EndFireRateBoost()
+    {
+        activeBoostMultiplier = 1f;
+        activeBoostRemaining = 0f;
+        globalFireRateMultiplier = 1f;
         PropagateGlobalFireRateMultiplierToWeapons();
     }
 

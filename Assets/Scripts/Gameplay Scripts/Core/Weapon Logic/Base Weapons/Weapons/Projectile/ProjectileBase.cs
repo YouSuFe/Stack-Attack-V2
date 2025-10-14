@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
+public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IStoppable
 {
     [Header("Damage")]
     [SerializeField] private int damageAmount = 1;
@@ -20,6 +20,8 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     private float lifeTimer;
     private int remainingPiercing;
     private GameObject owner;
+
+    private bool isStopped;
 
     // Used only when policy == OncePerTargetPerProjectile
     private readonly HashSet<int> countedTargets = new HashSet<int>();
@@ -94,10 +96,12 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     protected virtual void Update()
     {
+        if (isStopped) return;
+
         lifeTimer += Time.deltaTime;
         if (lifeTimer >= maxLifetimeSeconds)
         {
-            Destroy(gameObject);
+            ReturnToPool();
             return;
         }
 
@@ -106,8 +110,13 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     protected abstract void TickMotion(float dt);
 
+    protected virtual void OnEnable() { PauseManager.Instance?.Register(this); }
+    protected virtual void OnDisable() { PauseManager.Instance?.Unregister(this); }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (isStopped) return; // ignore collisions while paused
+
         // Don't hit our owner
         if ((owner != null && other.gameObject == owner) || other.CompareTag("Projectile") || other.CompareTag("Player"))
         {
@@ -147,6 +156,16 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
         {
             ReturnToPool();
         }
+    }
+
+    public void OnStopGameplay()
+    {
+        isStopped = true;
+    }
+
+    public void OnResumeGameplay()
+    {
+        isStopped = false;
     }
 
     /// <summary>

@@ -1,7 +1,8 @@
+// PlayerDragMover.cs
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerDragMover : MonoBehaviour
+public class PlayerDragMover : MonoBehaviour, IStoppable
 {
     [Header("Dependencies")]
     [SerializeField] private Camera gameplayCamera;
@@ -12,6 +13,7 @@ public class PlayerDragMover : MonoBehaviour
 
     private Rigidbody2D playerRigidBody2D;
     private bool isDragging;
+    private bool isStopped;
     private float startOffsetX;
     private float targetX;
 
@@ -27,8 +29,20 @@ public class PlayerDragMover : MonoBehaviour
         targetX = transform.position.x;
     }
 
+    private void OnEnable()
+    {
+        PauseManager.Instance?.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        PauseManager.Instance?.Unregister(this);
+    }
+
     private void FixedUpdate()
     {
+        if (isStopped) return; // freeze gameplay motion during upgrade UI
+
         // Smoothly move horizontally toward targetX using physics-friendly motion
         Vector2 position = playerRigidBody2D.position;
         float maxStep = moveSpeed * Time.fixedDeltaTime;
@@ -39,6 +53,8 @@ public class PlayerDragMover : MonoBehaviour
     /// <summary>Begin a drag at the given screen position.</summary>
     public void BeginDrag(Vector2 screenPosition)
     {
+        if (isStopped) return;
+
         isDragging = true;
         float pointerWorldX = ScreenToWorldX(screenPosition);
         startOffsetX = playerRigidBody2D.position.x - pointerWorldX; // preserve initial “grip” offset
@@ -48,7 +64,7 @@ public class PlayerDragMover : MonoBehaviour
     /// <summary>Update drag (while the finger/mouse is held).</summary>
     public void UpdateDrag(Vector2 screenPosition)
     {
-        if (!isDragging) return;
+        if (!isDragging || isStopped) return;
 
         float pointerWorldX = ScreenToWorldX(screenPosition);
         float desiredX = pointerWorldX + startOffsetX;
@@ -57,6 +73,12 @@ public class PlayerDragMover : MonoBehaviour
 
     /// <summary>End the drag.</summary>
     public void EndDrag(Vector2 screenPosition)
+    {
+        isDragging = false;
+    }
+
+    /// <summary>Force end (used by soft pause).</summary>
+    public void ForceEndDrag()
     {
         isDragging = false;
     }
@@ -81,4 +103,19 @@ public class PlayerDragMover : MonoBehaviour
 
     public void SetBounds(Vector2 newBounds) => xBounds = newBounds;
     public void SetMoveSpeed(float newSpeed) => moveSpeed = newSpeed;
+
+    // ------------------------
+    // IStoppable
+    // ------------------------
+
+    public void OnStopGameplay()
+    {
+        isStopped = true;
+        isDragging = false;
+    }
+
+    public void OnResumeGameplay()
+    {
+        isStopped = false;
+    }
 }

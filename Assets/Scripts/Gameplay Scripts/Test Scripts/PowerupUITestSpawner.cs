@@ -14,7 +14,13 @@ public class PowerupUITestSpawner : MonoBehaviour
         {
             timer = 0f;
             if (powerupPanelUIController != null && !powerupPanelUIController.gameObject.activeSelf)
+            {
+                // opening the panel
+                PauseManager.Instance.StopGameplay();
+
                 powerupPanelUIController.ShowAndRoll();
+                // after the player picks a card / closes the panel
+            }
         }
     }
 }

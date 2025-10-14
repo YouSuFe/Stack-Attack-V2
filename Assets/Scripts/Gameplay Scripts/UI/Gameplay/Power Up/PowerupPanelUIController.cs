@@ -39,6 +39,9 @@ public class PowerupPanelUIController : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+
+        // ToDo: Test Purposes, it will move proper manager
+        PauseManager.Instance.ResumeGameplay();
     }
 
     public void OnApplyCard(PowerupOffer selectedOffer)
