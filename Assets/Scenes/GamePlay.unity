@@ -5726,6 +5726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206572570}
   - component: {fileID: 1206572569}
+  - component: {fileID: 1206572571}
   m_Layer: 0
   m_Name: Pause Manager
   m_TagString: Untagged
@@ -5760,6 +5761,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206572571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206572568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140db0ad9ba8a4cd4a2e6a3385efd075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  origin: {fileID: 703825594}
+  def: {fileID: 11400000, guid: 66130a14f0e364b8cb3811dc4cf0b990, type: 2}
+  drawWhenNotSelected: 0
+  visualizeHits: 1
+  normalLength: 0.35
+  arrowHeadSize: 0.25
 --- !u!1 &1249588010
 GameObject:
   m_ObjectHideFlags: 0

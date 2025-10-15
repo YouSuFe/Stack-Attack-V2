@@ -8,7 +8,13 @@ public class LaserSkill : ISpecialSkill
 
     private GameObject owner;
     private GameObject visualInstance;
-    private LineRenderer lineRenderer;
+    private LaserBeamVisual beamVisual;
+    private LineRenderer lineRenderer; // cached fallback if no LaserBeamVisual
+
+    // World-space snapshot taken at activation so the beam doesn't follow the origin.
+    private Vector2 startSnapshot;
+    private Vector2 dirSnapshot;
+    private float rangeSnapshot;
 
     // Hit accounting for this activation
     private readonly HashSet<int> countedThisActivation = new();
@@ -27,11 +33,33 @@ public class LaserSkill : ISpecialSkill
     {
         this.owner = owner;
 
-        if (def.BeamVisualPrefab != null && origin != null)
+        if (def.BeamVisualPrefab != null)
         {
-            visualInstance = Object.Instantiate(def.BeamVisualPrefab, origin.position, origin.rotation, origin);
-            lineRenderer = visualInstance.GetComponent<LineRenderer>();
-            if (visualInstance) visualInstance.SetActive(false);
+            Vector3 spawnPos = origin ? origin.position : Vector3.zero;
+            Quaternion spawnRot = origin ? origin.rotation : Quaternion.identity;
+
+            // IMPORTANT: instantiate WITHOUT a parent so it won't follow the origin transform.
+            visualInstance = Object.Instantiate(def.BeamVisualPrefab, spawnPos, spawnRot);
+            visualInstance.SetActive(false);
+
+            // Prefer helper component
+            beamVisual = visualInstance.GetComponent<LaserBeamVisual>();
+
+            // Cache LineRenderer as fallback (in case helper not added)
+            if (beamVisual == null)
+            {
+                lineRenderer = visualInstance.GetComponent<LineRenderer>();
+                if (lineRenderer != null) lineRenderer.useWorldSpace = true;
+            }
+            else
+            {
+                lineRenderer = beamVisual.Line; // cache for UpdateVisual()
+                if (lineRenderer != null) lineRenderer.useWorldSpace = true;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[LaserSkill] BeamVisualPrefab is not assigned on SpecialSkillDefinitionSO. Visual will be skipped.");
         }
     }
 
@@ -44,39 +72,45 @@ public class LaserSkill : ISpecialSkill
         tickTimer = 0f;
         singleImpactApplied = false;
 
-        if (visualInstance != null) visualInstance.SetActive(true);
+        // Snapshot the start & direction ONCE so the beam won't follow the player after firing.
+        startSnapshot = origin.position;
+        dirSnapshot = origin.up.normalized;
+        rangeSnapshot = def.MaxRange;
+
+        // Position/rotate the visual to match the snapshot direction (prefab remains unparented)
+        if (visualInstance != null)
+        {
+            visualInstance.transform.position = startSnapshot;
+            visualInstance.transform.rotation = Quaternion.FromToRotation(Vector3.up, dirSnapshot);
+            visualInstance.SetActive(true);
+        }
+
+        // First frame visual update
+        UpdateVisual();
+
         return true;
     }
 
     public void TickActive(float deltaTime)
     {
-        if (origin == null) return;
+        // Visual is driven from snapshots (won't follow moving origin)
+        UpdateVisual();
 
-        Vector2 start = origin.position;
-        Vector2 dir = origin.up;
-        float range = def.MaxRange;
+        // Physics from the SNAPSHOT, not the moving origin
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(
+            startSnapshot, def.BeamRadius, dirSnapshot, rangeSnapshot, def.DamageMask);
 
-        // Visuals
-        if (lineRenderer != null)
-        {
-            lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, start);
-            lineRenderer.SetPosition(1, start + dir * range);
-        }
-
-        // Collect current hits
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(start, def.BeamRadius, dir, range, def.DamageMask);
         if (hits == null || hits.Length == 0) return;
 
         if (def.DamageMode == SpecialDamageMode.SingleImpact)
         {
-            if (singleImpactApplied) return; // already did our one-time hit this activation
+            if (singleImpactApplied) return; // already processed this activation
             ApplyHitBatch(hits, /*applyDamage*/ true, /*raiseHitEvents*/ true);
             singleImpactApplied = true;
             return;
         }
 
-        // Continuous: accumulate time and apply on interval
+        // Continuous damage mode: apply on a tick interval
         tickTimer += deltaTime;
         if (tickTimer >= def.TickIntervalSeconds)
         {
@@ -85,6 +119,7 @@ public class LaserSkill : ISpecialSkill
         }
     }
 
+
     public void Stop()
     {
         if (visualInstance != null)
@@ -92,6 +127,28 @@ public class LaserSkill : ISpecialSkill
     }
 
     // -------- Helpers --------
+
+    private void UpdateVisual()
+    {
+        if (visualInstance == null) return;
+
+        Vector3 start = startSnapshot;
+        Vector3 end = startSnapshot + dirSnapshot * rangeSnapshot;
+
+        if (beamVisual != null)
+        {
+            beamVisual.SetEndpoints(start, end);
+            return;
+        }
+
+        if (lineRenderer != null)
+        {
+            if (!lineRenderer.useWorldSpace) lineRenderer.useWorldSpace = true;
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, start);
+            lineRenderer.SetPosition(1, end);
+        }
+    }
 
     private void ApplyHitBatch(RaycastHit2D[] hits, bool applyDamage, bool raiseHitEvents)
     {

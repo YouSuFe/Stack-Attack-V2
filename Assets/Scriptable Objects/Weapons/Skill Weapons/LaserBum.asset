@@ -23,5 +23,5 @@ MonoBehaviour:
   damageMask:
     serializedVersion: 2
     m_Bits: 64
-  beamVisualPrefab: {fileID: 7537136635215886244, guid: 53681a9918c694968abd4eb4a4da4960, type: 3}
+  beamVisualPrefab: {fileID: 5696365709449921289, guid: 5a813d7d65463426fb91b8804fded7af, type: 3}
   countOncePerActivation: 1

@@ -34,7 +34,7 @@ public class SpecialSkillDefinitionSO : ScriptableObject
     [Tooltip("Which layers the laser can damage.")]
     [SerializeField] private LayerMask damageMask;
 
-    [Header("Visuals (optional)")]
+    [Header("Visuals")]
     [Tooltip("Prefab with LineRenderer/VFX. Can be null.")]
     [SerializeField] private GameObject beamVisualPrefab;
 
