@@ -10,7 +10,7 @@ using UnityEngine;
 /// - Empties bar on fire.
 /// - Skill visuals run for ActiveDurationSeconds.
 /// </summary>
-public class SpecialSkillDriver : MonoBehaviour
+public class SpecialSkillDriver : MonoBehaviour, IStoppable
 {
     [Header("Definition & Mounts")]
     [SerializeField] private SpecialSkillDefinitionSO specialDefinition;
@@ -24,6 +24,8 @@ public class SpecialSkillDriver : MonoBehaviour
     private ISpecialSkill activeSkill;
     private float activeTimer;
     private GameObject owner;
+
+    private bool isPaused;
 
     // UI events
     public Action<int, int> OnChargeChanged;  // (current, required)
@@ -73,7 +75,7 @@ public class SpecialSkillDriver : MonoBehaviour
 
     private void Update()
     {
-        if (!isActive) return;
+        if (!isActive || isPaused) return;
 
         float dt = Time.deltaTime;
         activeTimer -= dt;
@@ -147,5 +149,15 @@ public class SpecialSkillDriver : MonoBehaviour
     private void NotifyChargeChanged()
     {
         OnChargeChanged?.Invoke(currentCharge, specialDefinition != null ? specialDefinition.RequiredCharge : 1);
+    }
+
+    public void OnStopGameplay()
+    {
+        isPaused = true;
+    }
+
+    public void OnResumeGameplay()
+    {
+        isPaused = false;
     }
 }
