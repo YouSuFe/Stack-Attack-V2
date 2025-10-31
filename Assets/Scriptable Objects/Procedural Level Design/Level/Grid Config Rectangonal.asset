@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3d7c31bdcde4ede99389867a1925c5, type: 3}
+  m_Name: Grid Config Rectangonal
+  m_EditorClassIdentifier: 
+  originY: 5
+  topology: 0
+  columns: 5
+  cellWidth: 1
+  cellHeight: 1
+  hexOrientation: 0
+  hexSize: 0.5
+  hexOffset: 1
+  octApothem: 0.5
+  octLayout: 0
+  previewRows: 15
+  extraTopRows: 0
+  extraBottomRows: 0

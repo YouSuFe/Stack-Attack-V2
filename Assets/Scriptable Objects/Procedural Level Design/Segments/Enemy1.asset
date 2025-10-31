@@ -1,0 +1,1061 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97afe99b6befb4fe6ae31eeb92fe093e, type: 3}
+  m_Name: Enemy1
+  m_EditorClassIdentifier: 
+  spaceAlignOverride: 3
+  segmentType: 0
+  lengthInRows: 60
+  spawnTable:
+  - rowOffset: 2
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 2
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 3
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 3
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 0
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 0
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 1
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 1
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 6
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 6
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 7
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 7
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 8
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 8
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 9
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 9
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 12
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 12
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 12
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 13
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 13
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 13
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 10
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 5
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 0
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 4
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 5
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 14
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 14
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 11
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 11
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 17
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 18
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 19
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 20
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 21
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 22
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 23
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 25
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 24
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 23
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 22
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 21
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 20
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 19
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 18
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 17
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 28
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 28
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 28
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 28
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 28
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 36
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 35
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 34
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 33
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 32
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 32
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 33
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 34
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 35
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 36
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 37
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 35
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 36
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 37
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 38
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 39
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 42
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 42
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 42
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 43
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 43
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 48
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 48
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 48
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 49
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 49
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 49
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 50
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 50
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 50
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 51
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 51
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 51
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 54
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 54
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 54
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 55
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 55
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 55
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 56
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 56
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 56
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 57
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 57
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 57
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 58
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 58
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 58
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 59
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 59
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  - rowOffset: 59
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 0
+      tone: 0
+  stripes:
+  - topology: 0
+    config: {fileID: 11400000, guid: 0c5f100204bb449aa8bd86c48483d36e, type: 2}
+    rows: 15
+    gapBeforeY: 0
+  - topology: 2
+    config: {fileID: 11400000, guid: bce4e1a5706344c64a55e7dcaeeb0684, type: 2}
+    rows: 30
+    gapBeforeY: 2
+  - topology: 1
+    config: {fileID: 11400000, guid: 1cee0fd99af0f450a9a0cd219226d96d, type: 2}
+    rows: 15
+    gapBeforeY: 2
