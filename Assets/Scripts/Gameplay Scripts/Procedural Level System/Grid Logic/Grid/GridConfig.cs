@@ -27,7 +27,7 @@ public enum OctLayout
     //Square          // regular square lattice; interstitial little squares (4.8.8 tiling)
 }
 
-[CreateAssetMenu(menuName = "Level/Grid Config")]
+[CreateAssetMenu(menuName = "Game/Level/Grid Config")]
 public class GridConfig : ScriptableObject
 {
     #region Grid Dimensions

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movement/Straight Down")]
+[CreateAssetMenu(menuName = "Game/Movement/Straight Down")]
 public class StraightDownDefinition : MovementDefinition
 {
     #region Inspector

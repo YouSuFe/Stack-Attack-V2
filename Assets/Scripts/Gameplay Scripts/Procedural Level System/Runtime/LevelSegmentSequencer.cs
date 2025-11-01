@@ -31,6 +31,20 @@ public class LevelSegmentSequencer : MonoBehaviour
 
     #endregion
 
+    #region Inspector - Difficulty / Definitions
+
+    [Header("Difficulty / Level Context")]
+    [Tooltip("1-based level index used by EnemyInitializer to compute scaled HP.")]
+    [SerializeField, Min(1)] private int levelIndex1Based = 1;
+
+    [Header("Fallback Enemy/Boss Definitions")]
+    [Tooltip("Used when a SpawnEntry (Enemy/Boss) has no EnemyDefinition assigned.")]
+    [SerializeField] private EnemyDefinition defaultEnemyDefinition;
+
+    [Tooltip("Used when a SpawnEntry (Boss) has no EnemyDefinition assigned.")]
+    [SerializeField] private EnemyDefinition defaultBossDefinition;
+
+    #endregion
 
     #region Inspector - Orchestrator
 
@@ -316,12 +330,15 @@ public class LevelSegmentSequencer : MonoBehaviour
                     }
                 }
 
-                // === NEW: if this spawned object is a Boss, hook the orchestrator and late-bind segment ===
+                // === Inject EnemyDefinition -> EnemyInitializer (for Enemy & Boss) ===
+                InjectDefinitionAndInitialize(go, entry);
+
+                // === If this spawned object is a Boss, hook the orchestrator and late-bind segment ===
                 TryHookBossAddsOrchestrator(go, tracker);
             }
             else if (isAnchorPayload)
             {
-                // NEW: create a dummy under segRoot so anchors get the same alignment shift.
+                // create a dummy under segRoot so anchors get the same alignment shift.
                 go = new GameObject("__PivotAnchorDummy");
                 go.transform.SetParent(segRoot, worldPositionStays: true);
                 go.transform.position = spawnPos;
@@ -378,6 +395,46 @@ public class LevelSegmentSequencer : MonoBehaviour
         Destroy(segRoot.gameObject);
 #endif
     }
+
+    /// <summary>
+    /// Set EnemyDefinition on EnemyInitializer and initialize HP using levelIndex1Based.
+    /// Falls back to defaultEnemyDefinition/defaultBossDefinition if entry has none.
+    /// Also supports the initializer being on a child (prefab variants).
+    /// </summary>
+    private void InjectDefinitionAndInitialize(GameObject go, SpawnEntry entry)
+    {
+        if (!go) return;
+
+        // Only relevant for Enemy or Boss spawns
+        if (entry.spawnType != SpawnType.Enemy && entry.spawnType != SpawnType.Boss) return;
+
+        // Allow initializer to be on root OR children (inactive included, useful for pooled setups)
+        var init = go.GetComponentInChildren<EnemyInitializer>(true);
+        if (init == null)
+        {
+            if (verboseLogging)
+                Debug.LogWarning($"[Sequencer] Spawned {entry.spawnType} but no EnemyInitializer found on {go.name} (root or children).");
+            return;
+        }
+
+        // Pick definition (entry -> fallback by type)
+        var def = entry.EnemyDefinition;
+        if (def == null)
+        {
+            def = (entry.spawnType == SpawnType.Boss) ? defaultBossDefinition : defaultEnemyDefinition;
+            if (verboseLogging && def != null)
+                Debug.Log($"[Sequencer] Using fallback {(entry.spawnType == SpawnType.Boss ? "Boss" : "Enemy")} definition: {def.name}");
+        }
+
+        if (def != null)
+            init.SetDefinition(def);
+
+        // ToDo: Create the Level Catalog logic to get which level we are in right now.
+        // Clamp level index defensively (EnemyDefinition expects 1-based)
+        var lvl = Mathf.Max(1, levelIndex1Based);
+        init.InitializeFromSpawn(lvl);
+    }
+
 
     /// <summary>
     /// If the instantiated object looks like a Boss, hook the scene orchestrator

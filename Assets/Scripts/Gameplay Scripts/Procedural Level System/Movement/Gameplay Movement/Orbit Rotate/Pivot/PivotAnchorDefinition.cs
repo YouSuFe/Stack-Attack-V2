@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movement/Pivot Anchor")]
+[CreateAssetMenu(menuName = "Game/Movement/Pivot Anchor")]
 public class PivotAnchorDefinition : MovementDefinition
 {
     #region Inspector

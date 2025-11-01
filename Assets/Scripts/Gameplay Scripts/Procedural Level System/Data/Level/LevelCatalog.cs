@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Level/Level Catalog")]
+[CreateAssetMenu(menuName = "Game/Level/Level Catalog")]
 public class LevelCatalog : ScriptableObject
 {
     [SerializeField] private List<LevelDefinition> levels = new();

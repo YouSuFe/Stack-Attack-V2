@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movement/ZigZag Horizontal")]
+[CreateAssetMenu(menuName = "Game/Movement/ZigZag Horizontal")]
 public class ZigZagHorizontalDefinition : MovementDefinition
 {
     #region Inspector

@@ -54,7 +54,7 @@ public class BossPhaseEnemySpawner : MonoBehaviour
     private readonly Dictionary<Object, List<GameObject>> ownerSpawned = new Dictionary<Object, List<GameObject>>();
     #endregion
 
-    #region NEW: Custom Wave API
+    #region Custom Wave API
     public struct SpawnRequest
     {
         public int laneIndex;                // 0..(lanes-1)

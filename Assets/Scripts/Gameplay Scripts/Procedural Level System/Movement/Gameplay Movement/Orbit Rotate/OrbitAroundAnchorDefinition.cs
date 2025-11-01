@@ -1,7 +1,7 @@
 ﻿ using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Movement/Orbit Around Anchor")]
+[CreateAssetMenu(menuName = "Game/Movement/Orbit Around Anchor")]
 public class OrbitAroundAnchorDefinition : MovementDefinition
 {
     #region Inspector

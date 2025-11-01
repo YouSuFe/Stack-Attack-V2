@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BasicWeapon : BaseWeapon
 {
-
     [Header("Basic Damage")]
     [SerializeField] private int damagePerBasic = 1;         // simple per-shot damage
 

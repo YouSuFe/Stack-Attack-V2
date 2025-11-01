@@ -10,7 +10,7 @@ public enum SpaceAlignMode
     LastRowToAnchor = 3   // Align Space segment's LAST row to the anchor Y (recommended: shows the “final Y” exactly at anchor)
 }
 
-[CreateAssetMenu(menuName = "Level/Segment")]
+[CreateAssetMenu(menuName = "Game/Level/Segment")]
 public class LevelSegment : ScriptableObject
 {
     #region Serialized Fields

@@ -65,6 +65,17 @@ public class SpawnEntry
     }
     #endregion
 
+    #region Enemy/Boss Definition
+    [SerializeField, Tooltip("Stats/scaling template used when spawnType is Enemy or Boss.")]
+    private EnemyDefinition enemyDefinition;
+
+    /// <summary>Definition used by Enemy or Boss spawns.</summary>
+    public EnemyDefinition EnemyDefinition => enemyDefinition;
+
+    /// <summary>Setter for editor/runtime tools if needed.</summary>
+    public void SetEnemyDefinition(EnemyDefinition def) => enemyDefinition = def;
+    #endregion
+
     #region Validation Helpers (optional)
     public void ClampReserved()
     {

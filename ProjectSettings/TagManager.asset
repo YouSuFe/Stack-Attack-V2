@@ -5,6 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Projectile
+  - Trap
+  - SpaceDummy
+  - Coin
+  - Enemy
+  - Boss
+  - Pivot
+  - Bound
+  - PowerUp
+  - Multiplier
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -13,7 +23,7 @@ TagManager:
   - Water
   - UI
   - Damagable
-  - 
+  - Staging
   - 
   - 
   - 

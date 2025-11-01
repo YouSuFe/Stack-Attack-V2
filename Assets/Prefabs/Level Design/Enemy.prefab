@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: -4107546351645337142}
   - component: {fileID: 7076659792511784047}
   - component: {fileID: -7414128890478754169}
+  - component: {fileID: -3609158823353936284}
+  - component: {fileID: 4238683371438556200}
+  - component: {fileID: 5184367690249955576}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -120,7 +123,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -208,3 +211,53 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   category: 0
+--- !u!114 &-3609158823353936284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133992487809149930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ae37f8956e94a5eb833568c78de758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnDeath: 1
+  deathEffect: {fileID: 0}
+  ignoreDamageWhenPaused: 1
+--- !u!114 &4238683371438556200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133992487809149930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 795cd0b58b35c40019c71f962c7bab78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  definition: {fileID: 11400000, guid: 361e93c01e2ed4430a6f4e92d42a65fe, type: 2}
+  fallbackHealth: 20
+--- !u!114 &5184367690249955576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133992487809149930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154ff515936e64c599474a71fd17bb04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 1
+  owner: {fileID: 0}
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  requiredTargetTag: Player
+  perTargetCooldown: 0.5
+  onlyOnEnter: 0
+  knockbackImpulse: 0

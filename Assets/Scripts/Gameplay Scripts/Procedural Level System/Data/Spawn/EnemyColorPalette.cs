@@ -12,7 +12,7 @@ public enum EnemyTone
     Light, Normal, Deep
 }
 
-[CreateAssetMenu(fileName = "EnemyColorPalette", menuName = "Colors/Enemy Color Palette")]
+[CreateAssetMenu(fileName = "EnemyColorPalette", menuName = "Game/Colors/Enemy Color Palette")]
 public class EnemyColorPalette : ScriptableObject
 {
     [Serializable]

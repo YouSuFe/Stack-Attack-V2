@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Level/Spawn Prefab Catalog")]
+[CreateAssetMenu(menuName = "Game/Level/Spawn Prefab Catalog")]
 public class SpawnPrefabCatalog : ScriptableObject
 {
     [Serializable]
