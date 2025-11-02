@@ -33,9 +33,6 @@ public class DamageOnContact : MonoBehaviour, IDamageDealer, IStoppable
     [SerializeField, Tooltip("If true, deal damage only on enter. If false, also on stay respecting cooldown.")]
     private bool onlyOnEnter = false;
 
-    [Header("Knockback (optional)")]
-    [SerializeField, Tooltip("If > 0, apply an impulse away from this source when dealing damage.")]
-    private float knockbackImpulse = 0f;
     #endregion
 
     #region State
@@ -47,6 +44,7 @@ public class DamageOnContact : MonoBehaviour, IDamageDealer, IStoppable
     #region IDamageDealer
     public int DamageAmount => damageAmount;
     public GameObject Owner => owner != null ? owner : gameObject;
+    public void SetOwner(GameObject gameObject) => owner = gameObject;
     #endregion
 
     #region Unity

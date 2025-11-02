@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -3609158823353936284}
   - component: {fileID: 4238683371438556200}
   - component: {fileID: 5184367690249955576}
+  - component: {fileID: 438838746980977128}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -260,4 +261,17 @@ MonoBehaviour:
   requiredTargetTag: Player
   perTargetCooldown: 0.5
   onlyOnEnter: 0
-  knockbackImpulse: 0
+--- !u!114 &438838746980977128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7133992487809149930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a43006293dc485ebe6fabca045fe69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  expPerKill: 1
+  ignoreWhilePaused: 1

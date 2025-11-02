@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Generic health component for regular enemies.
@@ -35,6 +36,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IStoppable
     public int CurrentHealth => currentHealth;
     public bool IsAlive => isAlive; // IDamageable
     #endregion
+
+    public event Action<EnemyHealth> OnDied;
 
     #region Unity
     private void OnEnable()
@@ -83,6 +86,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IStoppable
     {
         if (!isAlive) return;
         isAlive = false;
+
+        OnDied?.Invoke(this);
 
         if (deathEffect) Instantiate(deathEffect, transform.position, Quaternion.identity);
 

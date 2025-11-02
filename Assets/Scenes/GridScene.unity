@@ -331,11 +331,9 @@ MonoBehaviour:
     target: {fileID: 1224888180}
   - segmentType: 2
     target: {fileID: 1684191691}
-  pinataUI: {fileID: 730409120}
   inDuration: 0.18
   outDuration: 0.22
   popOvershoot: 0.12
-  popNudge: {x: 0, y: 12}
   interruptOnNewSpace: 1
   verboseLogs: 0
 --- !u!1 &519420028
@@ -1031,6 +1029,9 @@ MonoBehaviour:
   gridConfig: {fileID: 11400000, guid: 1cee0fd99af0f450a9a0cd219226d96d, type: 2}
   levelDefinition: {fileID: 11400000, guid: e8f2d32dc11be4dd5baa083704fc3c51, type: 2}
   enemyPalette: {fileID: 11400000, guid: b850201ec0e524ad2b02b611aaa96a36, type: 2}
+  levelIndex1Based: 1
+  defaultEnemyDefinition: {fileID: 11400000, guid: 361e93c01e2ed4430a6f4e92d42a65fe, type: 2}
+  defaultBossDefinition: {fileID: 11400000, guid: ff68e0505ea904d15ae19549e4239dfc, type: 2}
   bossAddsOrchestrator: {fileID: 1833807300}
   prefabCatalog: {fileID: 11400000, guid: f202ad1eca6e24055b57ee8a1de98cf7, type: 2}
   defaultPrefab: {fileID: 0}
