@@ -454,7 +454,8 @@ public class LevelSegmentSequencer : MonoBehaviour
             if (bossAddsOrchestrator != null)
             {
                 bossAddsOrchestrator.HookBoss(boss);
-                if (verboseLogging) Debug.Log("[Sequencer] Boss detected -> Orchestrator hooked.");
+                LevelContextBinder.Instance?.HookBoss(boss);
+                if (verboseLogging) Debug.Log("[Sequencer] Boss detected -> Orchestrator and Level Binder hooked.");
             }
             else if (verboseLogging)
             {
@@ -575,6 +576,11 @@ public class LevelSegmentSequencer : MonoBehaviour
     private bool IsSpace(LevelSegment segment)
     {
         return segment.SegmentType == SegmentType.Space;
+    }
+
+    public void SetLevelDefinition(LevelDefinition def)
+    {
+        levelDefinition = def;
     }
 
     #endregion

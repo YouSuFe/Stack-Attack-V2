@@ -1,5 +1,6 @@
 namespace PixeLadder.EasyTransition
 {
+    using System;
     using System.Collections;
     using UnityEngine;
     using UnityEngine.SceneManagement;
@@ -20,7 +21,7 @@ namespace PixeLadder.EasyTransition
 
         // --- Private State ---
         private Image transitionImageInstance;
-        public static event System.Action OnSceneLoaded;
+        public static event Action OnSceneLoaded;
 
         private void Awake()
         {

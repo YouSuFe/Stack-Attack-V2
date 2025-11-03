@@ -322,7 +322,13 @@ public class UpcomingSegmentAnnouncer : MonoBehaviour
             if (seg && seg.SegmentType != SegmentType.Space)
                 return seg.SegmentType;
         }
-        return null;
+        // Default, fallback for enemywave
+        return SegmentType.EnemyWave;
+    }
+
+    public void SetLevelDefinition(LevelDefinition def)
+    {
+        levelDefinition = def;
     }
     #endregion
 

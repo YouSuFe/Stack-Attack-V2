@@ -4091,7 +4091,6 @@ GameObject:
   m_Component:
   - component: {fileID: 744143228}
   - component: {fileID: 744143229}
-  - component: {fileID: 744143230}
   m_Layer: 5
   m_Name: Pause Root
   m_TagString: Untagged
@@ -4143,18 +4142,6 @@ MonoBehaviour:
     y: 0
     width: 0
     height: 0
---- !u!114 &744143230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744143227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ced748a519a64a80be647c7aad69e5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &757323047
 GameObject:
   m_ObjectHideFlags: 0
@@ -7323,6 +7310,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304265522}
   m_CullTransparentMesh: 1
+--- !u!1 &1323291124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1323291126}
+  - component: {fileID: 1323291125}
+  m_Layer: 0
+  m_Name: Game Flow Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1323291125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323291124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 187944095537b4c1eadca3d21b01f342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequencer: {fileID: 0}
+  inputController: {fileID: 1285472740}
+  optionalWeaponDriver: {fileID: 1402596872}
+  starterWeapon: 0
+  equipStarterOnSceneStart: 1
+  starterEquipDelay: 0
+--- !u!4 &1323291126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323291124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 89.65595, y: 225.90297, z: -1.54079}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1352231210
 GameObject:
   m_ObjectHideFlags: 0
@@ -7687,11 +7724,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -13079,6 +13116,7 @@ SceneRoots:
   - {fileID: 2078498833}
   - {fileID: 260281962}
   - {fileID: 1285472741}
+  - {fileID: 1323291126}
   - {fileID: 1875104286}
   - {fileID: 497009734}
   - {fileID: 1206572570}

@@ -13,7 +13,6 @@ public class PauseManager : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        //DontDestroyOnLoad(gameObject);
     }
 
     public void Register(IStoppable listener)

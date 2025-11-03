@@ -118,7 +118,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         float blinkHalfPeriod = (shieldBlinkFrequencyHz > 0f) ? (0.5f / shieldBlinkFrequencyHz) : 0.1f;
         bool shieldVisible = true;
 
-        while (timeRemaining > 0f)
+        while (timeRemaining > 0f && !PauseManager.Instance.IsGameplayStopped)
         {
             float dt = Time.deltaTime;
             timeRemaining -= dt;
