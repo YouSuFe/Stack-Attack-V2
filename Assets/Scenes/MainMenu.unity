@@ -1228,6 +1228,56 @@ RectTransform:
   m_AnchoredPosition: {x: -0.27368164, y: -105}
   m_SizeDelta: {x: 769.45264, y: 250}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!1 &1361312670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1361312672}
+  - component: {fileID: 1361312671}
+  m_Layer: 0
+  m_Name: Level Service
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1361312671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361312670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f389c01eef0d84b829049f04647f765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelCatalog: {fileID: 11400000, guid: 67cb72d63bec94c01be3f65a34c1a60d, type: 2}
+  loadProgressOnAwake: 1
+  defaultStartLevelIndex: 0
+  currentLevelIndex: -1
+  highestUnlockedLevelIndex: 0
+  lastPlayedIndex: 0
+--- !u!4 &1361312672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361312670}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 89.65595, y: 225.90297, z: -1.54079}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1529218437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,6 +1663,7 @@ SceneRoots:
   - {fileID: 893214742}
   - {fileID: 1956757276}
   - {fileID: 333116361}
+  - {fileID: 1361312672}
   - {fileID: 2101941856}
   - {fileID: 1529218441}
   - {fileID: 580886580}

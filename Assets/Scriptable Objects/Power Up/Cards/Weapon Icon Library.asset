@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1371018ff2db247698c9f92c9ce4f7af, type: 3}
-  m_Name: WeaponIconLibrary
+  m_Name: Weapon Icon Library
   m_EditorClassIdentifier: 
   weaponIcons:
   - weaponType: 0

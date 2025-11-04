@@ -39,7 +39,7 @@ public class LevelContextBinder : MonoBehaviour
     private bool verboseLogs = false;
     #endregion
 
-    #region Public Events (bind your Result UI later)
+    #region Public Events
     public event Action OnLevelSucceeded;
     public event Action OnLevelFailed;
     #endregion
