@@ -2,18 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Orchestrates which end-of-level UI is visible:
-/// - Listens to LevelContextBinder for success/fail.
-/// - On success: shows Success result UI.
-/// - On fail: shows Dead screen; if player declines or timer hits 0 → shows Failure result UI.
-/// Ensures only one UI is visible at a time.
+/// Subscribes to level outcome events and triggers the appropriate Result UI:
+/// - On success ⇒ calls ResultUIController.ShowSuccessUIWithSequence(...)
+/// - On fail ⇒ shows DeadCanvas; if player declines/timeout ⇒ calls ResultUIController.ShowFailureUIWithSequence(...)
+/// This class DOES NOT hide/show result groups directly; the ResultUIController handles that.
 /// </summary>
 [DisallowMultipleComponent]
 public class GameUIFlowController : MonoBehaviour
 {
     #region Serialized References
     [Header("Controllers")]
-    [SerializeField, Tooltip("Controls Success/Failure result groups.")]
+    [SerializeField, Tooltip("Controls Success/Failure result parents (owns enable/disable).")]
     private ResultUIController resultUIController;
 
     [SerializeField, Tooltip("Dead (KO) canvas with revive / not-revive and countdown.")]
@@ -28,7 +27,7 @@ public class GameUIFlowController : MonoBehaviour
     [SerializeField, Tooltip("Rewards to display on Failure (optional).")]
     private List<ResultViewBase.RewardEntry> failureRewardsPreview = new List<ResultViewBase.RewardEntry>();
 
-    [SerializeField, Tooltip("If set >=0, Failure UI will show REACHED {value}%. Leave -1 to keep whatever text is already on the component.")]
+    [SerializeField, Tooltip("If set >=0, Failure UI will show REACHED {value}%. Leave -1 to keep the view's current text.")]
     private int reachedPercentOnFailure = -1;
 
     [Header("Dead Canvas Settings")]
@@ -42,9 +41,17 @@ public class GameUIFlowController : MonoBehaviour
     #endregion
 
     #region Unity
+
+    private void Awake()
+    {
+        // Ensure dead canvas starts hidden every session.
+        if (deadCanvas != null)
+            deadCanvas.Hide();
+    }
+
     private void OnEnable()
     {
-        // Bind to the current LevelContextBinder (scene-local singleton)
+        // Subscribe to level outcome
         binder = LevelContextBinder.Instance;
         if (binder != null)
         {
@@ -52,7 +59,7 @@ public class GameUIFlowController : MonoBehaviour
             binder.OnLevelFailed += HandleLevelFailed;
         }
 
-        // Hook dead canvas decisions
+        // Subscribe to DeadCanvas choices
         if (deadCanvas != null)
         {
             deadCanvas.ReviveRequested += HandleReviveChosen;
@@ -77,7 +84,7 @@ public class GameUIFlowController : MonoBehaviour
     }
     #endregion
 
-    #region Public API (optional setters if you build rewards at runtime)
+    #region Public API (optional setters for runtime rewards)
     public void SetSuccessRewards(IEnumerable<ResultViewBase.RewardEntry> rewards)
     {
         successRewardsPreview = rewards != null ? new List<ResultViewBase.RewardEntry>(rewards) : new List<ResultViewBase.RewardEntry>();
@@ -98,15 +105,14 @@ public class GameUIFlowController : MonoBehaviour
     #region Level Outcomes
     private void HandleLevelSucceeded()
     {
-        Debug.Log("[GameUIFlowController] Outcome: SUCCESS → Show Success UI");
+        Debug.Log("[GameUIFlowController] Outcome: SUCCESS → trigger Success UI");
         HideDeadCanvasIfNeeded();
-        ShowSuccessUI();
+        TriggerSuccessUI();
     }
 
     private void HandleLevelFailed()
     {
-        Debug.Log("[GameUIFlowController] Outcome: FAIL → Show Dead Canvas");
-        HideAllResultGroups();
+        Debug.Log("[GameUIFlowController] Outcome: FAIL → show Dead Canvas");
         ShowDeadCanvas();
     }
     #endregion
@@ -114,21 +120,47 @@ public class GameUIFlowController : MonoBehaviour
     #region Dead Canvas Reactions
     private void HandleReviveChosen()
     {
-        // You can put revive logic here (resume gameplay, consume currency, ad flow, etc.)
-        Debug.Log("[GameUIFlowController] DeadCanvas: Revive chosen.");
+        // Gameplay resumes; no result UI shown here.
+        Debug.Log("[GameUIFlowController] DeadCanvas: Revive chosen → resume gameplay.");
         HideDeadCanvasIfNeeded();
-        // No result UI shown; gameplay resumes.
     }
 
     private void HandleNotReviveChosen()
     {
-        Debug.Log("[GameUIFlowController] DeadCanvas: Not Revive (or timeout) → Show Failure UI");
+        Debug.Log("[GameUIFlowController] DeadCanvas: Not Revive / timeout → trigger Failure UI");
         HideDeadCanvasIfNeeded();
-        ShowFailureUI();
+        TriggerFailureUI();
     }
     #endregion
 
-    #region Show/Hide Helpers
+    #region UI Triggers (no direct show/hide of result groups here)
+    private void TriggerSuccessUI()
+    {
+        if (resultUIController == null)
+        {
+            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
+            return;
+        }
+
+        var rewards = successRewardsPreview ?? new List<ResultViewBase.RewardEntry>();
+        resultUIController.ShowSuccessUIWithSequence(rewards);
+    }
+
+    private void TriggerFailureUI()
+    {
+        if (resultUIController == null)
+        {
+            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
+            return;
+        }
+
+        var rewards = failureRewardsPreview ?? new List<ResultViewBase.RewardEntry>();
+        int? reached = (reachedPercentOnFailure >= 0) ? (int?)reachedPercentOnFailure : null;
+        resultUIController.ShowFailureUIWithSequence(rewards, reached);
+    }
+    #endregion
+
+    #region Dead Canvas Helpers
     private void ShowDeadCanvas()
     {
         if (deadCanvas == null)
@@ -139,11 +171,10 @@ public class GameUIFlowController : MonoBehaviour
 
         showingDead = true;
 
-        // Determine countdown seconds
         if (deadCountdownSecondsOverride > 0)
             deadCanvas.Show(deadCountdownSecondsOverride);
         else
-            deadCanvas.Show(); // uses its own default
+            deadCanvas.Show();
     }
 
     private void HideDeadCanvasIfNeeded()
@@ -152,42 +183,9 @@ public class GameUIFlowController : MonoBehaviour
         showingDead = false;
         deadCanvas.Hide();
     }
-
-    private void HideAllResultGroups()
-    {
-        if (resultUIController != null)
-            resultUIController.HideAll();
-    }
-
-    private void ShowSuccessUI()
-    {
-        if (resultUIController == null)
-        {
-            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
-            return;
-        }
-
-        var rewards = successRewardsPreview != null ? successRewardsPreview : new List<ResultViewBase.RewardEntry>();
-        resultUIController.ShowSuccessUIWithSequence(rewards);
-    }
-
-    private void ShowFailureUI()
-    {
-        if (resultUIController == null)
-        {
-            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
-            return;
-        }
-
-        var rewards = failureRewardsPreview != null ? failureRewardsPreview : new List<ResultViewBase.RewardEntry>();
-        int? reached = (reachedPercentOnFailure >= 0) ? (int?)reachedPercentOnFailure : null;
-
-        resultUIController.ShowFailureUIWithSequence(rewards, reached);
-    }
     #endregion
 
 #if UNITY_EDITOR
-    // Quick test helpers (right-click on component)
     [ContextMenu("Debug/Simulate Success")]
     private void Debug_SimSuccess() => HandleLevelSucceeded();
 
@@ -195,7 +193,6 @@ public class GameUIFlowController : MonoBehaviour
     private void Debug_SimFailToFailure()
     {
         HandleLevelFailed();
-        // simulate not revive after 1s
         Invoke(nameof(HandleNotReviveChosen), 1f);
     }
 

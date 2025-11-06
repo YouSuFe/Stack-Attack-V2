@@ -93,6 +93,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         OnDied?.Invoke();
         // Disable gameplay here or notify GameManager via event subscribers.
+        Debug.Log("[PlayerHealth] Player is dead.");
         gameObject.SetActive(false);
     }
 
@@ -150,5 +151,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         OnInvulnerabilityEnded?.Invoke();
         invulnerabilityCoroutine = null;
     }
+
+    [ContextMenu("Debug/Show Success UI")]
+    private void DebugOnDied() => OnDied();
 }
 

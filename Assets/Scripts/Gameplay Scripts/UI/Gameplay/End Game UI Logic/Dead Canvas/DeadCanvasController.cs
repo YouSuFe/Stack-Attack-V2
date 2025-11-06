@@ -48,7 +48,7 @@ public class DeadCanvasController : MonoBehaviour
     private UnityEvent onNotRevive;
     #endregion
 
-    #region Public API (optional C# events)
+    #region Public API
     /// <summary>Raised when Revive is chosen.</summary>
     public event Action ReviveRequested;
 
@@ -71,6 +71,10 @@ public class DeadCanvasController : MonoBehaviour
     {
         if (reviveButton != null) reviveButton.onClick.AddListener(HandleReviveClicked);
         if (notReviveButton != null) notReviveButton.onClick.AddListener(HandleNotReviveClicked);
+
+        // Safety: ensure fill image is actually "Filled"
+        if (timerFillImage != null && timerFillImage.type != Image.Type.Filled)
+            timerFillImage.type = Image.Type.Filled;
     }
     #endregion
 
@@ -82,6 +86,7 @@ public class DeadCanvasController : MonoBehaviour
     public void Show(int? seconds = null)
     {
         gameObject.SetActive(true);
+        Debug.Log("DebugCanvasController : Trying to set game object active true");
         StartCountdown(seconds ?? defaultCountdownSeconds);
     }
 
@@ -106,6 +111,8 @@ public class DeadCanvasController : MonoBehaviour
         remainingSeconds = initialSeconds;
 
         UpdateTimerUI(force: true);
+
+        Debug.Log("DebugCanvasController : Trying to update UI before starting timer");
 
         if (initialSeconds > 0)
             countdownRoutine = StartCoroutine(CountdownRoutine());
@@ -147,27 +154,32 @@ public class DeadCanvasController : MonoBehaviour
     #region Countdown
     private IEnumerator CountdownRoutine()
     {
-        float timeLeft = initialSeconds;   // float for smooth fill
-        int lastShown = -1;
+        // Prime UI fully visible (e.g., "5" and 100% fill) on the first rendered frame.
+        UpdateTimerUI(force: true);
+        yield return null; // let the activation frame settle to avoid a big first delta
 
-        while (!decisionMade && timeLeft > 0f)
+        // Anchor timing using absolute timestamps; this is resilient to frame hitches.
+        float start = useUnscaledTime ? Time.realtimeSinceStartup : Time.time;
+
+        while (!decisionMade)
         {
-            float delta = useUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-            timeLeft = Mathf.Max(0f, timeLeft - delta);
+            float now = useUnscaledTime ? Time.realtimeSinceStartup : Time.time;
+            float elapsed = Mathf.Max(0f, now - start);
+            float timeLeft = Mathf.Max(0f, initialSeconds - elapsed);
 
-            // Update integer display when it changes (floor)
-            int toShow = Mathf.FloorToInt(timeLeft);
-            if (toShow != lastShown)
+            // Smooth fill every frame
+            UpdateTimerFillOnly(timeLeft);
+
+            // Integer label (hold current second until it fully elapses)
+            int toShow = Mathf.Max(0, Mathf.CeilToInt(timeLeft));
+            if (toShow != remainingSeconds)
             {
                 remainingSeconds = toShow;
                 UpdateTimerUI(force: true);
-                lastShown = toShow;
             }
-            else
-            {
-                // Still update fill every frame for smoothness
-                UpdateTimerFillOnly(timeLeft);
-            }
+
+            if (timeLeft <= 0f)
+                break;
 
             yield return null;
         }
@@ -195,14 +207,14 @@ public class DeadCanvasController : MonoBehaviour
         if (timerText != null)
             timerText.text = Mathf.Clamp(remainingSeconds, 0, 999).ToString();
 
-        // Update fill (smooth)
+        // Update fill (snaps to integer step here; smooth fill handled per-frame in the coroutine)
         float t = initialSeconds <= 0 ? 0f : Mathf.Clamp01((float)remainingSeconds / initialSeconds);
         if (timerFillImage != null)
             timerFillImage.fillAmount = t;
 
         if (force)
         {
-            // No-op for now; placeholder if you want to add SFX or tick feedback at each second.
+            // Hook for tick SFX or haptics if needed.
         }
     }
 

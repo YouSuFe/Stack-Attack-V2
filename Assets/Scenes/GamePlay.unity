@@ -7565,7 +7565,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 965122906}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ced748a519a64a80be647c7aad69e5b, type: 3}
   m_Name: 
@@ -7685,6 +7685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8fd9291230a4a339024c95fc9c04b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verboseLogging: 1
   reviveButton: {fileID: 1744660797}
   notReviveButton: {fileID: 0}
   timerText: {fileID: 1297700982}
@@ -7692,12 +7693,6 @@ MonoBehaviour:
   defaultCountdownSeconds: 5
   useUnscaledTime: 1
   hideOnDecision: 1
-  onRevive:
-    m_PersistentCalls:
-      m_Calls: []
-  onNotRevive:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &970626303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9889,9 +9884,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   successView: {fileID: 1990072263}
   failureView: {fileID: 1370398100}
-  startHidden: 0
-  useFade: 1
-  fadeDuration: 0.25
+  startHidden: 1
 --- !u!1 &1285472739
 GameObject:
   m_ObjectHideFlags: 0
