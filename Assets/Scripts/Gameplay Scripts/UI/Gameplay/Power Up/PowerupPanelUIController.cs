@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PowerupPanelUIController : MonoBehaviour
 {
+
+
     [Header("Logic References")]
     [SerializeField] private PowerupManager powerupManager;
     [SerializeField] private WeaponIconLibrary weaponIconLibrary;
@@ -28,6 +31,9 @@ public class PowerupPanelUIController : MonoBehaviour
 
     private readonly List<PowerupOffer> currentRolledOffers = new();
 
+    // Fired when the player applies/accepts a card (one level-up resolved).
+    public event Action OnCardApplied;
+
     // ---------------- PUBLIC API ----------------
 
     public void ShowAndRoll()
@@ -38,23 +44,36 @@ public class PowerupPanelUIController : MonoBehaviour
 
     public void Hide()
     {
+        // Only hides the panel. Gameplay resume is handled by the orchestrator.
         gameObject.SetActive(false);
-
-        // ToDo: Test Purposes, it will move proper manager
-        PauseManager.Instance.ResumeGameplay();
     }
 
     public void OnApplyCard(PowerupOffer selectedOffer)
     {
         if (selectedOffer == null) return;
+
+        if (powerupManager == null)
+        {
+            Debug.LogError("[PowerupPanelUIController] PowerupManager reference not set.");
+            return;
+        }
+
         powerupManager.ApplyOffer(selectedOffer);
-        Hide();
+
+        // re-roll (more pending upgrades) or close+resume (none left).
+        OnCardApplied?.Invoke();
     }
 
     // ---------------- INTERNAL ----------------
 
     private void RollAndBindCards()
     {
+        if (powerupManager == null)
+        {
+            Debug.LogError("[PowerupPanelUIController] PowerupManager is not assigned; cannot roll cards.");
+            return;
+        }
+
         currentRolledOffers.Clear();
 
         List<PowerupOffer> offers = powerupManager.RollOffers();

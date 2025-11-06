@@ -7,7 +7,7 @@ using UnityEngine;
 /// - Overflow ALWAYS carries to next level.
 /// - Thresholds follow an arithmetic sequence: baseThreshold + stepIncrement * upgradesTaken
 ///   e.g., 4, 10, 16, 22, ...
-/// - Optionally opens PowerupPanel on level-up (if reference assigned).
+/// - Decoupled: no UI references. Orchestrator handles panel & pause.
 /// </summary>
 public class ExperienceSystem : MonoBehaviour
 {
@@ -22,20 +22,27 @@ public class ExperienceSystem : MonoBehaviour
 
     [Tooltip("Constant step added each level. Example: 6 -> 4,10,16,22,...")]
     [SerializeField, Min(0)] private int stepIncrement = 6;
-
-    [Header("Optional: Auto-Show Powerup Panel on Level-Up")]
-    [SerializeField] private PowerupPanelUIController powerupPanel;
     #endregion
 
     #region State (not exposed to Inspector)
     private int currentExp = 0;
-    private int upgradesTaken = 0; // number of level-ups already achieved
+    private int upgradesTaken = 0;    // number of level-ups already achieved
     private int nextThreshold = 4;
+
+    // Number of level-ups waiting for player choices (drained by orchestrator)
+    private int pendingUpgrades = 0;
     #endregion
 
+
+    public int CurrentExp => currentExp;
+    public int NextThreshold => nextThreshold;
+    public int UpgradesTaken => upgradesTaken;
+    public int PendingUpgrades => pendingUpgrades;
+
     #region Events
-    public Action<int, int> OnExpChanged; // (currentExp, nextThreshold)
-    public Action<int> OnLeveledUp;       // (upgradesTaken after increment)
+    public Action<int, int> OnExpChanged;            // (currentExp, nextThreshold)
+    public Action<int> OnLeveledUp;                  // (upgradesTaken after increment)
+    public Action<int> OnPendingUpgradesChanged;     // (pendingUpgrades)
     #endregion
 
     #region Unity
@@ -51,8 +58,9 @@ public class ExperienceSystem : MonoBehaviour
 
         nextThreshold = ComputeThresholdForNextUpgrade(upgradesTaken);
         currentExp = 0;
-        if (OnExpChanged != null)
-            OnExpChanged(currentExp, nextThreshold);
+
+        OnExpChanged?.Invoke(currentExp, nextThreshold);
+        OnPendingUpgradesChanged?.Invoke(pendingUpgrades);
     }
     #endregion
 
@@ -61,10 +69,12 @@ public class ExperienceSystem : MonoBehaviour
     public void AddExp(int amount)
     {
         if (amount == 0) return;
+
         currentExp = Mathf.Max(0, currentExp + amount);
         ResolveLevelUpsIfAny();
 
-        if (OnExpChanged != null) OnExpChanged(currentExp, nextThreshold);
+        // match original pattern: notify after resolution
+        OnExpChanged?.Invoke(currentExp, nextThreshold);
     }
 
     /// <summary>
@@ -80,9 +90,18 @@ public class ExperienceSystem : MonoBehaviour
         return (int)Mathf.Clamp(value, 1, int.MaxValue);
     }
 
-    public int CurrentExp => currentExp;
-    public int NextThreshold => nextThreshold;
-    public int UpgradesTaken => upgradesTaken;
+
+    /// <summary>
+    /// Consume exactly one pending upgrade (called by orchestrator after a card is applied).
+    /// Returns true if one was consumed.
+    /// </summary>
+    public bool TryConsumeOnePendingUpgrade()
+    {
+        if (pendingUpgrades <= 0) return false;
+        pendingUpgrades--;
+        OnPendingUpgradesChanged?.Invoke(pendingUpgrades);
+        return true;
+    }
     #endregion
 
     #region Internal
@@ -90,21 +109,23 @@ public class ExperienceSystem : MonoBehaviour
     {
         // Handle burst kills (multiple level-ups in one frame)
         int safety = 256; // guard against bad data
+        int leveledThisCall = 0;
+
         while (currentExp >= nextThreshold && safety-- > 0)
         {
             currentExp -= nextThreshold; // carry remaining EXP
             upgradesTaken++;
             nextThreshold = ComputeThresholdForNextUpgrade(upgradesTaken);
 
-            if (OnLeveledUp != null) OnLeveledUp(upgradesTaken);
+            OnLeveledUp?.Invoke(upgradesTaken);
 
-            if (powerupPanel != null)
-            {
-                if (PauseManager.Instance != null)
-                    PauseManager.Instance.StopGameplay();
-                powerupPanel.ShowAndRoll();
-            }
+            // Queue for UI resolution (orchestrator will open panel and drain)
+            pendingUpgrades++;
+            leveledThisCall++;
         }
+
+        if (leveledThisCall > 0)
+            OnPendingUpgradesChanged?.Invoke(pendingUpgrades);
 
         if (safety <= 0)
             Debug.LogError("[ExperienceSystem] ResolveLevelUpsIfAny hit safety limit. Check threshold values.");
