@@ -86,7 +86,7 @@ public class SpawnStageAgent : MonoBehaviour
         if (StagingConveyor.Instance != null)
             StagingConveyor.Instance.Register(this);
         else
-            Debug.LogWarning("[SpawnStageAgent] Missing StagingConveyor in scene.");
+            Debug.LogWarning("[SpawnStageAgent] Missing StagingConveyor in scene." + gameObject.name);
     }
 
     private void CancelHandoffIfAny()

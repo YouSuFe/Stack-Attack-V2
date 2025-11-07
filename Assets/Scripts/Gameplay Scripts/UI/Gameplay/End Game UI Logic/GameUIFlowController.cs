@@ -17,6 +17,10 @@ public class GameUIFlowController : MonoBehaviour
 
     [SerializeField, Tooltip("Dead (KO) canvas with revive / not-revive and countdown.")]
     private DeadCanvasController deadCanvas;
+
+    [Header("Progress Source")]
+    [SerializeField, Tooltip("Runtime that exposes ProgressPercent (0–100).")]
+    private LevelProgressRuntime progressRuntime;
     #endregion
 
     #region Optional Data (for quick testing)
@@ -94,12 +98,6 @@ public class GameUIFlowController : MonoBehaviour
     {
         failureRewardsPreview = rewards != null ? new List<ResultViewBase.RewardEntry>(rewards) : new List<ResultViewBase.RewardEntry>();
     }
-
-    /// <summary>Set reached percent to show on Failure UI (e.g., 17). Pass -1 to keep existing label.</summary>
-    public void SetReachedPercentOnFailure(int value)
-    {
-        reachedPercentOnFailure = value;
-    }
     #endregion
 
     #region Level Outcomes
@@ -155,8 +153,8 @@ public class GameUIFlowController : MonoBehaviour
         }
 
         var rewards = failureRewardsPreview ?? new List<ResultViewBase.RewardEntry>();
-        int? reached = (reachedPercentOnFailure >= 0) ? (int?)reachedPercentOnFailure : null;
-        resultUIController.ShowFailureUIWithSequence(rewards, reached);
+        int? reachedPercent = (progressRuntime != null) ? progressRuntime.ProgressPercent : (int?)null;
+        resultUIController.ShowFailureUIWithSequence(rewards, reachedPercent);
     }
     #endregion
 
