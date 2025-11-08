@@ -2,31 +2,39 @@ using UnityEngine;
 using TMPro;
 
 /// <summary>
-/// Simple UI controller that updates a TMP text with the integer total coin count.
+/// HUD coin display. Shows VALUED coins (pickups × level coin value).
+/// Uses LevelRewardsProvider to convert raw pickup count on every change.
 /// </summary>
 public class CoinUIController : MonoBehaviour
 {
     #region Inspector
     [Header("References")]
-    [SerializeField] private CoinSystem coinSystem;         // Optional: auto-resolves if left empty
-    [SerializeField] private TextMeshProUGUI coinText;      // Assign your HUD TMP text here
+    [SerializeField, Tooltip("Will auto-resolve from singleton if left empty.")]
+    private CoinSystem coinSystem;
+
+    [SerializeField, Tooltip("Provides current LevelRewardDefinition.")]
+    private LevelRewardsProvider rewardsProvider;
+
+    [SerializeField, Tooltip("TMP text to show the valued coin amount.")]
+    private TextMeshProUGUI coinText;
     #endregion
 
+    #region Unity
     private void Awake()
     {
-        if (coinSystem == null)
-            coinSystem = CoinSystem.Instance;
-
-        if (coinText == null)
-            Debug.LogError("[CoinUIController] coinText not assigned.");
+        if (coinSystem == null) coinSystem = CoinSystem.Instance;
+        if (coinText == null) Debug.LogError("[CoinUIController] coinText not assigned.");
     }
 
     private void OnEnable()
     {
+        if (rewardsProvider != null)
+            rewardsProvider.OnRewardsAvailable += HandleRewardsAvailable;
+
         if (coinSystem != null)
         {
             coinSystem.OnCoinsChanged += HandleCoinsChanged;
-            HandleCoinsChanged(coinSystem.TotalCoins);
+            HandleCoinsChanged(coinSystem.PickupCount); // initial render
         }
         else
         {
@@ -36,13 +44,30 @@ public class CoinUIController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (rewardsProvider != null)
+            rewardsProvider.OnRewardsAvailable -= HandleRewardsAvailable;
+
         if (coinSystem != null)
             coinSystem.OnCoinsChanged -= HandleCoinsChanged;
     }
+    #endregion
 
-    private void HandleCoinsChanged(int total)
+    #region Handlers
+    private void HandleRewardsAvailable(LevelRewardDefinition _)
+    {
+        // Recompute with current rules when rewards resolve.
+        if (coinSystem != null) HandleCoinsChanged(coinSystem.PickupCount);
+    }
+
+    private void HandleCoinsChanged(int pickupCount)
     {
         if (coinText == null) return;
-        coinText.text = total.ToString(); // integer only
+
+        int display = rewardsProvider != null
+            ? rewardsProvider.ToMetaCoins(pickupCount)
+            : pickupCount;
+
+        coinText.text = display.ToString();
     }
+    #endregion
 }

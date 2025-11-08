@@ -1468,9 +1468,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077441263}
-  - component: {fileID: 1077441262}
   - component: {fileID: 1077441265}
-  - component: {fileID: 1077441264}
   m_Layer: 0
   m_Name: Level Progress
   m_TagString: Untagged
@@ -1478,36 +1476,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1077441262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077441261}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18bde4c5ffa8d4de0b436a82246cc89f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  levelDefinition: {fileID: 11400000, guid: e8f2d32dc11be4dd5baa083704fc3c51, type: 2}
-  spawnPoint: {fileID: 1858819964}
-  referencePoint: {fileID: 1455497011}
-  fillImage: {fileID: 1675471911}
-  markersContainer: {fileID: 2043913777}
-  starMarkerPrefab: {fileID: 2293657585400693498, guid: 607d143c43b5e4b5aad2494b2180d86b, type: 3}
-  dummyPrefab: {fileID: 2011769553}
-  dummyParent: {fileID: 0}
-  rowHeight: 1
-  verboseLogging: 1
-  plan:
-    TotalRowsToBossStart: 0
-    SegmentsBeforeBossStart: 0
-    SegmentStartRows: 
-    Markers: []
-  gapSpawnToReference: 0
-  totalDistanceWorld: 0
-  dummyInstance: {fileID: 0}
 --- !u!4 &1077441263
 Transform:
   m_ObjectHideFlags: 0
@@ -1523,22 +1491,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1077441264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077441261}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d08b8891c8cf48ff819a9c6e5977fbc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  runtime: {fileID: 1077441265}
-  fillImage: {fileID: 1675471911}
-  markersContainer: {fileID: 2043913777}
-  starMarkerPrefab: {fileID: 2293657585400693498, guid: 607d143c43b5e4b5aad2494b2180d86b, type: 3}
 --- !u!114 &1077441265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1507,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1858819964}
   referencePoint: {fileID: 1455497011}
   dummyPrefab: {fileID: 2011769553}
-  dummyParent: {fileID: 0}
   rowHeight: 1
 --- !u!1 &1137565997
 GameObject:

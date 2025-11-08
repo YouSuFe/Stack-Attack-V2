@@ -12,6 +12,9 @@ public class GameUIFlowController : MonoBehaviour
 {
     #region Serialized References
     [Header("Controllers")]
+    [SerializeField, Tooltip("Runtime reward calculator for this scene.")]
+    private RewardRuntime rewardRuntime;
+
     [SerializeField, Tooltip("Controls Success/Failure result parents (owns enable/disable).")]
     private ResultUIController resultUIController;
 
@@ -23,17 +26,7 @@ public class GameUIFlowController : MonoBehaviour
     private LevelProgressRuntime progressRuntime;
     #endregion
 
-    #region Optional Data (for quick testing)
-    [Header("Optional Rewards (Inspector Testing)")]
-    [SerializeField, Tooltip("Rewards to display on Success (optional).")]
-    private List<ResultViewBase.RewardEntry> successRewardsPreview = new List<ResultViewBase.RewardEntry>();
-
-    [SerializeField, Tooltip("Rewards to display on Failure (optional).")]
-    private List<ResultViewBase.RewardEntry> failureRewardsPreview = new List<ResultViewBase.RewardEntry>();
-
-    [SerializeField, Tooltip("If set >=0, Failure UI will show REACHED {value}%. Leave -1 to keep the view's current text.")]
-    private int reachedPercentOnFailure = -1;
-
+    #region Optional Data
     [Header("Dead Canvas Settings")]
     [SerializeField, Tooltip("Seconds to count down on Dead Canvas when shown (overrides DeadCanvas default if >0).")]
     private int deadCountdownSecondsOverride = 0;
@@ -88,18 +81,6 @@ public class GameUIFlowController : MonoBehaviour
     }
     #endregion
 
-    #region Public API (optional setters for runtime rewards)
-    public void SetSuccessRewards(IEnumerable<ResultViewBase.RewardEntry> rewards)
-    {
-        successRewardsPreview = rewards != null ? new List<ResultViewBase.RewardEntry>(rewards) : new List<ResultViewBase.RewardEntry>();
-    }
-
-    public void SetFailureRewards(IEnumerable<ResultViewBase.RewardEntry> rewards)
-    {
-        failureRewardsPreview = rewards != null ? new List<ResultViewBase.RewardEntry>(rewards) : new List<ResultViewBase.RewardEntry>();
-    }
-    #endregion
-
     #region Level Outcomes
     private void HandleLevelSucceeded()
     {
@@ -140,8 +121,13 @@ public class GameUIFlowController : MonoBehaviour
             return;
         }
 
-        var rewards = successRewardsPreview ?? new List<ResultViewBase.RewardEntry>();
-        resultUIController.ShowSuccessUIWithSequence(rewards);
+        rewardRuntime?.BuildNow(success: true);
+
+        var entries = rewardRuntime != null
+            ? new List<ResultViewBase.RewardEntry>(rewardRuntime.LastEntries)
+            : new List<ResultViewBase.RewardEntry>();
+
+        resultUIController.ShowSuccessUIWithSequence(entries);
     }
 
     private void TriggerFailureUI()
@@ -152,9 +138,15 @@ public class GameUIFlowController : MonoBehaviour
             return;
         }
 
-        var rewards = failureRewardsPreview ?? new List<ResultViewBase.RewardEntry>();
-        int? reachedPercent = (progressRuntime != null) ? progressRuntime.ProgressPercent : (int?)null;
-        resultUIController.ShowFailureUIWithSequence(rewards, reachedPercent);
+        rewardRuntime?.BuildNow(success: false);
+
+        int reachedPercent = rewardRuntime != null ? rewardRuntime.LastReachedPercent : 0;
+
+        var entries = rewardRuntime != null
+            ? new List<ResultViewBase.RewardEntry>(rewardRuntime.LastEntries)
+            : new List<ResultViewBase.RewardEntry>();
+
+        resultUIController.ShowFailureUIWithSequence(entries, reachedPercent);
     }
     #endregion
 
@@ -199,6 +191,57 @@ public class GameUIFlowController : MonoBehaviour
     {
         HandleLevelFailed();
         Invoke(nameof(HandleReviveChosen), 1f);
+    }
+#endif
+
+#if UNITY_EDITOR
+    [Header("Reward Debug (Editor Only)")]
+    [SerializeField, Tooltip("When true, debug simulate buttons use this % instead of LevelProgressRuntime.")]
+    private bool useDebugReachedPercent = false;
+
+    [SerializeField, Range(0, 100), Tooltip("Reached % used by debug simulate buttons when override is enabled.")]
+    private int debugReachedPercent = 75;
+
+    private int? GetDebugOverridePercent() => useDebugReachedPercent ? (int?)debugReachedPercent : null;
+
+    [ContextMenu("Debug/Simulate SUCCESS (Build & Show)")]
+    private void DebugSimulateSuccess()
+    {
+        if (resultUIController == null)
+        {
+            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
+            return;
+        }
+
+        rewardRuntime?.BuildNow(success: true, overrideReachedPercent: GetDebugOverridePercent());
+
+        var entries = rewardRuntime != null
+            ? new List<ResultViewBase.RewardEntry>(rewardRuntime.LastEntries)
+            : new List<ResultViewBase.RewardEntry>();
+
+        resultUIController.ShowSuccessUIWithSequence(entries);
+        Debug.Log("[GameUIFlowController] Debug Success shown.");
+    }
+
+    [ContextMenu("Debug/Simulate FAILURE (Build & Show)")]
+    private void DebugSimulateFailure()
+    {
+        if (resultUIController == null)
+        {
+            Debug.LogWarning("[GameUIFlowController] ResultUIController is not assigned.");
+            return;
+        }
+
+        rewardRuntime?.BuildNow(success: false, overrideReachedPercent: GetDebugOverridePercent());
+
+        int reachedPercent = rewardRuntime != null ? rewardRuntime.LastReachedPercent : 0;
+
+        var entries = rewardRuntime != null
+            ? new List<ResultViewBase.RewardEntry>(rewardRuntime.LastEntries)
+            : new List<ResultViewBase.RewardEntry>();
+
+        resultUIController.ShowFailureUIWithSequence(entries, reachedPercent);
+        Debug.Log("[GameUIFlowController] Debug Failure shown.");
     }
 #endif
 }

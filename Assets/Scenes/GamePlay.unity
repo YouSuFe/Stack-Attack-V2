@@ -1171,7 +1171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &151136845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2231,6 +2231,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerupPanelUIController: {fileID: 380224483}
   secondsBetweenRolls: 5
+--- !u!1 &287109220
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 287109222}
+  - component: {fileID: 287109221}
+  m_Layer: 0
+  m_Name: Progress Runtime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &287109221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287109220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7d4fdf02fff4a1b904e76ba103d936, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelDefinition: {fileID: 11400000, guid: e8f2d32dc11be4dd5baa083704fc3c51, type: 2}
+  spawnPoint: {fileID: 0}
+  referencePoint: {fileID: 0}
+  dummyPrefab: {fileID: 0}
+  rowHeight: 1
+--- !u!4 &287109222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287109220}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.110565, y: 1078.7324, z: -2.4104095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680979612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &303919417
 GameObject:
   m_ObjectHideFlags: 0
@@ -2438,6 +2487,52 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &312581716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312581718}
+  - component: {fileID: 312581717}
+  m_Layer: 0
+  m_Name: Level Reward Provider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312581717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312581716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c38c1d6057c74184b22d6945f7bb421, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contextBinder: {fileID: 1255992934}
+  fallbackRewards: {fileID: 11400000, guid: 3715bc2f2410347258e8e3ffd592809e, type: 2}
+--- !u!4 &312581718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312581716}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315.3077, y: 416.799, z: -2.6538677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323999813
 GameObject:
   m_ObjectHideFlags: 0
@@ -4241,6 +4336,56 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &487301647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 487301648}
+  - component: {fileID: 487301649}
+  m_Layer: 0
+  m_Name: Reward Runtime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &487301648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487301647}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.110565, y: 1078.7324, z: -2.4104095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 680979612}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &487301649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487301647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d81e710c060046f58b4231d5d6896b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardsProvider: {fileID: 312581717}
+  progressRuntime: {fileID: 287109221}
+  coinIcon: {fileID: 21300000, guid: ba345f2f643d842459447c374943401d, type: 3}
+  xpIcon: {fileID: 21300000, guid: b533c652136df4744a089524507a44c6, type: 3}
+  useDebugReachedPercent: 0
+  debugReachedPercent: 50
 --- !u!1 &497009732
 GameObject:
   m_ObjectHideFlags: 0
@@ -5367,6 +5512,40 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &680979611
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680979612}
+  m_Layer: 0
+  m_Name: Reward PH
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &680979612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680979611}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 315.3077, y: 416.799, z: -2.6538677}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1538497318}
+  - {fileID: 287109222}
+  - {fileID: 487301648}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &691408211
 GameObject:
   m_ObjectHideFlags: 0
@@ -6480,6 +6659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinSystem: {fileID: 1538497317}
+  rewardsProvider: {fileID: 312581717}
   coinText: {fileID: 1921060633}
 --- !u!114 &889593147
 MonoBehaviour:
@@ -6927,7 +7107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseThreshold: 4
   stepIncrement: 6
-  powerupPanel: {fileID: 380224483}
 --- !u!4 &908296643
 Transform:
   m_ObjectHideFlags: 0
@@ -7685,7 +7864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8fd9291230a4a339024c95fc9c04b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  verboseLogging: 1
   reviveButton: {fileID: 1744660797}
   notReviveButton: {fileID: 0}
   timerText: {fileID: 1297700982}
@@ -7693,6 +7871,12 @@ MonoBehaviour:
   defaultCountdownSeconds: 5
   useUnscaledTime: 1
   hideOnDecision: 1
+  onRevive:
+    m_PersistentCalls:
+      m_Calls: []
+  onNotRevive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &970626303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9455,18 +9639,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a98e89b4f28e44997b80055976445b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewardRuntime: {fileID: 487301649}
   resultUIController: {fileID: 1262934853}
   deadCanvas: {fileID: 969827642}
-  successRewardsPreview:
-  - id: coin
-    icon: {fileID: 21300000, guid: ba345f2f643d842459447c374943401d, type: 3}
-    amount: 1
-  failureRewardsPreview:
-  - id: coin
-    icon: {fileID: 21300000, guid: ba345f2f643d842459447c374943401d, type: 3}
-    amount: 1
-  reachedPercentOnFailure: 18
+  progressRuntime: {fileID: 287109221}
   deadCountdownSecondsOverride: 0
+  useDebugReachedPercent: 1
+  debugReachedPercent: 75
 --- !u!4 &1191236787
 Transform:
   m_ObjectHideFlags: 0
@@ -9751,7 +9930,7 @@ MonoBehaviour:
   bossController: {fileID: 0}
   fallbackToLastPlayed: 1
   fallbackToIndexZero: 1
-  verboseLogs: 0
+  verboseLogs: 1
 --- !u!4 &1255992935
 Transform:
   m_ObjectHideFlags: 0
@@ -10824,7 +11003,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   experienceSystem: {fileID: 908296642}
   fillImage: {fileID: 1382674070}
-  minVisibleFill: 0.05
+  animateDuration: 0.18
+  wrapToFullDuration: 0.1
+  wrapFromZeroDuration: 0.12
+  useUnscaledTime: 0
+  initializeOnAwake: 1
 --- !u!114 &1382674070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12216,8 +12399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f8d1f82b106453bbf877d410a2b140, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValuePerPickup: 1
-  startingCoins: 0
+  startingPickups: 0
 --- !u!4 &1538497318
 Transform:
   m_ObjectHideFlags: 0
@@ -12226,12 +12408,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538497316}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 344.41827, y: 1495.5315, z: -5.064277}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.110565, y: 1078.7324, z: -2.4104095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 680979612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552849633
 GameObject:
@@ -18220,8 +18402,9 @@ SceneRoots:
   - {fileID: 497009734}
   - {fileID: 1206572570}
   - {fileID: 1170963670}
+  - {fileID: 680979612}
   - {fileID: 908296643}
-  - {fileID: 1538497318}
+  - {fileID: 312581718}
   - {fileID: 151136846}
   - {fileID: 1191236787}
   - {fileID: 2109368965}
