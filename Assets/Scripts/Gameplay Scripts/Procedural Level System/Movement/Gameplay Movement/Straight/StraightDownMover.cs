@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class StraightDownMover : MonoBehaviour, IStageActivatable
+public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
 {
     #region Inspector
     [Tooltip("Downward speed (units/sec).")]
@@ -26,8 +26,12 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable
     }
 
     public void ResumeMover() => isActive = true;
+
+    public void OnStopGameplay() => PauseMover();
+    public void OnResumeGameplay() => ResumeMover();
     #endregion
 
+    #region Unity
     private void Update()
     {
         if (!isActive) return;
@@ -35,4 +39,17 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable
         if (verticalSpeed > 0f)
             transform.position += Vector3.down * (verticalSpeed * Time.deltaTime);
     }
+
+    private void OnEnable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+    }
+    #endregion
 }

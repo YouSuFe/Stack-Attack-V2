@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [DisallowMultipleComponent]
-public class PivotAnchor : MonoBehaviour
+public class PivotAnchor : MonoBehaviour, IPausable
 {
     #region Static Registry
     private static readonly Dictionary<string, PivotAnchor> Registry = new();
@@ -87,6 +87,7 @@ public class PivotAnchor : MonoBehaviour
     #region Cache / Followers
     private SpawnStageAgent cachedAgent;   // cached reference if present
     private bool subscribed;               // guard to avoid double-subscribing
+    private bool isPaused;
 
     private readonly List<OrbitAroundAnchorMover> followers = new List<OrbitAroundAnchorMover>();
     public void RegisterFollower(OrbitAroundAnchorMover f)
@@ -113,11 +114,16 @@ public class PivotAnchor : MonoBehaviour
 
     private void OnEnable()
     {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
         TryWireAgentAndActivation();
     }
 
     private void OnDisable()
     {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+
         if (cachedAgent != null && subscribed)
         {
             cachedAgent.OnHandoffCompleted -= HandleAgentHandoffCompleted;
@@ -127,6 +133,8 @@ public class PivotAnchor : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused) return;
+
         // Formation rotation always ticks
         AngleDeg += angularSpeedDegPerSec * Time.deltaTime;
 
@@ -183,6 +191,9 @@ public class PivotAnchor : MonoBehaviour
         GroupHandoffStarted = false; // reset flag after synchronized entry completes
         OnActivated?.Invoke();
     }
+
+    public void OnStopGameplay() { isPaused = true; }
+    public void OnResumeGameplay() { isPaused = false; }
     #endregion
 
     #region Group Handoff (pivot-led sync)

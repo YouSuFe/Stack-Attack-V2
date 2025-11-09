@@ -10,7 +10,7 @@ using UnityEngine;
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class DamageOnContact : MonoBehaviour, IDamageDealer, IStoppable
+public class DamageOnContact : MonoBehaviour, IDamageDealer, IPausable
 {
     #region Serialized
     [Header("Damage")]

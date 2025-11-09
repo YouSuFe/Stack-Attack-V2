@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerDragMover : MonoBehaviour, IStoppable
+public class PlayerDragMover : MonoBehaviour, IPausable
 {
     [Header("Dependencies")]
     [SerializeField] private Camera gameplayCamera;

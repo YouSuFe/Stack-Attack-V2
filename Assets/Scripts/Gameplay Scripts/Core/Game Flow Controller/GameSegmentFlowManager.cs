@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -134,8 +135,8 @@ public class GameSegmentFlowManager : MonoBehaviour
     }
     #endregion
 
-    #region Starter Equip (Optional)
-    private System.Collections.IEnumerator EquipStarterIfAvailableAfterDelay()
+    #region Starter Equip
+    private IEnumerator EquipStarterIfAvailableAfterDelay()
     {
         if (starterEquipped || optionalWeaponDriver == null) yield break;
 

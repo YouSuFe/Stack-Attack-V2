@@ -138,7 +138,7 @@ public class BossStateController : MonoBehaviour
     // === TEMP TEST ===
     private IEnumerator TestGoToPinataAfterDelay()
     {
-        yield return new WaitForSeconds(5f);
+        yield return PauseAwareCoroutine.Delay(5f);
         Debug.Log("[BossStateController] TEST: Auto switching to Pinata state.");
         HandleBossBroken(); // simulate boss defeat
     }
@@ -159,7 +159,7 @@ public class BossStateController : MonoBehaviour
     private IEnumerator BreakToPinataRoutine()
     {
         if (breakToPinataDelay > 0f)
-            yield return new WaitForSeconds(breakToPinataDelay);
+            yield return PauseAwareCoroutine.Delay(breakToPinataDelay);
 
         if (PinataDirector.Instance != null && pinataMeter != null)
             PinataDirector.Instance.BeginPinataFor(this, pinataMeter);
@@ -202,7 +202,7 @@ public class BossStateController : MonoBehaviour
                                 clockwise: clockwise);
 
             if (spawnStagger > 0f)
-                yield return new WaitForSeconds(spawnStagger);
+                yield return PauseAwareCoroutine.Delay(spawnStagger);
         }
     }
 

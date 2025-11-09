@@ -4,7 +4,7 @@ using UnityEngine;
 /// Single manager that moves all staged objects downwards at a unified speed.
 /// No parenting is required; agents register/unregister themselves.
 /// </summary>
-public class StagingConveyor : MonoBehaviour
+public class StagingConveyor : MonoBehaviour, IPausable
 {
     #region Singleton
     public static StagingConveyor Instance { get; private set; }
@@ -13,6 +13,7 @@ public class StagingConveyor : MonoBehaviour
     #region Serialized
     [SerializeField, Tooltip("Unified downward speed for all off-screen staged objects (units/sec).")]
     private float conveyorSpeed = 5f;
+    private bool isPaused;
     #endregion
 
     #region Private Fields
@@ -32,8 +33,22 @@ public class StagingConveyor : MonoBehaviour
         Instance = this;
     }
 
+    private void OnEnable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
+    }
+
+    private void OnDisable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+    }
+
     private void Update()
     {
+        if (isPaused) return;
+            
         float delta = Time.deltaTime * conveyorSpeed;
         for (int i = 0; i < agents.Count; i++)
         {
@@ -79,5 +94,8 @@ public class StagingConveyor : MonoBehaviour
     }
 
     public float GetSpeed() => conveyorSpeed;
+
+    public void OnStopGameplay() { isPaused = true; }
+    public void OnResumeGameplay() { isPaused = false; }
     #endregion
 }

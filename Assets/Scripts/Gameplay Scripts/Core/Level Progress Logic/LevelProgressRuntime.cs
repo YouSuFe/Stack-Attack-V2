@@ -124,6 +124,9 @@ public class LevelProgressRuntime : MonoBehaviour
 
     private void Update()
     {
+        if (PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped)
+            return;
+
         UpdateProgress();
     }
     #endregion

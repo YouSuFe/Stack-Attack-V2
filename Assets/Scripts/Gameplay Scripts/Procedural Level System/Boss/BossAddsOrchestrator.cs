@@ -70,11 +70,11 @@ public class BossAddsOrchestrator : MonoBehaviour
         StartWaveLoop();
     }
 
-    private void HandleStateChanged(BossStateController.BossState s)
+    private void HandleStateChanged(BossStateController.BossState state)
     {
-        if (s == BossStateController.BossState.Breaking ||
-            s == BossStateController.BossState.Pinata ||
-            s == BossStateController.BossState.Done)
+        if (state == BossStateController.BossState.Breaking ||
+            state == BossStateController.BossState.Pinata ||
+            state == BossStateController.BossState.Done)
         {
             StopWaveLoop();
             BossPhaseEnemySpawner.Instance?.StopForOwner(this, destroySpawned: true);
@@ -108,6 +108,9 @@ public class BossAddsOrchestrator : MonoBehaviour
 
         while (true)
         {
+            while (PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped)
+                yield return null;
+
             // Wave size
             int minC = Mathf.Max(1, profile.waveCountRange.x);
             int maxC = Mathf.Max(minC, profile.waveCountRange.y);
@@ -138,7 +141,7 @@ public class BossAddsOrchestrator : MonoBehaviour
             // Wait next interval (+ jitter)
             float t = profile.waveInterval + ((profile.waveIntervalJitter > 0f) ? Random.Range(0f, profile.waveIntervalJitter) : 0f);
             if (t < 0.05f) t = 0.05f;
-            yield return new WaitForSeconds(t);
+            yield return PauseAwareCoroutine.Delay(t);
         }
     }
     #endregion

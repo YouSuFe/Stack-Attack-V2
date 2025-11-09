@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class PauseableParticleSystem : MonoBehaviour, IStoppable
+public class PauseableParticleSystem : MonoBehaviour, IPausable
 {
     private ParticleSystem VfxParticles;
 

@@ -66,10 +66,8 @@ public class MissileWeapon : BaseWeapon
         for (int i = 0; i < schedule.Count; i++)
         {
             ShotCommand cmd = schedule[i];
-            float targetTime = baseTime + cmd.timeOffsetSeconds;
 
-            while (Time.time < targetTime)
-                yield return null;
+            yield return PauseAwareCoroutine.Until(baseTime, cmd.timeOffsetSeconds);
 
             // Spawn at the fireOrigin + local offset (which points to the left/right muzzle)
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);

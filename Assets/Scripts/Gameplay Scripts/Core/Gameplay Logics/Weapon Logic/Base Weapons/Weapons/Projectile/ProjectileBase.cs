@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IStoppable
+public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IPausable
 {
     [Header("Damage")]
     [SerializeField] private int damageAmount = 1;
@@ -25,7 +25,7 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     private int remainingPiercing;
     private GameObject owner;
 
-    private bool isStopped;
+    private bool isPaused;
 
     // Used only when policy == OncePerTargetPerProjectile
     private readonly HashSet<int> countedTargets = new HashSet<int>();
@@ -70,7 +70,7 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     protected virtual void Update()
     {
-        if (isStopped) return;
+        if (isPaused) return;
 
         lifeTimer += Time.deltaTime;
         if (lifeTimer >= maxLifetimeSeconds)
@@ -89,7 +89,7 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
         PauseManager.Instance?.Register(this);
         // Sync immediately if we spawned while paused
         if (PauseManager.Instance != null)
-            isStopped = PauseManager.Instance.IsGameplayStopped;
+            isPaused = PauseManager.Instance.IsGameplayStopped;
     }
 
     protected virtual void OnDisable()
@@ -121,7 +121,7 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isStopped) return; // ignore collisions while paused
+        if (isPaused) return; // ignore collisions while paused
 
         // Don't hit our owner
         if ((owner != null && other.gameObject == owner) || other.CompareTag("Projectile") || other.CompareTag("Player"))
@@ -166,12 +166,12 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
 
     public void OnStopGameplay()
     {
-        isStopped = true;
+        isPaused = true;
     }
 
     public void OnResumeGameplay()
     {
-        isStopped = false;
+        isPaused = false;
     }
 
     public void SetSourceWeapon(WeaponType source)

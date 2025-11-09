@@ -1,4 +1,4 @@
-public interface IStoppable
+public interface IPausable
 {
     void OnStopGameplay();
     void OnResumeGameplay();

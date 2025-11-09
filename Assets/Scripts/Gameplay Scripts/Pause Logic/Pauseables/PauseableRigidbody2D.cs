@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PauseableRigidbody2D : MonoBehaviour, IStoppable
+public class PauseableRigidbody2D : MonoBehaviour, IPausable
 {
     [SerializeField] private bool clearVelocityOnStop = false;
 

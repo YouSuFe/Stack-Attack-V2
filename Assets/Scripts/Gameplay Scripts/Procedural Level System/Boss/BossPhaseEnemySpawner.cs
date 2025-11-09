@@ -106,7 +106,16 @@ public class BossPhaseEnemySpawner : MonoBehaviour
             {
                 var acts = go.GetComponents<IStageActivatable>();
                 for (int k = 0; k < acts.Length; k++) acts[k].ArmAtEntry(pos);
-                for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
+
+                bool paused = PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped;
+                if (paused)
+                {
+                    for (int k = 0; k < acts.Length; k++) acts[k].PauseMover();
+                }
+                else
+                {
+                    for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
+                }
             }
 
             var movement = req.movement ? req.movement : defaultMovement;

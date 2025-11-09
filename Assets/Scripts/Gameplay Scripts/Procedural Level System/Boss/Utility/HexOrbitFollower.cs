@@ -6,7 +6,7 @@
 /// Robust: uses edge param (edgeT) instead of world-position dot tests.
 /// </summary>
 [DisallowMultipleComponent]
-public class HexOrbitFollower : MonoBehaviour, IStageActivatable
+public class HexOrbitFollower : MonoBehaviour, IStageActivatable, IPausable
 {
     #region Serialized
     [SerializeField, Tooltip("Transform to orbit around (boss).")]
@@ -77,6 +77,21 @@ public class HexOrbitFollower : MonoBehaviour, IStageActivatable
     #endregion
 
     #region Unity
+
+    private void OnEnable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
+    }
+    private void OnDisable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+    }
+
+    public void OnStopGameplay() => PauseMover();
+    public void OnResumeGameplay() => ResumeMover();
+
     private void Update()
     {
         if (!isActive || center == null) return;

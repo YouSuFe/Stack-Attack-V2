@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class ProjectileDuplicationZone : MonoBehaviour, IStoppable
+public class ProjectileDuplicationZone : MonoBehaviour, IPausable
 {
     #region Serialized Fields
     [Header("Multiplier")]

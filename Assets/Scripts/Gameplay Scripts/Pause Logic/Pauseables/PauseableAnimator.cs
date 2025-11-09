@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class PauseableAnimator : MonoBehaviour, IStoppable
+public class PauseableAnimator : MonoBehaviour, IPausable
 {
     private Animator animator;
     private float storedSpeed = 1f;

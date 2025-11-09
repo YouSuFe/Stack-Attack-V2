@@ -60,10 +60,8 @@ public class KunaiWeapon : BaseWeapon
         for (int i = 0; i < schedule.Count; i++)
         {
             ShotCommand cmd = schedule[i];
-            float targetTime = baseTime + cmd.timeOffsetSeconds;
 
-            while (Time.time < targetTime)
-                yield return null;
+            yield return PauseAwareCoroutine.Until(baseTime, cmd.timeOffsetSeconds);
 
             // Spawn from the fire origin with the scheduled rotation
             Vector3 worldPos = fireOrigin.position;

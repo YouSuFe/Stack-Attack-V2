@@ -13,7 +13,7 @@ using UnityEngine;
 /// - When paused (OnStopGameplay), inputs are disabled and any ongoing drag/auto-fire is stopped.
 /// - On resume (OnResumeGameplay), the previous enabled state is restored and your policy remains in effect.
 /// </summary>
-public class InputReaderController : MonoBehaviour, IStoppable
+public class InputReaderController : MonoBehaviour, IPausable
 {
     #region Serialized References
     [Header("References")]

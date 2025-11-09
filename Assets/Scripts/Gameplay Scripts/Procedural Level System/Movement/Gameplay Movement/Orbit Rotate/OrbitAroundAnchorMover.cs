@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable
+public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable, IPausable
 {
     #region Inspector
     [SerializeField] private string anchorKey;
@@ -24,6 +24,9 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable
     #region Unity
     private void OnEnable()
     {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
+
         // Try immediate bind
         TryBindAnchor();
 
@@ -37,6 +40,9 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable
 
     private void OnDisable()
     {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+
         if (anchor != null)
         {
             anchor.UnregisterFollower(this);
@@ -159,7 +165,7 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable
     }
     #endregion
 
-    #region Public API (optional)
+    #region Public API
     /// <summary>
     /// Update runtime parameters (kept for compatibility with Definition).
     /// </summary>
@@ -175,5 +181,8 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable
         anchor = PivotAnchor.Find(anchorKey);
         armed = false;
     }
+
+    public void OnStopGameplay() => PauseMover();
+    public void OnResumeGameplay() => ResumeMover();
     #endregion
 }

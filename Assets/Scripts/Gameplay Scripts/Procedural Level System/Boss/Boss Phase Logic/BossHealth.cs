@@ -3,7 +3,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(SpawnStageAgent))]
-public class BossHealth : MonoBehaviour, IDamageable, IStoppable
+public class BossHealth : MonoBehaviour, IDamageable, IPausable
 {
     #region Serialized
     [SerializeField, Tooltip("Maximum health of the boss.")]

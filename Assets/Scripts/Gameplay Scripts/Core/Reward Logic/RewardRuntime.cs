@@ -15,7 +15,7 @@ public class RewardRuntime : MonoBehaviour
     [SerializeField, Tooltip("Provides reached % for XP calculation.")]
     private LevelProgressRuntime progressRuntime;
 
-    [Header("Icons (optional)")]
+    [Header("Icons")]
     [SerializeField] private Sprite coinIcon;
     [SerializeField] private Sprite xpIcon;
     #endregion

@@ -9,7 +9,7 @@ using UnityEngine;
 /// - Exposes a small API for input & gating firing
 /// - Routes upgrades to all or specific weapons
 /// </summary>
-public class WeaponDriver : MonoBehaviour,IStoppable
+public class WeaponDriver : MonoBehaviour, IPausable
 {
     [Header("Scene Mounts & Catalog")]
     [SerializeField] private WeaponMounts weaponMounts;   // Assign on Player
@@ -41,6 +41,7 @@ public class WeaponDriver : MonoBehaviour,IStoppable
 
     // --- Pause bookkeeping ---
     private bool gateBeforeStop;
+    private bool isPaused;
 
     private void Awake()
     {
@@ -56,10 +57,7 @@ public class WeaponDriver : MonoBehaviour,IStoppable
         // Tick only while gameplay is not soft-paused
         if (activeBoostMultiplier > 1f && activeBoostRemaining > 0f)
         {
-            // If you haven’t added PauseManager yet, this condition is effectively "true"
-            bool gameplayRunning = PauseManager.Instance == null || !PauseManager.Instance.IsGameplayStopped;
-
-            if (gameplayRunning)
+            if (!isPaused)
             {
                 activeBoostRemaining -= Time.deltaTime;
                 if (activeBoostRemaining <= 0f)
@@ -75,12 +73,14 @@ public class WeaponDriver : MonoBehaviour,IStoppable
     // Implement IStoppable on the class: public class WeaponDriver : MonoBehaviour, IStoppable
     public void OnStopGameplay()
     {
+        isPaused = true;
         gateBeforeStop = canAttack;
         SetCanAttack(false);           // freeze player weapons & stop autofire
     }
 
     public void OnResumeGameplay()
     {
+        isPaused = false;
         SetCanAttack(gateBeforeStop);  // restore previous gate
         PropagateGlobalFireRateMultiplierToWeapons(); // ensure fresh weapons still have the current boost
     }

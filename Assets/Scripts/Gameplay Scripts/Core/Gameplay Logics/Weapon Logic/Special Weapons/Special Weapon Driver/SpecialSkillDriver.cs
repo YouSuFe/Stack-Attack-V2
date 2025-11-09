@@ -10,7 +10,7 @@ using UnityEngine;
 /// - Empties bar on fire.
 /// - Skill visuals run for ActiveDurationSeconds.
 /// </summary>
-public class SpecialSkillDriver : MonoBehaviour, IStoppable
+public class SpecialSkillDriver : MonoBehaviour, IPausable
 {
     [Header("Definition & Mounts")]
     [SerializeField] private SpecialSkillDefinitionSO specialDefinition;

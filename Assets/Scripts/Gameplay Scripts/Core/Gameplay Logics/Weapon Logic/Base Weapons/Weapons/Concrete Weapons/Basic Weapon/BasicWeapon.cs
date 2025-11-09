@@ -64,11 +64,7 @@ public class BasicWeapon : BaseWeapon
         {
             ShotCommand cmd = schedule[i];
 
-            float targetTime = baseTime + cmd.timeOffsetSeconds;
-
-            // Wait until it's time to spawn this command
-            while (Time.time < targetTime)
-                yield return null;
+            yield return PauseAwareCoroutine.Until(baseTime, cmd.timeOffsetSeconds);
 
             // Compute spawn poses
             Vector3 worldPos = fireOrigin.TransformPoint(cmd.localOffset);

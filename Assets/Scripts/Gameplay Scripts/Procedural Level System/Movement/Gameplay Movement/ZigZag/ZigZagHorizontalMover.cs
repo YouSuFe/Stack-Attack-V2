@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [DisallowMultipleComponent]
-public class ZigZagHorizontalMover : MonoBehaviour, IStageActivatable
+public class ZigZagHorizontalMover : MonoBehaviour, IStageActivatable, IPausable
 {
     #region Inspector
     [Tooltip("Horizontal amplitude (world units).")]
@@ -21,12 +21,23 @@ public class ZigZagHorizontalMover : MonoBehaviour, IStageActivatable
     private bool isActive = false;
     #endregion
 
+
     private void OnEnable()
     {
-        // Do not capture baselines here; off-screen staging uses unified speed.
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Register(this);
         timer = 0f;
-        // isActive is controlled by SpawnStageAgent via Pause/Resume.
+
     }
+
+    private void OnDisable()
+    {
+        if (PauseManager.Instance != null)
+            PauseManager.Instance.Unregister(this);
+    }
+
+    public void OnStopGameplay() => PauseMover();
+    public void OnResumeGameplay() => ResumeMover();
 
     private void Update()
     {

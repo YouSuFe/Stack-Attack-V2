@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class EnemyHealth : MonoBehaviour, IDamageable, IStoppable
+public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
 {
     #region Serialized
     [Header("Lifecycle")]

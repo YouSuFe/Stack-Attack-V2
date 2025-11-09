@@ -7,7 +7,7 @@ public class PauseManager : MonoBehaviour
     public static PauseManager Instance { get; private set; }
     public bool IsGameplayStopped { get; private set; }
 
-    private readonly HashSet<IStoppable> pauseListeners = new HashSet<IStoppable>();
+    private readonly HashSet<IPausable> pauseListeners = new HashSet<IPausable>();
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public class PauseManager : MonoBehaviour
         Instance = this;
     }
 
-    public void Register(IStoppable listener)
+    public void Register(IPausable listener)
     {
         if (listener == null) return;
         pauseListeners.Add(listener);
@@ -25,7 +25,7 @@ public class PauseManager : MonoBehaviour
             listener.OnStopGameplay();
     }
 
-    public void Unregister(IStoppable listener)
+    public void Unregister(IPausable listener)
     {
         if (listener != null) pauseListeners.Remove(listener);
     }

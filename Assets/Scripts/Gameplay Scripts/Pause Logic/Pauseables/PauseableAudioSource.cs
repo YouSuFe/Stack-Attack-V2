@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class PauseableAudioSource : MonoBehaviour, IStoppable
+public class PauseableAudioSource : MonoBehaviour, IPausable
 {
     private AudioSource audioSource;
     private bool wasPlaying;
