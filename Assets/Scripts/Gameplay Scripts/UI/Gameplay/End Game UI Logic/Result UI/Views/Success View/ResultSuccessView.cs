@@ -26,9 +26,15 @@ public class ResultSuccessView : ResultViewBase
     [SerializeField, Tooltip("Double Rewards button (optional).")]
     private Button doubleRewardsButton;
 
+    [SerializeField, Tooltip("Continue/Collect button.")]
+    private Button continueButton;
+
     [SerializeField, Tooltip("Continue text or container.")]
     private GameObject continueContainer;
     #endregion
+
+    public Button ContinueButton => continueButton;
+    public Button DoubleButton => doubleRewardsButton;
 
     #region Cached CGs
     private CanvasGroup bgCg, stageCg, completedCg, collectRewardsCg, gridCg, doubleBtnCg, continueCg;

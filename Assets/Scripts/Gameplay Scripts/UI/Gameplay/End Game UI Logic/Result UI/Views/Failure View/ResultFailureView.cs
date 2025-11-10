@@ -32,6 +32,9 @@ public class ResultFailureView : ResultViewBase
     [SerializeField, Tooltip("Double Rewards button (optional).")]
     private Button doubleRewardsButton;
 
+    [SerializeField, Tooltip("Continue/Collect button.")]
+    private Button continueButton;
+
     [SerializeField, Tooltip("Continue text or container.")]
     private GameObject continueContainer;
 
@@ -46,6 +49,9 @@ public class ResultFailureView : ResultViewBase
     #region Input From Controller
     /// <summary>Set by controller before PlaySequence. If null, keeps existing text.</summary>
     public int? ReachedPercent { get; set; }
+
+    public Button ContinueButton => continueButton;
+    public Button DoubleButton => doubleRewardsButton;
     #endregion
 
     #region Cached CGs

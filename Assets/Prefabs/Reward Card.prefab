@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6688667819406859619}
   - component: {fileID: 820538894100142008}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Reward Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

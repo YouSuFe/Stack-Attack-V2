@@ -85,7 +85,6 @@ public class LevelService : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         if (levelCatalog == null)
             Debug.LogError("[LevelService] LevelCatalog is not assigned.");
