@@ -10,21 +10,15 @@ public class LevelContextBinder : MonoBehaviour
     #endregion
 
     #region Inject Targets
-    [Header("Inject Targets (optional auto-find)")]
+    [Header("Inject Targets")]
     [SerializeField, Tooltip("Sequencer that consumes LevelDefinition to run the level.")]
     private LevelSegmentSequencer sequencer;
 
     [SerializeField, Tooltip("Announcer that previews upcoming segments and needs LevelDefinition.")]
     private UpcomingSegmentAnnouncer announcer;
-    #endregion
 
-    #region Outcome Sources (can be hooked dynamically)
-    [Header("Outcome Sources (hook at runtime if spawned)")]
-    [SerializeField, Tooltip("Player health for fail detection. Can be assigned later via HookPlayer().")]
-    private PlayerHealth playerHealth;
-
-    [SerializeField, Tooltip("Boss controller for success detection (pinata ended). HookBoss() when spawned.")]
-    private BossStateController bossController;
+    [SerializeField, Tooltip("Level progress runtime that computes progress from LevelDefinition.")]
+    private LevelProgressRuntime progressRuntime;
     #endregion
 
     #region Resolution Options
@@ -39,25 +33,43 @@ public class LevelContextBinder : MonoBehaviour
     private bool verboseLogs = false;
     #endregion
 
-    #region Public Events
+    #region Outcome Sources (optional hooks)
+    [Header("Outcome Sources (hook at runtime if spawned)")]
+    [SerializeField, Tooltip("Player health for fail detection. Can be assigned later via HookPlayer().")]
+    private PlayerHealth playerHealth;
+
+    [SerializeField, Tooltip("Boss controller for success detection (pinata ended). HookBoss() when spawned.")]
+    private BossStateController bossController;
+    #endregion
+
+    #region Events
     public event Action OnLevelSucceeded;
     public event Action OnLevelFailed;
+
+    /// <summary>
+    /// Fired after the binder resolves the level context. Args: (currentLevelIndex, levelDefinition)
+    /// </summary>
+    public event Action<int, LevelDefinition> OnLevelContextReady;
     #endregion
 
     #region Public Accessors
     public LevelDefinition CurrentLevelDefinition { get; private set; }
+    /// <summary>Zero-based index taken from LevelService (or fallbacks).</summary>
+    public int CurrentLevelIndex { get; private set; } = -1;
+    /// <summary>1-based convenience accessor.</summary>
+    public int CurrentLevelNumber1Based => CurrentLevelIndex + 1;
+
     public bool HasBoundBoss => bossController != null;
     public bool HasBoundPlayer => playerHealth != null;
     #endregion
 
     #region Private
-    private bool outcomeHandled; // guard against double fire
+    private bool outcomeHandled;
     #endregion
 
-    #region Unity Lifecycle
+    #region Unity
     private void Awake()
     {
-        // Scene-local singleton (not persistent)
         if (Instance != null && Instance != this)
         {
             Debug.LogWarning("[LevelContextBinder] Duplicate binder in scene; destroying this instance.");
@@ -66,25 +78,28 @@ public class LevelContextBinder : MonoBehaviour
         }
         Instance = this;
 
-        // Inject LevelDefinition early so Start() users already have it
-        CurrentLevelDefinition = ResolveLevelDefinition();
+        ResolveLevelContext();
+
         if (CurrentLevelDefinition == null)
         {
             Debug.LogError("[LevelContextBinder] Could not resolve LevelDefinition. Ensure LevelService exists and/or enable fallbacks.");
+            return;
         }
-        else
-        {
-            if (sequencer != null) sequencer.SetLevelDefinition(CurrentLevelDefinition);
-            if (announcer != null) announcer.SetLevelDefinition(CurrentLevelDefinition);
-            if (verboseLogs) Debug.Log($"[LevelContextBinder] Injected LevelDefinition: {CurrentLevelDefinition.name}");
-        }
+
+        // Inject to dependents
+        if (sequencer != null) sequencer.SetLevelDefinition(CurrentLevelDefinition);
+        if (announcer != null) announcer.SetLevelDefinition(CurrentLevelDefinition);
+        if (progressRuntime != null) progressRuntime.SetLevelDefinition(CurrentLevelDefinition);
+
+        if (verboseLogs)
+            Debug.Log($"[LevelContextBinder] Injected LevelDefinition: {CurrentLevelDefinition.name} (Index {CurrentLevelIndex})");
+
+        OnLevelContextReady?.Invoke(CurrentLevelIndex, CurrentLevelDefinition);
     }
 
     private void OnEnable()
     {
-        // If player already present, hook now
         HookPlayer(playerHealth);
-        // Boss will typically be hooked later by spawner/sequencer via HookBoss()
     }
 
     private void OnDisable()
@@ -94,63 +109,43 @@ public class LevelContextBinder : MonoBehaviour
     }
     #endregion
 
-    #region Public Hook API (call these from your sequencer/spawner)
-    /// <summary>Hook a PlayerHealth at runtime (safe to call with null).</summary>
+    #region Public Hook API
     public void HookPlayer(PlayerHealth player)
     {
         if (!player) return;
-
-        // Unhook previous (if any)
         UnhookPlayer(playerHealth);
-
         playerHealth = player;
         playerHealth.OnDied += HandlePlayerDied;
-
-        if (verboseLogs) Debug.Log("[LevelContextBinder] Player hooked for outcome listening.");
     }
 
     public void UnhookPlayer(PlayerHealth player)
     {
         if (!player) return;
-
         player.OnDied -= HandlePlayerDied;
-
-        if (playerHealth == player)
-            playerHealth = null;
+        if (playerHealth == player) playerHealth = null;
     }
 
-    /// <summary>Hook a BossStateController at runtime (call right after you instantiate the boss).</summary>
     public void HookBoss(BossStateController boss)
     {
         if (!boss) return;
-
-        // Unhook previous, if any
         UnhookBoss(bossController);
-
         bossController = boss;
         bossController.OnPinataEnded += HandleBossPinataEnded;
-
-        if (verboseLogs) Debug.Log("[LevelContextBinder] Boss hooked for success listening.");
     }
 
     public void UnhookBoss(BossStateController boss)
     {
         if (!boss) return;
-
         boss.OnPinataEnded -= HandleBossPinataEnded;
-
-        if (bossController == boss)
-            bossController = null;
+        if (bossController == boss) bossController = null;
     }
     #endregion
 
-    #region Outcome Handlers (update LevelService only; no UI / transitions)
+    #region Outcome Handlers
     private void HandlePlayerDied()
     {
         if (outcomeHandled) return;
         outcomeHandled = true;
-
-        if (verboseLogs) Debug.Log("[LevelContextBinder] Outcome: FAIL (player died)");
         LevelService.Instance?.MarkLevelFailedOrQuitForUI();
         OnLevelFailed?.Invoke();
     }
@@ -159,33 +154,51 @@ public class LevelContextBinder : MonoBehaviour
     {
         if (outcomeHandled) return;
         outcomeHandled = true;
-
-        if (verboseLogs) Debug.Log("[LevelContextBinder] Outcome: SUCCESS (pinata ended)");
         LevelService.Instance?.MarkLevelCompletedAndAdvanceForUI();
         OnLevelSucceeded?.Invoke();
     }
     #endregion
 
     #region Helpers
-    private LevelDefinition ResolveLevelDefinition()
+    private void ResolveLevelContext()
     {
-        if (LevelService.Instance == null || LevelService.Instance.Catalog == null)
-            return null;
+        CurrentLevelDefinition = null;
+        CurrentLevelIndex = -1;
 
-        // Priority: Current → LastPlayed → Index 0
-        var def = LevelService.Instance.CurrentLevel;
-        if (def == null && fallbackToLastPlayed)
-            def = LevelService.Instance.GetLastPlayedLevel();
-        if (def == null && fallbackToIndexZero && LevelService.Instance.LevelCount > 0)
-            def = LevelService.Instance.Catalog.Get(0);
+        var svc = LevelService.Instance;
+        var catalog = svc != null ? svc.Catalog : null;
 
-        return def;
+        if (svc == null || catalog == null)
+            return;
+
+        // 1) Prefer service's explicit current level
+        if (svc.CurrentLevel != null && svc.CurrentLevelIndex >= 0)
+        {
+            CurrentLevelDefinition = svc.CurrentLevel;
+            CurrentLevelIndex = svc.CurrentLevelIndex;
+            return;
+        }
+
+        // 2) Fallback to last played (UI)
+        if (fallbackToLastPlayed && svc.LastPlayedLevel != null)
+        {
+            CurrentLevelDefinition = svc.LastPlayedLevel;
+            CurrentLevelIndex = svc.LastPlayedLevelIndex;
+            return;
+        }
+
+        // 3) Fallback to index 0
+        if (fallbackToIndexZero && svc.LevelCount > 0)
+        {
+            CurrentLevelDefinition = catalog.Get(0);
+            CurrentLevelIndex = 0;
+        }
     }
 
-    /// <summary>Optional helper if another script needs the level immediately in Awake/OnEnable.</summary>
+    /// <summary>Convenience for external callers that need the level immediately.</summary>
     public bool TryGetLevelDefinition(out LevelDefinition def)
     {
-        def = CurrentLevelDefinition ?? ResolveLevelDefinition();
+        def = CurrentLevelDefinition ?? LevelService.Instance?.CurrentLevel;
         return def != null;
     }
     #endregion

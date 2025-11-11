@@ -17,9 +17,6 @@ public class UpcomingSegmentAnnouncer : MonoBehaviour
     [SerializeField, Tooltip("Sequencer that raises OnSegmentStarted/OnSegmentEnded.")]
     private LevelSegmentSequencer sequencer;
 
-    [SerializeField, Tooltip("The LevelDefinition that the sequencer uses. Needed to look ahead.")]
-    private LevelDefinition levelDefinition;
-
     [SerializeField, Tooltip("Parent RectTransform that contains all unique reminder children.")]
     private RectTransform uiRoot;
 
@@ -52,6 +49,8 @@ public class UpcomingSegmentAnnouncer : MonoBehaviour
     private readonly Dictionary<SegmentType, GameObject> byType = new();
     private Coroutine playRoutine;
     private GameObject currentChild;
+
+    private LevelDefinition levelDefinition;
     #endregion
 
     #region Unity Lifecycle
@@ -59,7 +58,6 @@ public class UpcomingSegmentAnnouncer : MonoBehaviour
     {
         if (!uiRoot) Debug.LogError("[UpcomingSegmentAnnouncer] uiRoot is not assigned.");
         if (!sequencer) Debug.LogError("[UpcomingSegmentAnnouncer] sequencer is not assigned.");
-        if (!levelDefinition) Debug.LogWarning("[UpcomingSegmentAnnouncer] levelDefinition not assigned; look-ahead requires it.");
 
         BuildLookup();
         EnsureCanvasGroup();

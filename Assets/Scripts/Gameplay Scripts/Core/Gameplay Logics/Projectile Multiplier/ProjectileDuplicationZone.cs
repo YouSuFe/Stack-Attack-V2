@@ -2,7 +2,7 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class ProjectileDuplicationZone : MonoBehaviour, IPausable
+public class ProjectileDuplicationZone : MonoBehaviour, IPausable, IInitializableFromContext
 {
     #region Serialized Fields
     [Header("Multiplier")]
@@ -38,23 +38,21 @@ public class ProjectileDuplicationZone : MonoBehaviour, IPausable
     [Tooltip("Base lateral spacing (world units) for Missile duplicates. Scales per duplicate index to create nice separation.")]
     [SerializeField, Range(0f, 0.5f)] private float missileLateralBaseSpacing = 0.06f;
 
-
-    [Header("Services")]
-    [Tooltip("Projectile pool service. If not set, it will be found at runtime (FindObjectOfType).")]
-    [SerializeField] private ProjectilePoolService poolService;
     #endregion
 
     #region State
-    private bool isStopped; // true while gameplay is paused
+    private ProjectilePoolService poolService;
+    private bool isStopped;
+    #endregion
+
+    #region Initialization
+    public void Initialize(SpawnInitContext context)
+    {
+        poolService = context.ProjectilePoolService;
+    }
     #endregion
 
     #region Unity Lifecycle
-    private void Awake()
-    {
-        if (!poolService)
-            poolService = FindFirstObjectByType<ProjectilePoolService>();
-    }
-
     private void OnEnable()
     {
         if (PauseManager.Instance != null)

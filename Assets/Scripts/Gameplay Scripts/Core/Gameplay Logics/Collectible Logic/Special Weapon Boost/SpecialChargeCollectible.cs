@@ -1,11 +1,14 @@
 ﻿// CollectibleBase.cs
 using UnityEngine;
 
-public class SpecialChargeCollectible : CollectibleBase
+public class SpecialChargeCollectible : CollectibleBase, IInitializableFromContext
 {
-    [Header("Discovery")]
-    [Tooltip("If null, we will search on the Player.")]
-    [SerializeField] private SpecialSkillDriver specialSkillDriver;
+    private SpecialSkillDriver specialSkillDriver;
+
+    public void Initialize(SpawnInitContext context)
+    {
+        if (!specialSkillDriver) specialSkillDriver = context.SpecialSkillDriver;
+    }
 
     protected override bool OnCollected(GameObject player)
     {

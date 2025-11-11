@@ -1,7 +1,7 @@
 ﻿// CollectibleBase.cs
 using UnityEngine;
 
-public class FireRateBoostCollectible : CollectibleBase
+public class FireRateBoostCollectible : CollectibleBase, IInitializableFromContext
 {
     [Header("Effect")]
     [Tooltip("Multiply current fire-rate by this factor, e.g., 5 = five times faster.")]
@@ -10,9 +10,12 @@ public class FireRateBoostCollectible : CollectibleBase
     [Tooltip("How long the boost lasts (seconds).")]
     [SerializeField] private float durationSeconds = 5f;
 
-    [Header("Discovery")]
-    [Tooltip("If null, we will search on the Player.")]
-    [SerializeField] private WeaponDriver weaponDriver;
+    private WeaponDriver weaponDriver;
+
+    public void Initialize(SpawnInitContext context)
+    {
+        if (!weaponDriver) weaponDriver = context.WeaponDriver;
+    }
 
     protected override bool OnCollected(GameObject player)
     {

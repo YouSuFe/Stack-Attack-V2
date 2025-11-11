@@ -34,8 +34,6 @@ public class LevelProgressRuntime : MonoBehaviour
 
     #region Serialized Fields
     [Header("Level & World References")]
-    [SerializeField, Tooltip("LevelDefinition used by your sequencer.")]
-    private LevelDefinition levelDefinition;
 
     [SerializeField, Tooltip("World spawn point where each segment's first row is aligned.")]
     private Transform spawnPoint;
@@ -87,6 +85,8 @@ public class LevelProgressRuntime : MonoBehaviour
     private float gapSpawnToReference; // spawnY - referenceY
     private float totalDistanceWorld;  // segmentsBeforeBoss * gap + rowsToBoss * rowHeight
     private Transform dummyInstance;   // moved by your Conveyor (via SpawnStageAgent)
+
+    private LevelDefinition levelDefinition;
     #endregion
 
     #region Unity Lifecycle
@@ -254,6 +254,11 @@ public class LevelProgressRuntime : MonoBehaviour
     #endregion
 
     #region Utilities
+    public void SetLevelDefinition(LevelDefinition def)
+    {
+        levelDefinition = def;
+    }
+
     private bool ValidateRefs()
     {
         bool ok = true;

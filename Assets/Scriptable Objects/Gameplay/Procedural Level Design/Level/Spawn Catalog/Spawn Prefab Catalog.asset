@@ -26,12 +26,12 @@ MonoBehaviour:
   - type: 5
     prefab: {fileID: 816712894752878094, guid: 65541070a543940558e40fbb556f57d5, type: 3}
   - type: 6
-    prefab: {fileID: 0}
+    prefab: {fileID: 1525332354413432264, guid: 7e607d12258e448c0ba7a194bec41998, type: 3}
   - type: 7
-    prefab: {fileID: 0}
+    prefab: {fileID: 7065127358466625308, guid: afd8f7f00cb8c4eaba89a682cc0cbde0, type: 3}
   - type: 8
-    prefab: {fileID: 0}
-  - type: 6
+    prefab: {fileID: 2720747774245426916, guid: f1fffde791d314a9d82e686ede052b41, type: 3}
+  - type: 9
     prefab: {fileID: 0}
   - type: 10
     prefab: {fileID: 0}

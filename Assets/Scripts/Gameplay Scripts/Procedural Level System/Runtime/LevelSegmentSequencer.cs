@@ -22,9 +22,6 @@ public class LevelSegmentSequencer : MonoBehaviour
     [Tooltip("Default grid config when a segment has no stripes defined.")]
     [SerializeField] private GridConfig gridConfig;
 
-    [Tooltip("LevelDefinition to spawn from (ordered segments).")]
-    [SerializeField] private LevelDefinition levelDefinition;
-
     [Header("Enemy Colors (2D)")]
     [Tooltip("Palette used to resolve Enemy hue/tone to a Color at runtime.")]
     [SerializeField] private EnemyColorPalette enemyPalette;
@@ -32,10 +29,6 @@ public class LevelSegmentSequencer : MonoBehaviour
     #endregion
 
     #region Inspector - Difficulty / Definitions
-
-    [Header("Difficulty / Level Context")]
-    [Tooltip("1-based level index used by EnemyInitializer to compute scaled HP.")]
-    [SerializeField, Min(1)] private int levelIndex1Based = 1;
 
     [Header("Fallback Enemy/Boss Definitions")]
     [Tooltip("Used when a SpawnEntry (Enemy/Boss) has no EnemyDefinition assigned.")]
@@ -60,16 +53,13 @@ public class LevelSegmentSequencer : MonoBehaviour
     [Tooltip("Lookup from SpawnType -> Prefab.")]
     [SerializeField] private SpawnPrefabCatalog prefabCatalog;
 
-    [Tooltip("Fallback if catalog has no entry for a given SpawnType.")]
-    [SerializeField] private GameObject defaultPrefab;
-
     #endregion
 
     #region Inspector - Spawn Anchor
 
     [Header("Spawn Anchor")]
     [Tooltip("Reference Y for vertical alignment on spawn.")]
-    [SerializeField] private Transform segmentSpawnAnchor;
+    [SerializeField] private Transform segmentSpawnPoint;
 
     [Tooltip("Fallback Y if no anchor Transform is assigned.")]
     [SerializeField] private float segmentSpawnStartY = 0f;
@@ -115,6 +105,9 @@ public class LevelSegmentSequencer : MonoBehaviour
     private int activeCountForCurrentSegment = 0;
     private bool isRunning = false;
     private Coroutine runRoutine;
+
+    private LevelDefinition levelDefinition;
+    private int levelIndex1Based => LevelContextBinder.Instance.CurrentLevelNumber1Based;
 
     #endregion
 
@@ -305,18 +298,22 @@ public class LevelSegmentSequencer : MonoBehaviour
             {
                 if (prefabCatalog != null)
                     prefabCatalog.TryGetPrefab(entry.spawnType, out prefab);
-                if (prefab == null) prefab = defaultPrefab;
             }
 
-            GameObject go = null;
+            GameObject spawnedGameObject = null;
             SegmentObject tracker = null;
 
             if (prefab != null)
             {
-                go = Instantiate(prefab, spawnPos, Quaternion.identity, segRoot);
+                spawnedGameObject = Instantiate(prefab, spawnPos, Quaternion.identity, segRoot);
 
-                tracker = go.GetComponent<SegmentObject>();
-                if (tracker == null) tracker = go.AddComponent<SegmentObject>();
+                if (spawnedGameObject.TryGetComponent<IInitializableFromContext>(out var init))
+                {
+                    init.Initialize(GameplayInitializer.Instance.GetContext());
+                }
+
+                tracker = spawnedGameObject.GetComponent<SegmentObject>();
+                if (tracker == null) tracker = spawnedGameObject.AddComponent<SegmentObject>();
                 tracker.Bind(this, segIndex);
 
                 activeCountForCurrentSegment++;
@@ -326,22 +323,22 @@ public class LevelSegmentSequencer : MonoBehaviour
                 {
                     if (entry.TryResolveEnemyColor(enemyPalette, out var resolvedColor))
                     {
-                        ApplyEnemyColor2D(go, resolvedColor);
+                        ApplyEnemyColor2D(spawnedGameObject, resolvedColor);
                     }
                 }
 
                 // === Inject EnemyDefinition -> EnemyInitializer (for Enemy & Boss) ===
-                InjectDefinitionAndInitialize(go, entry);
+                InjectDefinitionAndInitialize(spawnedGameObject, entry);
 
                 // === If this spawned object is a Boss, hook the orchestrator and late-bind segment ===
-                TryHookBossAddsOrchestrator(go, tracker);
+                TryHookBossAddsOrchestrator(spawnedGameObject, tracker);
             }
             else if (isAnchorPayload)
             {
                 // create a dummy under segRoot so anchors get the same alignment shift.
-                go = new GameObject("__PivotAnchorDummy");
-                go.transform.SetParent(segRoot, worldPositionStays: true);
-                go.transform.position = spawnPos;
+                spawnedGameObject = new GameObject("__PivotAnchorDummy");
+                spawnedGameObject.transform.SetParent(segRoot, worldPositionStays: true);
+                spawnedGameObject.transform.position = spawnPos;
 
                 // (Usually anchors don't participate in completion counting.)
             }
@@ -352,7 +349,7 @@ public class LevelSegmentSequencer : MonoBehaviour
 
             var tags = entry.tags ?? new List<string>(0);
             Vector2Int gridCell = new Vector2Int(col, worldRow);
-            entry.payload?.AttachTo(go, stripe.config, gridCell, tags);
+            entry.payload?.AttachTo(spawnedGameObject, stripe.config, gridCell, tags);
 
             if (verboseLogging)
             {
@@ -429,7 +426,6 @@ public class LevelSegmentSequencer : MonoBehaviour
         if (def != null)
             init.SetDefinition(def);
 
-        // ToDo: Create the Level Catalog logic to get which level we are in right now.
         // Clamp level index defensively (EnemyDefinition expects 1-based)
         var lvl = Mathf.Max(1, levelIndex1Based);
         init.InitializeFromSpawn(lvl);
@@ -514,7 +510,7 @@ public class LevelSegmentSequencer : MonoBehaviour
 
     private float GetAnchorY()
     {
-        if (segmentSpawnAnchor != null) return segmentSpawnAnchor.position.y;
+        if (segmentSpawnPoint != null) return segmentSpawnPoint.position.y;
         return segmentSpawnStartY;
     }
 

@@ -23,7 +23,7 @@ using UnityEngine;
 /// - LevelCatalog contains ordered LevelDefinition assets
 /// - You can still SetCurrentLevel(index) directly if you just want to preview data
 /// </summary>
-[DefaultExecutionOrder(-200)]
+[DefaultExecutionOrder(-50)]
 public class LevelService : MonoBehaviour
 {
     #region PlayerPrefs Keys
@@ -253,8 +253,10 @@ public class LevelService : MonoBehaviour
             PlayerPrefs.GetInt(PREF_LAST_PLAYED, defaultStartLevelIndex),
             0, maxIndex);
 
-        // Ensure consistency: lastPlayed should never exceed highestUnlocked+1 (optional).
-        lastPlayedIndex = Mathf.Clamp(lastPlayedIndex, 0, Mathf.Max(0, highestUnlockedLevelIndex + 1, lastPlayedIndex));
+        // To prevent bad value of last played index, clamp within unlocked range only
+        int maxLevelIndex = Mathf.Max(0, LevelCount - 1);
+        int upperBound = Mathf.Min(maxLevelIndex, highestUnlockedLevelIndex);
+        lastPlayedIndex = Mathf.Clamp(lastPlayedIndex, 0, upperBound);
     }
 
     private void EnsureDefaultProgress()
