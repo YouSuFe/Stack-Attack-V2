@@ -1,35 +1,41 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Receives damage only while pinata is enabled. Projectiles will call IDamageable.TakeDamage.
+/// Keep ApplyHit for non-projectile callers (cheats, scripts, AOE).
+/// </summary>
 [DisallowMultipleComponent]
-public class PinataDamageReceiver : MonoBehaviour
+public class PinataDamageReceiver : MonoBehaviour, IDamageable
 {
-    #region Private
+    #region Private Fields
+    [SerializeField, Tooltip("Bound meter during pinata.")]
     private PinataMeter meter;
     #endregion
 
-    #region Public API
-    public void BindPinataMeter(PinataMeter m)
-    {
-        meter = m;
-        gameObject.SetActive(meter != null);
-    }
+    #region IDamageable
+    public bool IsAlive => meter != null && meter.IsEnabled;
 
-    public void ApplyHit(int damage)
+    public void TakeDamage(int amount, GameObject source)
     {
-        meter?.ApplyHit(damage);
+        if (!IsAlive) return;
+        meter.ApplyHit(amount);
     }
     #endregion
 
-    // Optional trigger hook if you use physics projectiles:
-    /*
-    private void OnTriggerEnter2D(Collider2D other)
+    #region Public API
+    public void BindPinataMeter(PinataMeter boundMeter)
     {
-        var proj = other.GetComponent<YourProjectileDamage>();
-        if (proj)
-        {
-            ApplyHit(proj.Damage);
-            Destroy(other.gameObject);
-        }
+        meter = boundMeter;
+        gameObject.SetActive(meter != null);
     }
-    */
+
+    /// <summary>
+    /// Convenience for non-projectile sources to push raw damage.
+    /// </summary>
+    public void ApplyHit(int damage)
+    {
+        if (!IsAlive) return;
+        meter.ApplyHit(damage);
+    }
+    #endregion
 }

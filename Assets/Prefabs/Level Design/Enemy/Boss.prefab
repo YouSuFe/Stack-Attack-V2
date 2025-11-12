@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -3143138656875813209}
   - component: {fileID: 6201899109184527674}
   - component: {fileID: 8213079687333254246}
-  - component: {fileID: 1526277042262755641}
   - component: {fileID: 9050103684981430960}
   m_Layer: 0
   m_Name: Boss
@@ -249,25 +248,8 @@ MonoBehaviour:
   spawnStagger: 0
   rotationOffsetDeg: -30
   clockwise: 1
-  pinataMeter: {fileID: 1526277042262755641}
+  pinataMeter: {fileID: 0}
   breakToPinataDelay: 3
---- !u!114 &1526277042262755641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3142940048156255881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9de130f139ef041aebb12fe2162cb60c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cycleThreshold: 100
-  hitScale: 1
-  minPerHit: 0
-  maxPerHit: 0
-  gatedByController: 1
 --- !u!114 &9050103684981430960
 MonoBehaviour:
   m_ObjectHideFlags: 0

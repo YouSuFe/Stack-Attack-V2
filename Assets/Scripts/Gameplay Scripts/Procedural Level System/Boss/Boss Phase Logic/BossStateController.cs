@@ -42,9 +42,6 @@ public class BossStateController : MonoBehaviour
 
     #region Pinata
     [Header("Pinata")]
-    [SerializeField, Tooltip("Pinata scoring meter (attach on the boss GO).")]
-    private PinataMeter pinataMeter;
-
     [SerializeField, Tooltip("Seconds to wait after boss breaks before starting pinata (defeat pause).")]
     private float breakToPinataDelay = 3.0f;
     #endregion
@@ -74,7 +71,6 @@ public class BossStateController : MonoBehaviour
     {
         TryGetComponent(out agent);
         TryGetComponent(out health);
-        if (!pinataMeter) TryGetComponent(out pinataMeter);
         state = BossState.Spawning;
     }
 
@@ -161,12 +157,13 @@ public class BossStateController : MonoBehaviour
         if (breakToPinataDelay > 0f)
             yield return PauseAwareCoroutine.Delay(breakToPinataDelay);
 
-        if (PinataDirector.Instance != null && pinataMeter != null)
-            PinataDirector.Instance.BeginPinataFor(this, pinataMeter);
+        if (PinataDirector.Instance != null)
+            PinataDirector.Instance.BeginPinataFor(this);
 
         ChangeState(BossState.Pinata);
         OnPinataStarted?.Invoke();
     }
+
 
     public void EndPinata()
     {
