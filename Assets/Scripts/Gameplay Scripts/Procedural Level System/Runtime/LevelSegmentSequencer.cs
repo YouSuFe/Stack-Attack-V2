@@ -37,6 +37,7 @@ public class LevelSegmentSequencer : MonoBehaviour
     [Tooltip("Used when a SpawnEntry (Boss) has no EnemyDefinition assigned.")]
     [SerializeField] private EnemyDefinition defaultBossDefinition;
 
+    [SerializeField] private BossHealthBarUI bossHealthBarUI;
     #endregion
 
     #region Inspector - Orchestrator
@@ -421,6 +422,13 @@ public class LevelSegmentSequencer : MonoBehaviour
             def = (entry.spawnType == SpawnType.Boss) ? defaultBossDefinition : defaultEnemyDefinition;
             if (verboseLogging && def != null)
                 Debug.Log($"[Sequencer] Using fallback {(entry.spawnType == SpawnType.Boss ? "Boss" : "Enemy")} definition: {def.name}");
+        }
+
+        if (entry.spawnType == SpawnType.Boss)
+        {
+            var controller = go.GetComponent<BossStateController>();
+            var health = go.GetComponent<BossHealth>();
+            bossHealthBarUI.Bind(controller, health);
         }
 
         if (def != null)
