@@ -72,6 +72,8 @@ public class BossPhaseEnemySpawner : MonoBehaviour
                                 float laneSpacing,
                                 float? topYOffsetOverride = null)
     {
+        Debug.LogWarning($"[EnemyInitializer] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
+
         if (requests == null || requests.Count == 0) return;
 
         var cam = targetCamera ? targetCamera : Camera.main;
@@ -100,23 +102,9 @@ public class BossPhaseEnemySpawner : MonoBehaviour
             }
 
             GameObject go = Instantiate(prefab, pos, Quaternion.identity);
+            Debug.LogWarning($"[EnemyInitializer33] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
 
-            // If something has a stage agent by accident, just arm/resume immediately
-            if (go.TryGetComponent(out SpawnStageAgent agent))
-            {
-                var acts = go.GetComponents<IStageActivatable>();
-                for (int k = 0; k < acts.Length; k++) acts[k].ArmAtEntry(pos);
-
-                bool paused = PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped;
-                if (paused)
-                {
-                    for (int k = 0; k < acts.Length; k++) acts[k].PauseMover();
-                }
-                else
-                {
-                    for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
-                }
-            }
+            InitializeSpawnedEnemy(go, pos);
 
             var movement = req.movement ? req.movement : defaultMovement;
             if (movement != null)
@@ -129,6 +117,47 @@ public class BossPhaseEnemySpawner : MonoBehaviour
             }
             list.Add(go);
         }
+    }
+
+    private void InitializeSpawnedEnemy(GameObject go, Vector3 pos)
+    {
+        if (!go) return;
+
+        // If something has a stage agent by accident, just arm/resume immediately
+        if (go.TryGetComponent(out SpawnStageAgent agent))
+        {
+            var acts = go.GetComponents<IStageActivatable>();
+            for (int k = 0; k < acts.Length; k++) acts[k].ArmAtEntry(pos);
+
+            bool paused = PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped;
+            if (paused)
+            {
+                for (int k = 0; k < acts.Length; k++) acts[k].PauseMover();
+            }
+            else
+            {
+                for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
+            }
+        }
+
+        if (go.TryGetComponent(out EnemyInitializer initializer))
+        {
+            int levelIndex1Based = 1;
+            if (LevelContextBinder.Instance != null)
+            {
+                levelIndex1Based = Mathf.Max(1, LevelContextBinder.Instance.CurrentLevelNumber1Based);
+            }
+            else
+            {
+                Debug.LogWarning("[BossPhaseEnemySpawner] LevelContextBinder.Instance is null. Using levelIndex1Based=1.");
+            }
+            Debug.LogWarning($"[EnemyInitializer22] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
+
+            initializer.InitializeFromSpawn(levelIndex1Based);
+            return;
+        }
+
+        Debug.LogWarning($"[BossPhaseEnemySpawner] Spawned {go.name} has no EnemyInitializer. Health not initialized.");
     }
 
     /// <summary>Destroys everything spawned under a given owner.</summary>

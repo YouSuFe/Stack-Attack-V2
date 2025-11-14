@@ -66,6 +66,13 @@ public class PinataDirector : MonoBehaviour
 
     [SerializeField, Tooltip("UI controller that drives bar + flags.")]
     private PinataMeterUIController uiController;
+
+    [Header("General UI To Toggle During Boss/Pinata")]
+    [SerializeField, Tooltip("Root GameObject for the EXP bar UI (parent object to enable/disable).")]
+    private GameObject expBarRoot;
+
+    [SerializeField, Tooltip("Root GameObject for the Level Progress UI (parent object to enable/disable).")]
+    private GameObject levelProgressRoot;
     #endregion
 
     #region Runtime
@@ -120,6 +127,8 @@ public class PinataDirector : MonoBehaviour
             return;
         }
 
+        DisableHUDForPinata();
+
         activeBoss = boss;
         activeMeter = meterToUse;
 
@@ -149,6 +158,12 @@ public class PinataDirector : MonoBehaviour
         }
 
         isRunning = true;
+    }
+
+    private void DisableHUDForPinata()
+    {
+        expBarRoot.SetActive(false);
+        levelProgressRoot.SetActive(false);
     }
 
     private void HandleRewardsGranted(int count)

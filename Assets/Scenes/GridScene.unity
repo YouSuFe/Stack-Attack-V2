@@ -1010,6 +1010,7 @@ MonoBehaviour:
   flagB: {fileID: 1883510647}
   animateFill: 1
   fillAnimDuration: 0.15
+  debugLogs: 1
 --- !u!1 &583514622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 629964175}
   - component: {fileID: 629964176}
+  - component: {fileID: 629964177}
   m_Layer: 0
   m_Name: Level Segment Sequencer
   m_TagString: Untagged
@@ -1217,6 +1219,7 @@ MonoBehaviour:
   enemyPalette: {fileID: 11400000, guid: b850201ec0e524ad2b02b611aaa96a36, type: 2}
   defaultEnemyDefinition: {fileID: 11400000, guid: 361e93c01e2ed4430a6f4e92d42a65fe, type: 2}
   defaultBossDefinition: {fileID: 11400000, guid: ff68e0505ea904d15ae19549e4239dfc, type: 2}
+  bossHealthBarUI: {fileID: 0}
   bossAddsOrchestrator: {fileID: 1833807300}
   prefabCatalog: {fileID: 11400000, guid: f202ad1eca6e24055b57ee8a1de98cf7, type: 2}
   segmentSpawnPoint: {fileID: 0}
@@ -1225,6 +1228,26 @@ MonoBehaviour:
   autoRunOnStart: 1
   segmentTimeoutSeconds: 0
   verboseLogging: 0
+--- !u!114 &629964177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 629964173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748f93fef57e44a7e83089be9fbc7cf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sequencer: {fileID: 629964176}
+  announcer: {fileID: 172174627}
+  progressRuntime: {fileID: 1077441265}
+  fallbackToLastPlayed: 1
+  fallbackToIndexZero: 1
+  verboseLogs: 0
+  playerHealth: {fileID: 0}
+  bossController: {fileID: 0}
 --- !u!1 &730409120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2170,10 @@ MonoBehaviour:
   targetCamera: {fileID: 519420031}
   pinataBackdrop: {fileID: 935220019}
   damageReceiver: {fileID: 1070943406}
+  sceneMeter: {fileID: 0}
+  uiController: {fileID: 0}
+  expBarRoot: {fileID: 0}
+  levelProgressRoot: {fileID: 0}
 --- !u!4 &1324533942
 Transform:
   m_ObjectHideFlags: 0
@@ -2602,6 +2629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1455497011}
+  - component: {fileID: 1455497012}
   m_Layer: 0
   m_Name: Progress Target
   m_TagString: Untagged
@@ -2624,6 +2652,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1455497012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455497010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f389c01eef0d84b829049f04647f765d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelCatalog: {fileID: 11400000, guid: 67cb72d63bec94c01be3f65a34c1a60d, type: 2}
+  loadProgressOnAwake: 1
+  defaultStartLevelIndex: 0
+  currentLevelIndex: -1
+  highestUnlockedLevelIndex: 0
+  lastPlayedIndex: 0
 --- !u!1 &1459013234
 GameObject:
   m_ObjectHideFlags: 0

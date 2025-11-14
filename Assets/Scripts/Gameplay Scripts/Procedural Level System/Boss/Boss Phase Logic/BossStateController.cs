@@ -186,6 +186,21 @@ public class BossStateController : MonoBehaviour
             if (!go.TryGetComponent(out HexOrbitFollower follower))
                 follower = go.AddComponent<HexOrbitFollower>();
 
+            if (go.TryGetComponent(out EnemyInitializer initializer))
+            {
+                int levelIndex1Based = 1;
+                if (LevelContextBinder.Instance != null)
+                {
+                    levelIndex1Based = Mathf.Max(1, LevelContextBinder.Instance.CurrentLevelNumber1Based);
+                }
+                else
+                {
+                    Debug.LogWarning("[BossPhaseEnemySpawner] LevelContextBinder.Instance is null. Using levelIndex1Based=1.");
+                }
+
+                initializer.InitializeFromSpawn(levelIndex1Based);
+            }
+
             float basePhase = (float)i / Mathf.Max(1, orbiters);
             float jitter = (phaseJitter > 0f) ? UnityEngine.Random.Range(-phaseJitter, phaseJitter) : 0f;
             float phase = Mathf.Repeat(basePhase + jitter, 1f);

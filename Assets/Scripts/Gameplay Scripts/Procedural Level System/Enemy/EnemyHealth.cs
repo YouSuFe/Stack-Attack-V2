@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// Generic health component for regular enemies.
-/// Implements IDamageable and IStoppable, cooperates with PauseManager,
+/// Implements IDamageable and IPausable, cooperates with PauseManager,
 /// and is pool-friendly (optionally disables instead of destroying).
 /// </summary>
 [DisallowMultipleComponent]
@@ -37,7 +37,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     public bool IsAlive => isAlive; // IDamageable
     #endregion
 
+    #region Events
+    /// <summary>
+    /// Fired when this enemy dies.
+    /// </summary>
     public event Action<EnemyHealth> OnDied;
+
+    /// <summary>
+    /// Fired whenever health changes (including initialization and damage).
+    /// Args: currentHealth, maxHealth.
+    /// </summary>
+    public event Action<int, int> OnHealthChanged;
+    #endregion
 
     #region Unity
     private void OnEnable()
@@ -58,24 +69,31 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
         maxHealth = Mathf.Max(1, computedMaxHealth);
         currentHealth = maxHealth;
         isAlive = true;
+
+        // Notify listeners (e.g., world-space health text) on spawn/init
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
     #endregion
 
     #region IDamageable
-    /// <summary>Apply damage from a dealer. Damage is ignored if dead, or (optionally) while paused.</summary>
+    /// <summary>
+    /// Apply damage from a dealer. Damage is ignored if dead, or (optionally) while paused.
+    /// </summary>
     public void TakeDamage(int damageAmount, GameObject damageSource)
     {
         if (!isAlive) return;
         if (ignoreDamageWhenPaused && isPaused) return;
 
         int applied = Mathf.Max(1, Mathf.Abs(damageAmount));
-        currentHealth -= applied;
+        currentHealth = Mathf.Max(0, currentHealth - applied);
 
         Debug.Log($"[EnemyHealth] -{applied} from {(damageSource ? damageSource.name : "Unknown")} => {currentHealth}/{maxHealth}");
 
+        // Notify listeners that the health value changed
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+
         if (currentHealth <= 0)
         {
-            currentHealth = 0;
             Die();
         }
     }
@@ -89,16 +107,32 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
 
         OnDied?.Invoke(this);
 
-        if (deathEffect) Instantiate(deathEffect, transform.position, Quaternion.identity);
+        if (deathEffect)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
 
-        if (destroyOnDeath) Destroy(gameObject);
-        else gameObject.SetActive(false);
+        if (destroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
     #endregion
 
-    #region IStoppable (Pause)
-    public void OnStopGameplay() { isPaused = true; }
-    public void OnResumeGameplay() { isPaused = false; }
+    #region IPausable (Pause)
+    public void OnStopGameplay()
+    {
+        isPaused = true;
+    }
+
+    public void OnResumeGameplay()
+    {
+        isPaused = false;
+    }
     #endregion
 
 #if UNITY_EDITOR
@@ -106,3 +140,5 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     private void DebugDamage() => TakeDamage(1, null);
 #endif
 }
+
+
