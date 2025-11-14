@@ -1,7 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+[Serializable]
+public enum RewardType
+{
+    None = 0,
+    Coin = 1,
+    Exp = 2
+}
 
 /// <summary>
 /// Base class for Result views (Success/Failure).
@@ -14,13 +23,14 @@ using UnityEngine.UI;
 public abstract class ResultViewBase : MonoBehaviour
 {
     #region Types
-    [System.Serializable]
+    [Serializable]
     public struct RewardEntry
     {
-        public string id;     // e.g., "coin", "exp", "item_sword"
-        public Sprite icon;   // icon
-        public int amount;    // quantity
+        public RewardType rewardType;
+        public int amount;
+        public Sprite icon;
     }
+
     #endregion
 
     #region Serialized - Common

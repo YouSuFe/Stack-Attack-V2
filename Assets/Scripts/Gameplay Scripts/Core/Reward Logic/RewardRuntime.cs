@@ -48,9 +48,9 @@ public class RewardRuntime : MonoBehaviour
             xp = rewardsProvider.Current.ComputeXpAward(success, reachedPercent);
 
         if (coinsMeta > 0)
-            lastBuiltEntries.Add(new ResultViewBase.RewardEntry { id = "coin", amount = coinsMeta, icon = coinIcon });
+            lastBuiltEntries.Add(new ResultViewBase.RewardEntry { rewardType = RewardType.Coin, amount = coinsMeta, icon = coinIcon });
         if (xp > 0)
-            lastBuiltEntries.Add(new ResultViewBase.RewardEntry { id = "xp", amount = xp, icon = xpIcon });
+            lastBuiltEntries.Add(new ResultViewBase.RewardEntry { rewardType = RewardType.Exp, amount = xp, icon = xpIcon });
 
         lastBuiltReachedPercent = reachedPercent;
 
@@ -90,7 +90,7 @@ public class RewardRuntime : MonoBehaviour
         for (int i = 0; i < lastBuiltEntries.Count; i++)
         {
             var e = lastBuiltEntries[i];
-            sb.Append($"[{i}] {e.id} +{e.amount}  ");
+            sb.Append($"[{i}] {e.rewardType} +{e.amount}  ");
         }
         return sb.ToString();
     }

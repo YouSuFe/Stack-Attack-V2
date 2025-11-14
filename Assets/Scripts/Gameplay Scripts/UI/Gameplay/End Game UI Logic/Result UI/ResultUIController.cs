@@ -164,15 +164,19 @@ public class ResultUIController : MonoBehaviour
         {
             foreach (var reward in cachedRewards)
             {
-                string rewardId = reward.id.ToLowerInvariant();
+                switch (reward.rewardType)
+                {
+                    case RewardType.Coin:
+                        totalCoinsEarned += Mathf.Max(0, reward.amount);
+                        break;
 
-                if (rewardId == "coin")
-                {
-                    totalCoinsEarned += Mathf.Max(0, reward.amount);
-                }
-                else if (rewardId == "exp" || rewardId == "xp")
-                {
-                    totalExperienceEarned += Mathf.Max(0, reward.amount);
+                    case RewardType.Exp:
+                        totalExperienceEarned += Mathf.Max(0, reward.amount);
+                        break;
+
+                    default:
+                        Debug.LogWarning($"[ResultUIController] Unknown reward type: {reward.rewardType}");
+                        break;
                 }
             }
         }
