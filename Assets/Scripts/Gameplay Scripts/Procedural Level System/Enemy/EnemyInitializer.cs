@@ -36,7 +36,6 @@ public class EnemyInitializer : MonoBehaviour
     /// </summary>
     public void InitializeFromSpawn(int levelIndex1Based)
     {
-        Debug.LogWarning($"[EnemyInitializer] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
         int hp = (definition != null)
             ? definition.ComputeMaxHealth(levelIndex1Based)
             : Mathf.Max(1, fallbackHealth);

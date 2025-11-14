@@ -53,6 +53,10 @@ public class PinataDirector : MonoBehaviour
 
     [SerializeField] private Camera targetCamera;
 
+    [Header("Coin Multiplier")]
+    [SerializeField, Min(1), Tooltip("Coin Multiplier for each reward.")]
+    private float coinMultiplier = 5;
+
     [Header("Presentation")]
     [SerializeField, Tooltip("Backdrop/plate shown during pinata.")]
     private GameObject pinataBackdrop;
@@ -170,7 +174,7 @@ public class PinataDirector : MonoBehaviour
     {
         if (count <= 0) return;
 
-        int coins = count * 5;
+        int coins = (int)(count * coinMultiplier);
         if (CoinSystem.Instance != null)
         {
             CoinSystem.Instance.AddCoins(coins);

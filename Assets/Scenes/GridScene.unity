@@ -1219,7 +1219,7 @@ MonoBehaviour:
   enemyPalette: {fileID: 11400000, guid: b850201ec0e524ad2b02b611aaa96a36, type: 2}
   defaultEnemyDefinition: {fileID: 11400000, guid: 361e93c01e2ed4430a6f4e92d42a65fe, type: 2}
   defaultBossDefinition: {fileID: 11400000, guid: ff68e0505ea904d15ae19549e4239dfc, type: 2}
-  bossHealthBarUI: {fileID: 0}
+  bossHealthBarUI: {fileID: 1459013239}
   bossAddsOrchestrator: {fileID: 1833807300}
   prefabCatalog: {fileID: 11400000, guid: f202ad1eca6e24055b57ee8a1de98cf7, type: 2}
   segmentSpawnPoint: {fileID: 0}
@@ -2682,6 +2682,7 @@ GameObject:
   - component: {fileID: 1459013237}
   - component: {fileID: 1459013236}
   - component: {fileID: 1459013235}
+  - component: {fileID: 1459013239}
   m_Layer: 5
   m_Name: Pinata Canvas
   m_TagString: Untagged
@@ -2772,6 +2773,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1459013239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459013234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a656e458e26384ea1809231f05043c16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 307064337}
+  fillLerpSpeed: 6
+  fadeDuration: 0.2
 --- !u!1 &1574743341
 GameObject:
   m_ObjectHideFlags: 0

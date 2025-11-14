@@ -102,7 +102,6 @@ public class BossPhaseEnemySpawner : MonoBehaviour
             }
 
             GameObject go = Instantiate(prefab, pos, Quaternion.identity);
-            Debug.LogWarning($"[EnemyInitializer33] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
 
             InitializeSpawnedEnemy(go, pos);
 
@@ -151,7 +150,6 @@ public class BossPhaseEnemySpawner : MonoBehaviour
             {
                 Debug.LogWarning("[BossPhaseEnemySpawner] LevelContextBinder.Instance is null. Using levelIndex1Based=1.");
             }
-            Debug.LogWarning($"[EnemyInitializer22] ASDASDASDASNo EnemyHealth or BossHealth on {name}. Nothing to initialize.");
 
             initializer.InitializeFromSpawn(levelIndex1Based);
             return;
