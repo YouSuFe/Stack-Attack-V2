@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIcons:
   - weaponType: 0
-    sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+    sprite: {fileID: -6630107450281793048, guid: 9eb20d20c60934640aeb934f42664ff9, type: 3}
   - weaponType: 2
-    sprite: {fileID: 21300000, guid: 678e07380549544ef9884c1817c65ae8, type: 3}
+    sprite: {fileID: -7552227622074003335, guid: c4f6feb77e0d4486392b3a4dab495ba7, type: 3}
   - weaponType: 1
-    sprite: {fileID: 21300000, guid: 950832395ec754ba48ab1cffa214cec0, type: 3}
-  defaultWeaponIcon: {fileID: 21300000, guid: 11e6f279ade864c6d951e8db74c11b54, type: 3}
-  defaultUpgradeIcon: {fileID: 21300000, guid: 11e6f279ade864c6d951e8db74c11b54, type: 3}
+    sprite: {fileID: 6448664608121395983, guid: 6dda979b2e52c478d96ec695fea50dab, type: 3}
+  defaultWeaponIcon: {fileID: -6630107450281793048, guid: 9eb20d20c60934640aeb934f42664ff9, type: 3}
+  defaultUpgradeIcon: {fileID: -6630107450281793048, guid: 9eb20d20c60934640aeb934f42664ff9, type: 3}

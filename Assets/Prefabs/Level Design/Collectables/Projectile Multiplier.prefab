@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 1, a: 0.29803923}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,7 +156,6 @@ MonoBehaviour:
   missileDuplicateAngleJitterDegrees: 2.5
   missileDuplicatePhaseJitterRadians: 0.35
   missileLateralBaseSpacing: 0.06
-  poolService: {fileID: 0}
 --- !u!50 &6815570804048178596
 Rigidbody2D:
   serializedVersion: 5
