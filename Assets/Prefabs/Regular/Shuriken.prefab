@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8811870335047647335}
   - component: {fileID: 4773106874129434010}
   m_Layer: 7
-  m_Name: Missiles
+  m_Name: Shuriken
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,6 +54,8 @@ MonoBehaviour:
   sineAmplitude: 0.7
   sineFrequencyHz: 2.5
   phaseOffsetRadians: 0
+  minRotationSpeed: 200
+  maxRotationSpeed: 600
 --- !u!61 &4773106874129434010
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -127,7 +129,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1108681049971871258}
@@ -176,7 +178,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -2174319765615879736, guid: b6dddeee801c343989d4a355f24506ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

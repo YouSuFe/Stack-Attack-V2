@@ -146,6 +146,9 @@ public class SpawnStageAgent : MonoBehaviour
 
         while (t < duration)
         {
+            while (PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped)
+                yield return null;
+
             float u = easeCurve.Evaluate(t / duration);
             transform.position = Vector3.LerpUnclamped(start, end, u);
             t += Time.deltaTime;
@@ -225,6 +228,9 @@ public class SpawnStageAgent : MonoBehaviour
 
         while (t < duration)
         {
+            while (PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped)
+                yield return null;
+
             float u = curve.Evaluate(t / duration);
             transform.position = Vector3.LerpUnclamped(start, end, u);
             t += Time.deltaTime;

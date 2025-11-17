@@ -1,14 +1,10 @@
 fileFormatVersion: 2
-guid: 101b9dd621238462bba6f7d99d8cd79b
-AssetOrigin:
-  serializedVersion: 1
-  productId: 177699
-  packageName: GUI - BlueSky
-  packageVersion: 2.1.2
-  assetPath: Assets/Layer Lab/GUI-BlueSky/ResourcesData/Sprites/Demo/Demo_Icon/ShopIcon_Coin_01.png
-  uploadId: 714557
+guid: 5473a8d978d7b4c03be898cdadf5c287
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -4538640045769037662
+    second: Weapon_Kunai_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1024
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +68,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -115,12 +111,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Weapon_Kunai_0
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 82
+        width: 365
+        height: 886
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a8e294dce28301c0800000000000000
+      internalID: -4538640045769037662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 8a1b70cce277e4ca9be31ad6b2ae2e2a
     internalID: 0
     vertices: []
     indices: 
@@ -129,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Weapon_Kunai_0: -4538640045769037662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

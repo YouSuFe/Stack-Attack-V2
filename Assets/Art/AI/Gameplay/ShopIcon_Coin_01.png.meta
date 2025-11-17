@@ -1,16 +1,14 @@
 fileFormatVersion: 2
-guid: 4c5ee924bb692445487faa78d7b7dfb3
+guid: 101b9dd621238462bba6f7d99d8cd79b
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177699
+  packageName: GUI - BlueSky
+  packageVersion: 2.1.2
+  assetPath: Assets/Layer Lab/GUI-BlueSky/ResourcesData/Sprites/Demo/Demo_Icon/ShopIcon_Coin_01.png
+  uploadId: 714557
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -7500969349409671691
-    second: Icon_Boss_0
-  - first:
-      213: -8602900504998460138
-    second: Icon_Boss_1
-  - first:
-      213: -2011435613244487253
-    second: Icon_Boss_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,9 +53,9 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1024
+  alignment: 9
+  spritePivot: {x: 0.50323, y: 0.5458996}
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -74,7 +72,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -117,79 +115,13 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Icon_Boss_0
-      rect:
-        serializedVersion: 2
-        x: 19
-        y: 464
-        width: 619
-        height: 555
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f5f7595e1437e790800000000000000
-      internalID: -7500969349409671691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icon_Boss_1
-      rect:
-        serializedVersion: 2
-        x: 572
-        y: 544
-        width: 371
-        height: 424
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 615c981229b5c9880800000000000000
-      internalID: -8602900504998460138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icon_Boss_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1015
-        height: 504
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ba90eff77f1f514e0800000000000000
-      internalID: -2011435613244487253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -197,10 +129,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Icon_Boss_0: -7500969349409671691
-      Icon_Boss_1: -8602900504998460138
-      Icon_Boss_2: -2011435613244487253
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

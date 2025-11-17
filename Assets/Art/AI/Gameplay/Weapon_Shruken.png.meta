@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 4c5ee924bb692445487faa78d7b7dfb3
+guid: b6dddeee801c343989d4a355f24506ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7500969349409671691
-    second: Icon_Boss_0
-  - first:
-      213: -8602900504998460138
-    second: Icon_Boss_1
-  - first:
-      213: -2011435613244487253
-    second: Icon_Boss_2
+      213: -2174319765615879736
+    second: Weapon_Shruken_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -119,67 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icon_Boss_0
+      name: Weapon_Shruken_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 464
-        width: 619
-        height: 555
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 148
+        y: 116
+        width: 733
+        height: 794
+      alignment: 9
+      pivot: {x: 0.49548772, y: 0.3750316}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f5f7595e1437e790800000000000000
-      internalID: -7500969349409671691
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icon_Boss_1
-      rect:
-        serializedVersion: 2
-        x: 572
-        y: 544
-        width: 371
-        height: 424
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 615c981229b5c9880800000000000000
-      internalID: -8602900504998460138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icon_Boss_2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1015
-        height: 504
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ba90eff77f1f514e0800000000000000
-      internalID: -2011435613244487253
+      spriteID: 8c9da5671b343d1e0800000000000000
+      internalID: -2174319765615879736
       vertices: []
       indices: 
       edges: []
@@ -188,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: efc0221b6dde7414a865cba94fa64c71
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Icon_Boss_0: -7500969349409671691
-      Icon_Boss_1: -8602900504998460138
-      Icon_Boss_2: -2011435613244487253
+      Weapon_Shruken_0: -2174319765615879736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
