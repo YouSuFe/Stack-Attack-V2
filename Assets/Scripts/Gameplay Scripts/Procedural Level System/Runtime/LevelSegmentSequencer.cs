@@ -607,16 +607,33 @@ public class LevelSegmentSequencer : MonoBehaviour
     /// <summary>
     /// Tints all SpriteRenderers under the enemy. Preserves original alpha.
     /// </summary>
-    private void ApplyEnemyColor2D(GameObject root, Color color)
+    private void ApplyEnemyColor2D(GameObject obj, Color color)
     {
-        if (!root) return;
-        var spriteRenderers = root.GetComponentsInChildren<SpriteRenderer>(true);
+        if (obj == null)
+        {
+            Debug.LogWarning("[LevelSegmentSequencer] ApplyEnemyColor2D called with null object.");
+            return;
+        }
+
+        var spriteRenderers = obj.GetComponentsInChildren<SpriteRenderer>(true);
+        if (spriteRenderers == null || spriteRenderers.Length == 0)
+        {
+            Debug.LogWarning($"[LevelSegmentSequencer] No SpriteRenderers found under '{obj.name}' when applying enemy color.", obj);
+            return;
+        }
+
+        // Apply color while preserving alpha
         for (int i = 0; i < spriteRenderers.Length; i++)
         {
-            var spriteRenderer = spriteRenderers[i];
-            var alpha = spriteRenderer.color.a;
-            spriteRenderer.color = new Color(color.r, color.g, color.b, alpha);
+            var sr = spriteRenderers[i];
+            var alpha = sr.color.a;
+            sr.color = new Color(color.r, color.g, color.b, alpha);
         }
+
+        // Debug: log info about what just happened
+        Debug.Log($"[LevelSegmentSequencer] Applied enemy color {color} to '{obj.name}'. " +
+                  $"SpriteRenderers found: {spriteRenderers.Length}. " +
+                  $"First renderer: '{spriteRenderers[0].name}', newColor={spriteRenderers[0].color}", obj);
     }
 
     #endregion

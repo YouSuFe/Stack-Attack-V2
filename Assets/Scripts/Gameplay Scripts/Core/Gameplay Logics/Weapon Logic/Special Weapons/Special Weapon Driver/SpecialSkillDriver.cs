@@ -91,8 +91,6 @@ public class SpecialSkillDriver : MonoBehaviour, IPausable
     public void SetIsInCombat(bool value)
     {
         isInCombat = value;
-        // If you want to stop mid-beam when leaving combat:
-        // if (!isInCombat && isActive) EndSkill();
     }
 
     /// <summary>

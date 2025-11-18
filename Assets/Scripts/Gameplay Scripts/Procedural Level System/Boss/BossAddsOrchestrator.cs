@@ -74,7 +74,7 @@ public class BossAddsOrchestrator : MonoBehaviour
     {
         if (state == BossStateController.BossState.Breaking ||
             state == BossStateController.BossState.Pinata ||
-            state == BossStateController.BossState.Done)
+            state == BossStateController.BossState.End)
         {
             StopWaveLoop();
             BossPhaseEnemySpawner.Instance?.StopForOwner(this, destroySpawned: true);

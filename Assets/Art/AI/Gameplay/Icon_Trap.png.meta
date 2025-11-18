@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5ff5a012d8fe8484baaeb1c81393609d
+guid: 8671a80c1ae8742e9a14ff28eba6c13f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6494503754347276034
-    second: Gameplay_Icon_Dollar_0
+      213: -2239431307029098828
+    second: Icon_Trap_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,9 +51,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1024
+  spritePixelsToUnits: 775
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gameplay_Icon_Dollar_0
+      name: Icon_Trap_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 123
+        y: 151
+        width: 775
+        height: 775
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef890b9ae33eed5a0800000000000000
-      internalID: -6494503754347276034
+      spriteID: 4be44ad5711fbe0e0800000000000000
+      internalID: -2239431307029098828
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 33dc856af14274e5999c5e7ec01748a4
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Gameplay_Icon_Dollar_0: -6494503754347276034
+      Icon_Trap_0: -2239431307029098828
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

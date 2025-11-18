@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(BossHealth))]
 public class BossStateController : MonoBehaviour
 {
-    public enum BossState { Spawning, Arriving, Fight, Breaking, Pinata, Done }
+    public enum BossState { Spawning, Arriving, Fight, Breaking, Pinata, End }
 
     #region Orbiters
     [Header("Orbiters")]
@@ -169,7 +169,7 @@ public class BossStateController : MonoBehaviour
     {
         if (state != BossState.Pinata) return;
         PinataDirector.Instance?.EndPinata();
-        ChangeState(BossState.Done);
+        ChangeState(BossState.End);
         OnPinataEnded?.Invoke();
         // Optionally Destroy(gameObject) or notify sequencer here.
     }
