@@ -54,6 +54,12 @@ public class CoinCollectible2D : MonoBehaviour
             Debug.LogWarning("[CoinCollectible2D] No CoinSystem found in scene. Coin not counted.");
         }
 
+        if (CoinPickupUIFX.Instance != null)
+        {
+            // Second arg is optional visual override per-pickup: 1..5
+            CoinPickupUIFX.Instance.PlayFromWorld(transform.position);
+        }
+
         // Fire optional feedback
         if (pickupSfx != null) pickupSfx.Play();
         if (pickupVfx != null) pickupVfx.Play();

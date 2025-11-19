@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1203804080821404066}
   - component: {fileID: 6602791058478609504}
-  - component: {fileID: 2863185918648718899}
   m_Layer: 7
   m_Name: Trail Renderer
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4903559109686384334}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.027, z: 0}
+  m_LocalPosition: {x: 0, y: -0.202, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -88,17 +87,17 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.2
+        value: 0
         inSlope: -0.25
-        outSlope: -0.2
+        outSlope: 0.2
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
-        inSlope: -0.2
+        value: 0.2
+        inSlope: 0.2
         outSlope: -0.25
         tangentMode: 5
         weightedMode: 0
@@ -149,18 +148,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &2863185918648718899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4903559109686384334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dd56f6bddf2b44b9b4cfae82c4960bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7468544236867463896
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,9 +221,9 @@ EdgeCollider2D:
   m_EdgeRadius: 0
   m_Points:
   - {x: -0.35, y: 0.3}
-  - {x: -0.19, y: 0}
-  - {x: -0.35, y: -0.33}
-  - {x: -0.5, y: 0}
+  - {x: -0.23439002, y: 0.025365723}
+  - {x: -0.34682927, y: -0.2697564}
+  - {x: -0.46829283, y: 0.019024294}
   - {x: -0.35, y: 0.3}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
@@ -255,10 +242,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 1
-  maxLifetimeSeconds: 10
+  maxLifetimeSeconds: 5
   startingPiercing: 0
   hitCountPolicy: 0
-  speed: 2
+  trailRenderer: {fileID: 6602791058478609504}
+  speed: 6
 --- !u!1 &8734055954615856137
 GameObject:
   m_ObjectHideFlags: 0

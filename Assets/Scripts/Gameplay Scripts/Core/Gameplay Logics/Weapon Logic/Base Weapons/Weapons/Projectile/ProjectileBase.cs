@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
-public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IPausable
+public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IPausable, IPoolDespawnable
 {
     [Header("Damage")]
     [SerializeField] private int damageAmount = 1;
@@ -16,6 +16,10 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     [Header("Hit Counting")]
     [Tooltip("How this projectile contributes to the hit-based charge bar.")]
     [SerializeField] private HitCountPolicy hitCountPolicy = HitCountPolicy.OncePerTargetPerProjectile;
+
+    [Header("Visuals")]
+    [Tooltip("Optional. If left empty, will auto-find the first TrailRenderer in children on Awake.")]
+    [SerializeField] private TrailRenderer trailRenderer;
 
     public HitCountPolicy HitCountPolicy => hitCountPolicy;
     public WeaponType SourceWeapon { get; private set; } = WeaponType.Basic;
@@ -61,11 +65,16 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     protected virtual void Awake()
     {
         Collider2D col = GetComponent<Collider2D>();
+
         if (col != null) col.isTrigger = true;
 
         lifeTimer = 0f;
         remainingPiercing = startingPiercing;
         countedTargets.Clear();
+
+        // Cache trail
+        if (trailRenderer == null)
+            trailRenderer = GetComponentInChildren<TrailRenderer>(true);
     }
 
     protected virtual void Update()
@@ -110,13 +119,24 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     {
         lifeTimer = 0f;
         countedTargets.Clear();
-        // If you ignore owner collisions or have other per-shot guards, re-apply them here.
+
+        // Reset the trail before showing again
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+            trailRenderer.emitting = true; // ensure it starts emitting again
+        }
     }
 
     /// <summary>Called by the pool on every Release(). Clean visuals here if needed.</summary>
     public virtual void OnReturnToPool()
     {
-        // Example: trailRenderer?.Clear(); particleSystem?.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        // Clean trail visuals immediately so next reuse starts fresh
+        if (trailRenderer != null)
+        {
+            trailRenderer.Clear();
+            trailRenderer.emitting = false; // optional: stop emitting while inactive
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -206,8 +226,19 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
         else
         {
             // If not pooled, disabling avoids GC churn and lets you still inspect state in playmode.
-            // If you really want the old behavior, swap to Destroy(gameObject) here.
             gameObject.SetActive(false);
         }
     }
+
+    /// <summary>
+    /// Public, interface-driven entry point to return this projectile to its pool.
+    /// Used by border volumes or other systems that don't know about concrete classes.
+    /// </summary>
+    public void DespawnToPool()
+    {
+        // Leverage the existing protected logic which prefers pooled despawn and
+        // safely disables if not pooled.
+        ReturnToPool();
+    }
+
 }

@@ -1021,7 +1021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 583514623}
   m_Layer: 5
-  m_Name: pH
+  m_Name: Flag Place Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2168,6 +2168,7 @@ MonoBehaviour:
   pinataAnchor: {fileID: 580637006}
   cameraTopYOffset: 0.35
   targetCamera: {fileID: 519420031}
+  coinMultiplier: 5
   pinataBackdrop: {fileID: 935220019}
   damageReceiver: {fileID: 1070943406}
   sceneMeter: {fileID: 0}
