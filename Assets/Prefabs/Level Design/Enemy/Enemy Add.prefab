@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 4
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -160,8 +160,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -247,8 +247,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 6
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -334,8 +334,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 8
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -421,8 +421,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 7
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -508,8 +508,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 3
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -595,8 +595,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 5
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -754,8 +754,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 9
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -1211,6 +1211,52 @@ MonoBehaviour:
   destroyOnDeath: 1
   deathEffect: {fileID: 0}
   ignoreDamageWhenPaused: 1
+  hitSound:
+    clip: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+  deathSound:
+    clip: {fileID: 8300000, guid: e8af9035f5758f44da37af4225a02619, type: 3}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!114 &4238683371438556200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1332,8 +1378,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}
@@ -1419,8 +1465,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -459445047
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 2060081323773116405, guid: 09b3b1123e7784e91b4f2ee1900f5ba5, type: 3}
   m_Color: {r: 0.07456994, g: 1, b: 0, a: 1}

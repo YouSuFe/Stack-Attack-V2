@@ -50,6 +50,12 @@ public class BasicWeapon : BaseWeapon
         if (schedule.Count > 0)
             burstDuration = Mathf.Max(0f, schedule[schedule.Count - 1].timeOffsetSeconds);
 
+        // Play ONE sound for the whole burst
+        if (schedule.Count > 0 && def.FireSound != null)
+        {
+            SoundUtils.Play2D(def.FireSound);
+        }
+
         // actually spawn on a coroutine
         StartCoroutine(FireScheduleCoroutine(schedule));
 
@@ -83,12 +89,11 @@ public class BasicWeapon : BaseWeapon
             projectile.Initialize(
                 owner: GetOwner() != null ? GetOwner() : gameObject,
                 damageAmount: damagePerBasic,
-                piercing : GetPiercing(),
+                piercing: GetPiercing(),
                 policy: policy
             );
 
             projectileBase.SetSourceWeapon(WeaponType.Basic);
-
         }
     }
 }

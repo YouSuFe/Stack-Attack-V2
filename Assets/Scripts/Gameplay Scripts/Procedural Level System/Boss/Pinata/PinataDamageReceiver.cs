@@ -10,6 +10,10 @@ public class PinataDamageReceiver : MonoBehaviour, IDamageable
     #region Private Fields
     [SerializeField, Tooltip("Bound meter during pinata.")]
     private PinataMeter meter;
+
+    [Header("Audio")]
+    [SerializeField, Tooltip("Sound played whenever the pinata takes a hit.")]
+    private SoundData hitSound;
     #endregion
 
     #region IDamageable
@@ -18,7 +22,13 @@ public class PinataDamageReceiver : MonoBehaviour, IDamageable
     public void TakeDamage(int amount, GameObject source)
     {
         if (!IsAlive) return;
+
         meter.ApplyHit(amount);
+
+        if (hitSound != null)
+        {
+            SoundUtils.PlayAtPosition(hitSound, transform.position);
+        }
     }
     #endregion
 
@@ -35,7 +45,13 @@ public class PinataDamageReceiver : MonoBehaviour, IDamageable
     public void ApplyHit(int damage)
     {
         if (!IsAlive) return;
+
         meter.ApplyHit(damage);
+
+        if (hitSound != null)
+        {
+            SoundUtils.PlayAtPosition(hitSound, transform.position);
+        }
     }
     #endregion
 }

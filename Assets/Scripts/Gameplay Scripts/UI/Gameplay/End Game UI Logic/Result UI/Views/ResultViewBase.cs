@@ -64,6 +64,13 @@ public abstract class ResultViewBase : MonoBehaviour
     [SerializeField, Range(0f, 0.6f), Tooltip("Pop animation duration per element.")]
     protected float popDuration = 0.12f;
 
+    [Header("Audio")]
+    [SerializeField, Tooltip("Played when this result view sequence starts (success/failure fanfare).")]
+    protected SoundData viewShowSound;
+
+    [SerializeField, Tooltip("Played each time a reward card is spawned.")]
+    protected SoundData rewardCardSpawnSound;
+
     [Header("Behavior")]
     [SerializeField, Tooltip("Reset all elements hidden on Awake().")]
     protected bool resetHiddenOnAwake = true;
@@ -112,6 +119,9 @@ public abstract class ResultViewBase : MonoBehaviour
     private IEnumerator DoPlaySequence(IEnumerable<RewardEntry> rewards)
     {
         Debug.Log($"[{GetType().Name}] DoPlaySequence() started");
+
+        if (viewShowSound != null)
+            SoundUtils.Play2D(viewShowSound);
 
         InstantHideAll();
         ClearRewards();
@@ -287,6 +297,10 @@ public abstract class ResultViewBase : MonoBehaviour
 
         var card = Instantiate(rewardCardPrefab, rewardsGridRoot);
         card.Set(entry.icon, entry.amount);
+
+        if (rewardCardSpawnSound != null)
+            SoundUtils.Play2D(rewardCardSpawnSound);
+
         StartCoroutine(CardPop(card.transform));
     }
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2489388252343698456}
   m_Layer: 0
   m_Name: Fire Rate Boost
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,9 +93,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requirePlayerTag: 1
+  playerTag: Player
   destroyOnPickup: 1
-  pickupSfx: {fileID: 0}
-  pickupVfx: {fileID: 0}
+  pickupSound:
+    clip: {fileID: 8300000, guid: 11ed3748d81324da3962022a70d094db, type: 3}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
   fireRateMultiplier: 5
   durationSeconds: 5
 --- !u!1 &8633115616149278550
@@ -171,9 +193,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 926936805
+  m_SortingLayer: 3
+  m_SortingOrder: 5
   m_Sprite: {fileID: 4828121960805873912, guid: e3fa14855584649c496814fe1f9f2a7b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

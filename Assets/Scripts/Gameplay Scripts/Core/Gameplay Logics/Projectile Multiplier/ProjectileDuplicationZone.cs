@@ -168,7 +168,7 @@ public class ProjectileDuplicationZone : MonoBehaviour, IPausable, IInitializabl
                 }
                 break;
 
-            case WeaponType.Missile:
+            case WeaponType.Shuriken:
                 {
                     // Subtle aim jitter (degrees) + lateral spacing that grows with index
                     float angleJitter = Random.Range(-missileDuplicateAngleJitterDegrees, missileDuplicateAngleJitterDegrees);

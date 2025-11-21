@@ -1,7 +1,7 @@
 public enum WeaponType
 {
     Basic = 0,
-    Missile = 1,
+    Shuriken = 1,
     Kunai = 2,
 }
 

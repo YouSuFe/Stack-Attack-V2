@@ -53,6 +53,10 @@ public class WeaponDefinitionSO : ScriptableObject
     [Tooltip("Total cone width in degrees for FanSequential pattern (e.g., 30° means ±15° from center).")]
     [SerializeField] private float maxFanAngleTotalDegrees = 30f;
 
+    [Header("Audio")]
+    [Tooltip("Sound played when this weapon fires (interpretation depends on weapon type).")]
+    [SerializeField] private SoundData fireSound;
+
     // === Properties ===
     public WeaponType WeaponType => weaponType;
     public string DisplayName => displayName;
@@ -73,4 +77,6 @@ public class WeaponDefinitionSO : ScriptableObject
     public float SequentialShotIntervalSeconds => sequentialShotIntervalSeconds;
     public float AlternatingBurstIntervalSeconds => alternatingBurstIntervalSeconds;
     public float MaxFanAngleTotalDegrees => maxFanAngleTotalDegrees;
+
+    public SoundData FireSound => fireSound;
 }

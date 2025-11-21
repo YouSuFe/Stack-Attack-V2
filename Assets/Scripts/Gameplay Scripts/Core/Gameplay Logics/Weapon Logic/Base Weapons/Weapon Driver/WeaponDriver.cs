@@ -388,7 +388,7 @@ public class WeaponDriver : MonoBehaviour, IPausable
                     return basicWeapon;
                 }
 
-            case WeaponType.Missile:
+            case WeaponType.Shuriken:
                 {
                     var missileWeapon = gameObject.AddComponent<MissileWeapon>();
                     missileWeapon.Init(

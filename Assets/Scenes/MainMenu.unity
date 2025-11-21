@@ -253,8 +253,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d39edcec64a69d419b6c77c454e0ada, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -1034,6 +1034,7 @@ GameObject:
   - component: {fileID: 700050547}
   - component: {fileID: 700050546}
   - component: {fileID: 700050545}
+  - component: {fileID: 700050548}
   m_Layer: 5
   m_Name: Battle Button
   m_TagString: Untagged
@@ -1144,6 +1145,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 700050543}
   m_CullTransparentMesh: 1
+--- !u!114 &700050548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 700050543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10610db17158457eb95177696a97e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound:
+    clip: {fileID: 8300000, guid: 44766caa059435f4fb71af84b2bea7e4, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &804057424
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,8 +1344,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5d39edcec64a69d419b6c77c454e0ada, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
@@ -1624,6 +1660,7 @@ GameObject:
   - component: {fileID: 1292786649}
   - component: {fileID: 1292786648}
   - component: {fileID: 1292786647}
+  - component: {fileID: 1292786650}
   m_Layer: 5
   m_Name: Rigt Button
   m_TagString: Untagged
@@ -1733,6 +1770,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292786645}
   m_CullTransparentMesh: 1
+--- !u!114 &1292786650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1292786645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10610db17158457eb95177696a97e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound:
+    clip: {fileID: 8300000, guid: 260b7abaff74533478f6f25c99e937cf, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &1336009525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2241,7 @@ GameObject:
   - component: {fileID: 1667033418}
   - component: {fileID: 1667033417}
   - component: {fileID: 1667033416}
+  - component: {fileID: 1667033419}
   m_Layer: 5
   m_Name: Left Button
   m_TagString: Untagged
@@ -2278,6 +2351,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667033414}
   m_CullTransparentMesh: 1
+--- !u!114 &1667033419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667033414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10610db17158457eb95177696a97e2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound:
+    clip: {fileID: 8300000, guid: 260b7abaff74533478f6f25c99e937cf, type: 3}
+    mixerGroup: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
 --- !u!1 &1747511991
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,11 +7,13 @@ using UnityEngine;
 /// - Movement is always allowed
 /// - Fire/Special are only allowed during EnemyWave & Boss segments
 /// - Starter weapon is equipped once (if a WeaponDriver is provided)
+/// - Plays segment-start sounds for Enemy/Boss/Reward segments (not Space)
 /// </summary>
 [DefaultExecutionOrder(-1)]
 public class GameSegmentFlowManager : MonoBehaviour
 {
     #region Serialized References
+
     [Header("References")]
     [SerializeField, Tooltip("Sequencer that emits segment lifecycle events.")]
     private LevelSegmentSequencer sequencer;
@@ -21,9 +23,25 @@ public class GameSegmentFlowManager : MonoBehaviour
 
     [SerializeField, Tooltip("Optional: If assigned, equips the starter weapon once.")]
     private WeaponDriver optionalWeaponDriver;
+
+    #endregion
+
+    #region Audio
+
+    [Header("Audio")]
+    [SerializeField, Tooltip("Played when an EnemyWave segment starts.")]
+    private SoundData enemyWaveStartSound;
+
+    [SerializeField, Tooltip("Played when a Boss segment starts.")]
+    private SoundData bossStartSound;
+
+    [SerializeField, Tooltip("Played when a Reward segment starts.")]
+    private SoundData rewardSegmentSound;
+
     #endregion
 
     #region Starter Weapon Config
+
     [Header("Starter Weapon (Optional)")]
     [SerializeField, Tooltip("Starter weapon to equip once if a WeaponDriver is assigned.")]
     private WeaponType starterWeapon = WeaponType.Basic;
@@ -33,13 +51,17 @@ public class GameSegmentFlowManager : MonoBehaviour
 
     [SerializeField, Range(0f, 1f), Tooltip("Optional delay (seconds) before equipping starter (init order safety).")]
     private float starterEquipDelay = 0f;
+
     #endregion
 
     #region Private State
+
     private bool starterEquipped;
+
     #endregion
 
     #region Unity Lifecycle
+
     private void Awake()
     {
         if (sequencer == null) TryGetComponent(out sequencer);
@@ -78,11 +100,16 @@ public class GameSegmentFlowManager : MonoBehaviour
             sequencer.OnLevelEnded -= HandleLevelEnded;
         }
     }
+
     #endregion
 
     #region Segment Handling
+
     private void HandleSegmentStarted(int index, LevelSegment segment)
     {
+        if (segment == null)
+            return;
+
         // Deferred starter equip (only if a WeaponDriver is provided)
         if (!equipStarterOnSceneStart && !starterEquipped && optionalWeaponDriver != null)
         {
@@ -91,6 +118,9 @@ public class GameSegmentFlowManager : MonoBehaviour
             else
                 StartCoroutine(EquipStarterIfAvailableAfterDelay()); // no-op if already equipped
         }
+
+        // Segment start sound (EnemyWave / Boss / Reward; not Space)
+        PlaySegmentStartSound(segment.SegmentType);
 
         // Input-driven gating by segment
         switch (segment.SegmentType)
@@ -117,9 +147,11 @@ public class GameSegmentFlowManager : MonoBehaviour
     {
         ApplyMovementOnlyProfile(); // end-of-level: movement only
     }
+
     #endregion
 
     #region Input Profiles (no input simulation)
+
     /// <summary>Movement allowed; fire & special disabled. No input simulation.</summary>
     private void ApplyMovementOnlyProfile()
     {
@@ -133,9 +165,11 @@ public class GameSegmentFlowManager : MonoBehaviour
         if (inputController == null) return;
         inputController.SetProfile_AllEnabled();
     }
+
     #endregion
 
     #region Starter Equip
+
     private IEnumerator EquipStarterIfAvailableAfterDelay()
     {
         if (starterEquipped || optionalWeaponDriver == null) yield break;
@@ -158,12 +192,42 @@ public class GameSegmentFlowManager : MonoBehaviour
 
         starterEquipped = true;
     }
+
     #endregion
 
     #region Helpers
+
     private static bool IsCombat(SegmentType type)
     {
         return type == SegmentType.EnemyWave || type == SegmentType.Boss;
     }
+
+    /// <summary>
+    /// Plays the appropriate segment-start sound for the given segment type.
+    /// EnemyWave, Boss, Reward -> sound. Space -> silent.
+    /// </summary>
+    private void PlaySegmentStartSound(SegmentType type)
+    {
+        switch (type)
+        {
+            case SegmentType.EnemyWave:
+                SoundUtils.Play2D(enemyWaveStartSound);
+                break;
+
+            case SegmentType.Boss:
+                SoundUtils.Play2D(bossStartSound);
+                break;
+
+            case SegmentType.Reward:
+                SoundUtils.Play2D(rewardSegmentSound);
+                break;
+
+            case SegmentType.Space:
+            default:
+                // Intentionally no sound for Space or unknown types.
+                break;
+        }
+    }
+
     #endregion
 }

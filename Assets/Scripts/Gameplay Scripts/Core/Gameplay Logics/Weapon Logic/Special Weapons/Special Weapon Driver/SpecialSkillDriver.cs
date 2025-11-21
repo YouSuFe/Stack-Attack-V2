@@ -104,6 +104,9 @@ public class SpecialSkillDriver : MonoBehaviour, IPausable
 
         if (activeSkill != null && activeSkill.TryActivate())
         {
+            if (specialDefinition.FireSound != null)
+                SoundUtils.Play2D(specialDefinition.FireSound);
+
             isActive = true;
             activeTimer = specialDefinition.ActiveDurationSeconds;
             SetCharge(0); // empty bar

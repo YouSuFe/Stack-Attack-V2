@@ -7,7 +7,6 @@ TagManager:
   - Projectile
   - Trap
   - SpaceDummy
-  - Coin
   - Enemy
   - Boss
   - Pivot
@@ -51,6 +50,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2024565583
+    locked: 0
+  - name: Characters
+    uniqueID: 3835522249
+    locked: 0
+  - name: Collectibles
+    uniqueID: 926936805
+    locked: 0
+  - name: Projectiles
+    uniqueID: 3089488295
     locked: 0
   m_RenderingLayers:
   - Default

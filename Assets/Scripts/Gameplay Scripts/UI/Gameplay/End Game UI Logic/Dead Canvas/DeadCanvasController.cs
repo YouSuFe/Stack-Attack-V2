@@ -40,12 +40,9 @@ public class DeadCanvasController : MonoBehaviour
     [SerializeField, Tooltip("Hide the canvas automatically after a choice is made or timeout.")]
     private bool hideOnDecision = true;
 
-    [Header("Events")]
-    [SerializeField, Tooltip("Invoked when Revive is chosen.")]
-    private UnityEvent onRevive;
-
-    [SerializeField, Tooltip("Invoked when Not Revive is chosen or timeout.")]
-    private UnityEvent onNotRevive;
+    [Header("Audio")]
+    [SerializeField, Tooltip("Played when the dead canvas is shown.")]
+    private SoundData deadCanvasSound;
     #endregion
 
     #region Public API
@@ -87,6 +84,10 @@ public class DeadCanvasController : MonoBehaviour
     {
         gameObject.SetActive(true);
         Debug.Log("DebugCanvasController : Trying to set game object active true");
+
+        if (deadCanvasSound != null)
+            SoundUtils.Play2D(deadCanvasSound);
+
         StartCountdown(seconds ?? defaultCountdownSeconds);
     }
 
@@ -130,7 +131,6 @@ public class DeadCanvasController : MonoBehaviour
         Debug.Log("[DeadCanvasController] Revive chosen.");
         DisableButtons();
 
-        onRevive?.Invoke();
         ReviveRequested?.Invoke();
 
         if (hideOnDecision) Hide();
@@ -144,7 +144,6 @@ public class DeadCanvasController : MonoBehaviour
         Debug.Log("[DeadCanvasController] Not Revive chosen.");
         DisableButtons();
 
-        onNotRevive?.Invoke();
         NotReviveRequested?.Invoke();
 
         if (hideOnDecision) Hide();

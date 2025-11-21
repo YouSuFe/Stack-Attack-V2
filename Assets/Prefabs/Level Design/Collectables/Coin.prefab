@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 926936805
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 101b9dd621238462bba6f7d99d8cd79b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 4528970964806043600}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Coin
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,7 +253,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bd843c30aa548f1bdd5881f3fc99b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  requirePlayerTag: 1
   playerTag: Player
-  pickupSfx: {fileID: 0}
-  pickupVfx: {fileID: 0}
-  destroyDelay: 0
+  destroyOnPickup: 1
+  pickupSound:
+    clip: {fileID: 8300000, guid: 8e746bda97a9f634f9c225c03bd4bfcb, type: 3}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 1
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0
+  coinAmount: 1

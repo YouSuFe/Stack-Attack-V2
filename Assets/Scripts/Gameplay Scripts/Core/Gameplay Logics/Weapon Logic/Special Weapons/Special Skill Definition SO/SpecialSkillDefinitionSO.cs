@@ -43,6 +43,9 @@ public class SpecialSkillDefinitionSO : ScriptableObject
              "If false, the same enemy can add charge on every Continuous tick (faster refill).")]
     [SerializeField] private bool countOncePerActivation = true;
 
+    [Header("Audio")]
+    [SerializeField] private SoundData fireSound;
+
     // Getters
     public SpecialSkillType SpecialSkillType => specialSkillType;
     public int RequiredCharge => requiredCharge;
@@ -55,4 +58,6 @@ public class SpecialSkillDefinitionSO : ScriptableObject
     public LayerMask DamageMask => damageMask;
     public GameObject BeamVisualPrefab => beamVisualPrefab;
     public bool CountOncePerActivation => countOncePerActivation;
+    public SoundData FireSound => fireSound;
+
 }

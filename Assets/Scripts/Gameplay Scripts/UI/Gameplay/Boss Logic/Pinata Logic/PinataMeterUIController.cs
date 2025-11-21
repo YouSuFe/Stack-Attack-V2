@@ -30,6 +30,10 @@ public class PinataMeterUIController : MonoBehaviour
     [Range(0.05f, 0.35f)]
     private float fillAnimDuration = 0.15f;
 
+    [Header("Audio")]
+    [SerializeField, Tooltip("Sound played when a pinata reward is granted.")]
+    private SoundData rewardGrantedSound;
+
     [Header("Debug")]
     [SerializeField, Tooltip("If true, prints detailed debug logs at critical points.")]
     private bool debugLogs = true;
@@ -174,6 +178,10 @@ public class PinataMeterUIController : MonoBehaviour
     private void HandleRewardsGranted(int count)
     {
         if (debugLogs) Debug.Log($"[PinataUI] HandleRewardsGranted: count={count}", this);
+
+        if (rewardGrantedSound != null)
+            SoundUtils.Play2D(rewardGrantedSound);
+
         StartDelayedSync();
     }
     #endregion

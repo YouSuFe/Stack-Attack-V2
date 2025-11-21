@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b6c11962a684cf29a306c3ccb7c9c9, type: 3}
+  m_Name: Shuriken
+  m_EditorClassIdentifier: 
+  weaponType: 1
+  displayName: Shuriken
+  projectilePrefab: {fileID: 326078946460496859, guid: 4c97eb41a7dd84861acd71ed43c50030, type: 3}
+  projectileMotionType: 1
+  hitCountPolicy: 0
+  patternType: 1
+  baseFireRatePerSecond: 0.5
+  baseProjectileAmount: 4
+  basePiercing: 0
+  supportsAutoFire: 1
+  horizontalSimultaneousLimit: 10
+  overflowResolution: 1
+  sequentialShotIntervalSeconds: 0.05
+  alternatingBurstIntervalSeconds: 0.1
+  maxFanAngleTotalDegrees: 30
+  fireSound:
+    clip: {fileID: 8300000, guid: 9d0113dd16699ce4ea3c58dd422fdc1f, type: 3}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0

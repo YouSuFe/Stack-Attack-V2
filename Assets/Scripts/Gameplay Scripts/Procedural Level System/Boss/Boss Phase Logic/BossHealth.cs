@@ -17,6 +17,13 @@ public class BossHealth : MonoBehaviour, IDamageable, IPausable
 
     [SerializeField, Tooltip("If true, ignore damage while paused.")]
     private bool ignoreDamageWhenPaused = true;
+
+    [Header("Audio")]
+    [SerializeField, Tooltip("Sound played when the boss takes damage.")]
+    private SoundData hitSound;
+
+    [SerializeField, Tooltip("Sound played when the boss is broken (dies).")]
+    private SoundData deadSound;
     #endregion
 
     #region Private
@@ -68,7 +75,6 @@ public class BossHealth : MonoBehaviour, IDamageable, IPausable
     #endregion
 
     #region Initialization (for EnemyInitializer)
-    /// <summary>Set max HP from data. Optionally reset current HP to the new max.</summary>
     public void InitializeMaxHealth(int newMax, bool resetCurrent)
     {
         maxHealth = Mathf.Max(1, newMax);
@@ -80,25 +86,28 @@ public class BossHealth : MonoBehaviour, IDamageable, IPausable
     #endregion
 
     #region Boss Controller Integration
-    /// <summary>Called by the controller when the fight begins.</summary>
     public void AllowDamage(bool allow) => canTakeDamage = allow && isAlive;
-
-    /// <summary>Let the sequencer bind the SegmentObject tracker.</summary>
     public void BindSegmentObject(SegmentObject so) => segmentObject = so;
     #endregion
 
     #region IDamageable
-    /// <summary>Dealer calls this to apply damage; controller gating + pause respected.</summary>
     public void TakeDamage(int damageAmount, GameObject damageSource)
     {
         if (!isAlive) return;
-        if (!canTakeDamage) return;                     // boss gate (e.g., during Arriving)
-        if (ignoreDamageWhenPaused && isPaused) return; // pause gate
+        if (!canTakeDamage) return;
+        if (ignoreDamageWhenPaused && isPaused) return;
 
         int dmg = Mathf.Abs(damageAmount);
         if (minDamageClamp > 0 && dmg < minDamageClamp) dmg = minDamageClamp;
 
         currentHealth = Mathf.Max(0, currentHealth - dmg);
+
+        // Hit sound
+        if (hitSound != null)
+        {
+            SoundUtils.PlayAtPosition(hitSound, transform.position);
+        }
+
         OnDamaged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth == 0) BreakBoss();
@@ -111,11 +120,18 @@ public class BossHealth : MonoBehaviour, IDamageable, IPausable
         if (!isAlive) return;
         isAlive = false;
         canTakeDamage = false;
+
+        // Break/death sound
+        if (deadSound != null)
+        {
+            SoundUtils.PlayAtPosition(deadSound, transform.position);
+        }
+
         OnBroken?.Invoke();
     }
     #endregion
 
-    #region IStoppable (Pause)
+    #region IPausable
     public void OnStopGameplay() { isPaused = true; }
     public void OnResumeGameplay() { isPaused = false; }
     #endregion

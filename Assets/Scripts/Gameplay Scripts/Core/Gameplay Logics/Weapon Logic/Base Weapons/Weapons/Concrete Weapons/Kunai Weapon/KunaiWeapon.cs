@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KunaiWeapon : BaseWeapon
 {
-
     [Header("Fan Damage")]
     [SerializeField] private int damagePerKunai = 1;         // simple per-shot damage
 
@@ -56,12 +55,19 @@ public class KunaiWeapon : BaseWeapon
     private IEnumerator FireScheduleCoroutine(List<ShotCommand> schedule)
     {
         float baseTime = Time.time;
+        var def = GetDefinition();
 
         for (int i = 0; i < schedule.Count; i++)
         {
             ShotCommand cmd = schedule[i];
 
             yield return PauseAwareCoroutine.Until(baseTime, cmd.timeOffsetSeconds);
+
+            // Play sound for EACH kunai in the sequence
+            if (def != null && def.FireSound != null)
+            {
+                SoundUtils.Play2D(def.FireSound);
+            }
 
             // Spawn from the fire origin with the scheduled rotation
             Vector3 worldPos = fireOrigin.position;
@@ -87,6 +93,3 @@ public class KunaiWeapon : BaseWeapon
         }
     }
 }
-
-
-

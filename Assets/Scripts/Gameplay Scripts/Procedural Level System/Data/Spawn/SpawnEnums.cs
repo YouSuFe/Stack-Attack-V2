@@ -3,7 +3,7 @@
     EnemyWave,
     Reward,
     Boss,
-    Space // 15-row gaps: use this and leave empty
+    Space
 }
 
 

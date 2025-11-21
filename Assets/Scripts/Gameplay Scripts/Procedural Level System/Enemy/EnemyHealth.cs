@@ -22,6 +22,13 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     [Header("Damage Gates")]
     [SerializeField, Tooltip("If true, ignores damage while paused.")]
     private bool ignoreDamageWhenPaused = true;
+
+    [Header("Audio")]
+    [SerializeField, Tooltip("Sound played when this enemy takes damage (non-lethal hit).")]
+    private SoundData hitSound;
+
+    [SerializeField, Tooltip("Sound played when this enemy dies.")]
+    private SoundData deathSound;
     #endregion
 
     #region Private Fields
@@ -70,7 +77,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
         currentHealth = maxHealth;
         isAlive = true;
 
-        // Notify listeners (e.g., world-space health text) on spawn/init
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
     }
     #endregion
@@ -89,7 +95,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
 
         Debug.Log($"[EnemyHealth] -{applied} from {(damageSource ? damageSource.name : "Unknown")} => {currentHealth}/{maxHealth}");
 
-        // Notify listeners that the health value changed
+        // Play hit sound for this damage event (even if it kills the enemy)
+        if (hitSound != null)
+        {
+            SoundUtils.PlayAtPosition(hitSound, transform.position);
+        }
+
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         if (currentHealth <= 0)
@@ -104,6 +115,12 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     {
         if (!isAlive) return;
         isAlive = false;
+
+        // Death sound
+        if (deathSound != null)
+        {
+            SoundUtils.PlayAtPosition(deathSound, transform.position);
+        }
 
         OnDied?.Invoke(this);
 
@@ -140,5 +157,3 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     private void DebugDamage() => TakeDamage(1, null);
 #endif
 }
-
-

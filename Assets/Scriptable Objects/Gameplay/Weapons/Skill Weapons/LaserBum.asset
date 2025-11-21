@@ -25,3 +25,26 @@ MonoBehaviour:
     m_Bits: 64
   beamVisualPrefab: {fileID: 5696365709449921289, guid: 5a813d7d65463426fb91b8804fded7af, type: 3}
   countOncePerActivation: 1
+  fireSound:
+    clip: {fileID: 0}
+    mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+    loop: 0
+    playOnAwake: 0
+    frequentSound: 0
+    mute: 0
+    bypassEffects: 0
+    bypassListenerEffects: 0
+    bypassReverbZones: 0
+    priority: 128
+    volume: 1
+    pitch: 1
+    panStereo: 0
+    spatialBlend: 0
+    reverbZoneMix: 1
+    dopplerLevel: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 500
+    ignoreListenerVolume: 0
+    ignoreListenerPause: 0
+    rolloffMode: 0

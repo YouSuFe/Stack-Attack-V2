@@ -17,6 +17,10 @@ public class PowerupPanelUIController : MonoBehaviour
     [SerializeField] private PowerupCardView cardCenter;
     [SerializeField] private PowerupCardView cardRight;
 
+    [Header("Audio")]
+    [SerializeField, Tooltip("Played when a level-up card is selected or Claim All is pressed.")]
+    private SoundData cardConfirmSound;
+
     [Header("Buttons")]
     [Tooltip("Rerolls the current set of offers without applying any.")]
     [SerializeField] private Button buttonReroll;
@@ -93,6 +97,10 @@ public class PowerupPanelUIController : MonoBehaviour
         }
 
         powerupManager.ApplyOffer(selectedOffer);
+
+        // Play confirm sound for single card selection
+        SoundUtils.Play2D(cardConfirmSound);
+
         OnCardApplied?.Invoke();
     }
 
@@ -221,6 +229,10 @@ public class PowerupPanelUIController : MonoBehaviour
         }
 
         isProcessing = false;
+
+        // Play one confirm sound for Claim All sequence
+        SoundUtils.Play2D(cardConfirmSound);
+
         OnCardApplied?.Invoke();
     }
 

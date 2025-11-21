@@ -1,24 +1,27 @@
-// CollectibleBase.cs
 using UnityEngine;
 
 /// <summary>
 /// Generic 2D trigger collectible:
-/// - Requires the Player to have a Rigidbody2D (you already do)
-/// - This object should have a Collider2D set to "Is Trigger"
+/// - Requires the Player to have a Collider2D (and usually Rigidbody2D).
+/// - This object should have a Collider2D set to "Is Trigger".
+/// - Handles common pickup feedback (sound + VFX).
 /// </summary>
 [RequireComponent(typeof(Collider2D))]
 public abstract class CollectibleBase : MonoBehaviour
 {
     [Header("Pickup Settings")]
-    [Tooltip("Optional: restrict pickup to colliders tagged 'Player'. If false, any collider can pick up.")]
+    [Tooltip("If true, only colliders with this tag can collect it.")]
     [SerializeField] private bool requirePlayerTag = true;
 
-    [Tooltip("Auto-destroy on pickup (recommended).")]
+    [SerializeField, Tooltip("Tag allowed to collect this item. Used only if requirePlayerTag = true.")]
+    private string playerTag = "Player";
+
+    [Tooltip("Auto-destroy on pickup.")]
     [SerializeField] private bool destroyOnPickup = true;
 
     [Header("Feedback")]
-    [SerializeField] private AudioSource pickupSfx;
-    [SerializeField] private GameObject pickupVfx;
+    [Tooltip("Sound played when picked up (2D).")]
+    [SerializeField] private SoundData pickupSound;
 
     protected virtual void Reset()
     {
@@ -28,15 +31,17 @@ public abstract class CollectibleBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (requirePlayerTag && !other.CompareTag("Player"))
+        if (requirePlayerTag && !other.CompareTag(playerTag))
             return;
 
         GameObject player = other.gameObject;
+
         if (OnCollected(player))
         {
-            if (pickupSfx) pickupSfx.Play();
-            if (pickupVfx) Instantiate(pickupVfx, transform.position, Quaternion.identity);
-            if (destroyOnPickup) Destroy(gameObject);
+            PlayPickupFeedback();
+
+            if (destroyOnPickup)
+                Destroy(gameObject);
         }
     }
 
@@ -44,4 +49,13 @@ public abstract class CollectibleBase : MonoBehaviour
     /// Perform the collectible effect. Return true if consumed.
     /// </summary>
     protected abstract bool OnCollected(GameObject player);
+
+    /// <summary>
+    /// Common feedback: sound only. VFX handled in child classes.
+    /// </summary>
+    protected virtual void PlayPickupFeedback()
+    {
+        if (pickupSound != null)
+            SoundUtils.Play2D(pickupSound);
+    }
 }

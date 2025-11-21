@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MissileWeapon : BaseWeapon
 {
-
     [Header("Damage")]
     [SerializeField] private int damagePerMissile = 2;
 
@@ -35,7 +34,7 @@ public class MissileWeapon : BaseWeapon
             limit: def.HorizontalSimultaneousLimit,
             overflow: def.OverflowResolution,
             seq: def.SequentialShotIntervalSeconds,
-            alt: def.AlternatingBurstIntervalSeconds,  // used here
+            alt: def.AlternatingBurstIntervalSeconds,
             fan: def.MaxFanAngleTotalDegrees
         );
 
@@ -54,6 +53,12 @@ public class MissileWeapon : BaseWeapon
         float burstDuration = 0f;
         if (schedule.Count > 0)
             burstDuration = Mathf.Max(0f, schedule[schedule.Count - 1].timeOffsetSeconds);
+
+        // Play ONE sound for the whole missile burst
+        if (schedule.Count > 0 && def.FireSound != null)
+        {
+            SoundUtils.Play2D(def.FireSound);
+        }
 
         StartCoroutine(FireScheduleCoroutine(schedule));
         return burstDuration;
@@ -90,7 +95,7 @@ public class MissileWeapon : BaseWeapon
                 policy: policy
             );
 
-            projectileBase.SetSourceWeapon(WeaponType.Missile);
+            projectileBase.SetSourceWeapon(WeaponType.Shuriken);
 
             // Mirror sine phase by side: left (x<0) => π, right => 0
             SineMissileProjectile sine = projectileBase as SineMissileProjectile;
@@ -101,5 +106,4 @@ public class MissileWeapon : BaseWeapon
             }
         }
     }
-
 }
