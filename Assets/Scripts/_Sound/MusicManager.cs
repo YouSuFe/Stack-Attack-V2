@@ -2,100 +2,271 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[RequireComponent(typeof(MusicManager))]
-public class MusicManager : PersistentSingleton<MonoBehaviour>
+/// <summary>
+/// MusicManager
+/// Persistent playlist-based music system with logarithmic crossfade.
+/// - Holds two playlists: Menu and Gameplay.
+/// - Swaps playlists by mode without restarting if already active.
+/// - Uses 2 AudioSources (current/previous) for smooth crossfade.
+/// - Auto-plays next track when current ends.
+/// </summary>
+public class MusicManager : PersistentSingleton<MusicManager>
 {
-    const float crossFadeTime = 1.0f;
-    float fading;
-    AudioSource current;
-    AudioSource previous;
-    readonly Queue<AudioClip> playlist = new();
+    #region Types
 
-    [SerializeField] List<AudioClip> initialPlaylist;
-    [SerializeField] AudioMixerGroup musicMixerGroup;
-
-    void Start()
+    private enum MusicMode
     {
-        foreach (var clip in initialPlaylist)
-        {
-            AddToPlaylist(clip);
-        }
+        None,
+        Menu,
+        Gameplay
     }
 
-    public void AddToPlaylist(AudioClip clip)
+    #endregion
+
+    #region Inspector Fields
+
+    [Header("Mixer")]
+    [SerializeField, Tooltip("Output group for music.")]
+    private AudioMixerGroup musicMixerGroup;
+
+    [Header("Crossfade")]
+    [SerializeField, Range(0.1f, 10f), Tooltip("Seconds to crossfade between tracks.")]
+    private float crossFadeTime = 2f;
+
+    [Header("Playlists")]
+    [SerializeField, Tooltip("Tracks used in the main menu.")]
+    private List<AudioClip> menuPlaylist = new();
+
+    [SerializeField, Tooltip("Tracks used during gameplay.")]
+    private List<AudioClip> gameplayPlaylist = new();
+
+    #endregion
+
+    #region Private Fields
+
+    private readonly Queue<AudioClip> playlist = new();
+
+    private AudioSource current;
+    private AudioSource previous;
+
+    private float fading; // 0 = no fade, >0 = active fade timer
+    private MusicMode currentMode = MusicMode.None;
+
+    #endregion
+
+    #region Unity Lifecycle
+
+    protected override void Awake()
     {
-        playlist.Enqueue(clip);
-        if (current == null && previous == null)
+        base.Awake();
+        // Ensure we have at least one AudioSource ready.
+        current = gameObject.GetOrAdd<AudioSource>();
+        ConfigureSource(current);
+    }
+
+    private void Update()
+    {
+        HandleCrossFade();
+
+        // If current finished, play next.
+        if (current != null && !current.isPlaying && fading <= 0f && playlist.Count > 0)
         {
             PlayNextTrack();
         }
     }
 
-    public void Clear() => playlist.Clear();
+    #endregion
 
-    public void PlayNextTrack()
+    #region Public API
+
+    /// <summary>
+    /// Switch to the Menu playlist (if not already active).
+    /// </summary>
+    public void PlayMenuMusic()
     {
-        if (playlist.TryDequeue(out AudioClip nextTrack))
+        if (currentMode == MusicMode.Menu) return;
+        currentMode = MusicMode.Menu;
+        SetPlaylist(menuPlaylist);
+    }
+
+    /// <summary>
+    /// Switch to the Gameplay playlist (if not already active).
+    /// </summary>
+    public void PlayGameplayMusic()
+    {
+        if (currentMode == MusicMode.Gameplay) return;
+        currentMode = MusicMode.Gameplay;
+        SetPlaylist(gameplayPlaylist);
+    }
+
+    /// <summary>
+    /// Clears current queue and enqueues the given clips, then starts immediately.
+    /// </summary>
+    public void SetPlaylist(List<AudioClip> clips, bool startImmediately = true)
+    {
+        if (clips == null || clips.Count == 0)
         {
-            Play(nextTrack);
+            Debug.LogWarning("[MusicManager] SetPlaylist called with empty list.");
+            return;
+        }
+
+        ClearPlaylistInternal();
+
+        for (int i = 0; i < clips.Count; i++)
+        {
+            if (clips[i] != null)
+                playlist.Enqueue(clips[i]);
+        }
+
+        if (startImmediately)
+            PlayNextTrack();
+    }
+
+    /// <summary>
+    /// Adds a single clip to the end of the current playlist.
+    /// If nothing is playing, it starts immediately.
+    /// </summary>
+    public void AddToPlaylist(AudioClip clip)
+    {
+        if (clip == null) return;
+
+        playlist.Enqueue(clip);
+
+        if (current != null && !current.isPlaying && fading <= 0f)
+        {
+            PlayNextTrack();
         }
     }
 
-    public void Play(AudioClip clip)
+    /// <summary>
+    /// Clears playlist and stops audio (with no fade).
+    /// </summary>
+    public void StopMusic()
     {
-        if (current && current.clip == clip) return;
+        ClearPlaylistInternal();
 
-        if (previous)
+        if (current != null)
+            current.Stop();
+
+        if (previous != null)
         {
             Destroy(previous);
             previous = null;
         }
 
-        previous = current;
+        fading = 0f;
+        currentMode = MusicMode.None;
+    }
 
+    #endregion
+
+    #region Core Playback
+
+    private void PlayNextTrack()
+    {
+        if (playlist.Count == 0) return;
+
+        AudioClip next = playlist.Dequeue();
+        if (next == null) return;
+
+        Play(next);
+
+        // Optional: loop playlist forever by re-enqueueing.
+        playlist.Enqueue(next);
+    }
+
+    private void Play(AudioClip clip)
+    {
+        if (clip == null) return;
+
+        // If current already playing this exact track, do nothing.
+        if (current != null && current.isPlaying && current.clip == clip)
+            return;
+
+        // Cleanup any leftover previous source
+        if (previous != null)
+        {
+            Destroy(previous);
+            previous = null;
+        }
+
+        // Move current → previous
+        if (current != null)
+        {
+            previous = current;
+        }
+
+        // Create a new current source
         current = gameObject.GetOrAdd<AudioSource>();
+        ConfigureSource(current);
+
         current.clip = clip;
-        current.outputAudioMixerGroup = musicMixerGroup; // Set mixer group
-        current.loop = false; // For playlist functionality, we want tracks to play once
-        current.volume = 0;
-        current.bypassListenerEffects = true;
+        current.volume = 0f; // fade-in from zero
         current.Play();
 
-        fading = 0.001f;
+        fading = Mathf.Max(0.01f, crossFadeTime);
     }
 
-    void Update()
+    private void ConfigureSource(AudioSource source)
     {
-        HandleCrossFade();
+        if (source == null) return;
 
-        if (current && !current.isPlaying && playlist.Count > 0)
-        {
-            PlayNextTrack();
-        }
+        source.loop = false; // playlist handles looping
+        source.playOnAwake = false;
+        source.outputAudioMixerGroup = musicMixerGroup;
+
+        // keep music consistent / clean
+        source.bypassEffects = true;
+        source.bypassListenerEffects = true;
+        source.dopplerLevel = 0f;
+        source.spatialBlend = 0f; // 2D music
     }
 
-    void HandleCrossFade()
+    #endregion
+
+    #region Crossfade
+
+    private void HandleCrossFade()
     {
         if (fading <= 0f) return;
 
-        fading += Time.deltaTime;
+        fading -= Time.unscaledDeltaTime;
+        float t = 1f - Mathf.Clamp01(fading / crossFadeTime);
 
-        float fraction = Mathf.Clamp01(fading / crossFadeTime);
+        // logarithmic fraction for nicer fade curve
+        float logT = t.ToLogarithmicFraction();
 
-        // Logarithmic fade
-        float logFraction = fraction.ToLogarithmicFraction();
+        if (previous != null)
+            previous.volume = 1f - logT;
 
-        if (previous) previous.volume = 1.0f - logFraction;
-        if (current) current.volume = logFraction;
+        if (current != null)
+            current.volume = logT;
 
-        if (fraction >= 1)
+        if (fading <= 0f)
         {
-            fading = 0.0f;
-            if (previous)
+            // Fade done; kill previous
+            if (previous != null)
             {
+                previous.Stop();
                 Destroy(previous);
                 previous = null;
             }
+
+            if (current != null)
+                current.volume = 1f;
+
+            fading = 0f;
         }
     }
+
+    #endregion
+
+    #region Helpers
+
+    private void ClearPlaylistInternal()
+    {
+        playlist.Clear();
+    }
+
+    #endregion
 }

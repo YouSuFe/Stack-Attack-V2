@@ -256,6 +256,60 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &195135593
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195135595}
+  - component: {fileID: 195135594}
+  m_Layer: 0
+  m_Name: Music Service
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &195135594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195135593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daab712d876464ed498282ada7ae2e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoUnparentOnAwake: 1
+  musicMixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
+  crossFadeTime: 2
+  menuPlaylist:
+  - {fileID: 8300000, guid: bea93a38b71b64b598109b3a3b1a0048, type: 3}
+  - {fileID: 8300000, guid: 5b1ed8fbe89154eaf96723b6e5f0aad3, type: 3}
+  - {fileID: 8300000, guid: eb7f10105313640a18ce7926041a4d76, type: 3}
+  gameplayPlaylist:
+  - {fileID: 8300000, guid: 458dd8822518c4f37bc3edba9b6c57d9, type: 3}
+  - {fileID: 8300000, guid: 3fc26869a512b4e5187c9be6310ad8c2, type: 3}
+--- !u!4 &195135595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195135593}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.9149701, y: 349.59744, z: 0.0067519955}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &487536538
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +915,7 @@ SceneRoots:
   - {fileID: 1239637550907588589}
   - {fileID: 871329541}
   - {fileID: 8416175817606995633}
+  - {fileID: 195135595}
   - {fileID: 1700008957}
   - {fileID: 1079454297}
   - {fileID: 487536542}
