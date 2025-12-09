@@ -99,16 +99,18 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     public void Revive()
     {
+        // Put it here to prevent instant damage when revive
+        IsInvulnerable = true;
+
         // Reactivate player if disabled
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
 
+        // Make player invulnerable for a short period after revive
+        StartInvulnerability();
+
         // Restore health 
         CurrentHearts = startingHearts;
-
-        // Make player invulnerable for a short period after revive
-        IsInvulnerable = true;
-        StartInvulnerability();
 
         // Trigger healing event for UI updates
         OnHealed?.Invoke(CurrentHearts, 3);
