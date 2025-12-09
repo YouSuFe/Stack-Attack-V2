@@ -70,7 +70,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.1
+  m_Radius: 0.2
 --- !u!114 &8752611432593956998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,9 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa34fded89b64e4588ef714d43cf662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
   maxLifetimeSeconds: 8
-  startingPiercing: 0
   hitCountPolicy: 0
   trailRenderer: {fileID: 3660768292856787787}
   speed: 4

@@ -79,7 +79,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.6, y: 0.6}
   m_EdgeRadius: 0
 --- !u!114 &8811870335047647335
 MonoBehaviour:
@@ -93,9 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2f9570b4195463c870d61e6b18b34b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
   maxLifetimeSeconds: 6
-  startingPiercing: 0
   hitCountPolicy: 0
   trailRenderer: {fileID: 6380485989228475919}
   forwardSpeed: 5

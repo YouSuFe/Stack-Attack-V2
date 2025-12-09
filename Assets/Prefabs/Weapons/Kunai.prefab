@@ -220,11 +220,11 @@ EdgeCollider2D:
   m_Offset: {x: 0.35, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.35, y: 0.3}
-  - {x: -0.23439002, y: 0.025365723}
-  - {x: -0.34682927, y: -0.2697564}
-  - {x: -0.46829283, y: 0.019024294}
-  - {x: -0.35, y: 0.3}
+  - {x: -0.35, y: 0.3250072}
+  - {x: -0.2134094, y: 0.038670503}
+  - {x: -0.34898055, y: -0.32569003}
+  - {x: -0.48517966, y: 0.0374463}
+  - {x: -0.3500619, y: 0.32545635}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -241,9 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa34fded89b64e4588ef714d43cf662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 5
   maxLifetimeSeconds: 5
-  startingPiercing: 0
   hitCountPolicy: 0
   trailRenderer: {fileID: 6602791058478609504}
   speed: 6

@@ -26,7 +26,7 @@ MonoBehaviour:
   beamVisualPrefab: {fileID: 5696365709449921289, guid: 5a813d7d65463426fb91b8804fded7af, type: 3}
   countOncePerActivation: 1
   fireSound:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4186b8c528d78423eafd7024c1fdd97a, type: 3}
     mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}
     loop: 0
     playOnAwake: 0

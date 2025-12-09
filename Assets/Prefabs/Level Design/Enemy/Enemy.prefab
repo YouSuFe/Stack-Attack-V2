@@ -880,7 +880,7 @@ GameObject:
   - component: {fileID: 4238683371438556200}
   - component: {fileID: 5184367690249955576}
   - component: {fileID: 438838746980977128}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1083,6 +1083,7 @@ MonoBehaviour:
     ignoreListenerVolume: 0
     ignoreListenerPause: 0
     rolloffMode: 0
+  currentHealthValue: 0
 --- !u!114 &4238683371438556200
 MonoBehaviour:
   m_ObjectHideFlags: 0
