@@ -49,6 +49,7 @@ public class ProjectilePoolService : MonoBehaviour
         {
             projectile.transform.SetParent(poolRoot, false);
             projectile.gameObject.SetActive(true);
+            service.MarkActive(projectile);
         }
 
         private void OnRelease(ProjectileBase projectile)
@@ -56,6 +57,7 @@ public class ProjectilePoolService : MonoBehaviour
             projectile.OnReturnToPool();                        // cleanup visuals if any
             projectile.transform.SetParent(poolRoot, false);
             projectile.gameObject.SetActive(false);
+            service.MarkInactive(projectile);
         }
 
         private void OnDestroyInstance(ProjectileBase projectile)
@@ -67,12 +69,25 @@ public class ProjectilePoolService : MonoBehaviour
     private readonly Dictionary<ProjectileBase, PoolCallbacks> poolsByPrefab = new Dictionary<ProjectileBase, PoolCallbacks>();
     internal readonly Dictionary<ProjectileBase, ProjectileBase> prefabByInstance = new Dictionary<ProjectileBase, ProjectileBase>();
 
+    // Track currently checked-out (active) instances
+    private readonly HashSet<ProjectileBase> activeInstances = new HashSet<ProjectileBase>();
+
     private Transform poolRoot;
 
     private void Awake()
     {
         poolRoot = new GameObject("ProjectilePools").transform;
         poolRoot.SetParent(transform, false);
+    }
+
+    private void MarkActive(ProjectileBase instance)
+    {
+        if (instance != null) activeInstances.Add(instance);
+    }
+
+    private void MarkInactive(ProjectileBase instance)
+    {
+        if (instance != null) activeInstances.Remove(instance);
     }
 
     /// <summary>
@@ -141,6 +156,7 @@ public class ProjectilePoolService : MonoBehaviour
         if (!prefabByInstance.TryGetValue(instance, out prefabKey))
         {
             instance.gameObject.SetActive(false); // safety
+            activeInstances.Remove(instance); // safety
             return;
         }
 
@@ -148,6 +164,7 @@ public class ProjectilePoolService : MonoBehaviour
         if (!poolsByPrefab.TryGetValue(prefabKey, out callbacks))
         {
             instance.gameObject.SetActive(false); // safety
+            activeInstances.Remove(instance); // safety
             return;
         }
 
@@ -173,4 +190,24 @@ public class ProjectilePoolService : MonoBehaviour
         var clone = Spawn(prefabKey, position, rotation, parent);
         return clone;
     }
+
+    /// <summary>
+    /// Despawn all currently active projectiles across all pools.
+    /// Safe to call on level fail/success/menu transitions.
+    /// </summary>
+    public void DespawnAllActive()
+    {
+        if (activeInstances.Count == 0) return;
+
+        // Copy first to avoid modifying while iterating
+        var temps = new List<ProjectileBase>(activeInstances.Count);
+        foreach (var inst in activeInstances)
+            if (inst != null) temps.Add(inst);
+
+        for (int i = 0; i < temps.Count; i++)
+            Despawn(temps[i]);
+
+        temps.Clear();
+    }
 }
+

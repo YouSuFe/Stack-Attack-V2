@@ -7854,6 +7854,8 @@ GameObject:
   m_Component:
   - component: {fileID: 949579074}
   - component: {fileID: 949579075}
+  - component: {fileID: 949579077}
+  - component: {fileID: 949579076}
   m_Layer: 0
   m_Name: Pinata Visual
   m_TagString: Untagged
@@ -7931,6 +7933,64 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &949579076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949579073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fd8a770a609437d867815af5994e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &949579077
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 949579073}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.33425945}
+  m_SpriteTilingProperty:
+    border: {x: 0.79999995, y: 0, z: 0.76, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.18, y: 5}
+    newSize: {x: 2.18, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.18, y: 4.331481}
+  m_EdgeRadius: 0
 --- !u!1 &959457053
 GameObject:
   m_ObjectHideFlags: 0
@@ -10128,7 +10188,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1197549685
 Transform:
   m_ObjectHideFlags: 0
@@ -17108,6 +17168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1875104286}
   - component: {fileID: 1875104285}
+  - component: {fileID: 1875104287}
   m_Layer: 0
   m_Name: Projectile Pooling Controller
   m_TagString: Untagged
@@ -17142,6 +17203,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1875104287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875104284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9749c4527291a4eba9f2fafc6b490286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolService: {fileID: 1875104285}
+  binder: {fileID: 1255992934}
 --- !u!1 &1902621386
 GameObject:
   m_ObjectHideFlags: 0
