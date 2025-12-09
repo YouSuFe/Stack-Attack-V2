@@ -97,6 +97,25 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         gameObject.SetActive(false);
     }
 
+    public void Revive()
+    {
+        // Reactivate player if disabled
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
+        // Restore health 
+        CurrentHearts = startingHearts;
+
+        // Make player invulnerable for a short period after revive
+        IsInvulnerable = true;
+        StartInvulnerability();
+
+        // Trigger healing event for UI updates
+        OnHealed?.Invoke(CurrentHearts, 3);
+
+        Debug.Log("[PlayerHealth] Player revived with 3 hearts and temporary invulnerability.");
+    }
+
     private void StartInvulnerability()
     {
         if (invulnerabilityCoroutine != null)
@@ -151,8 +170,4 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         OnInvulnerabilityEnded?.Invoke();
         invulnerabilityCoroutine = null;
     }
-
-    [ContextMenu("Debug/Show Success UI")]
-    private void DebugOnDied() => OnDied();
 }
-

@@ -91,6 +91,8 @@ public class GameUIFlowController : MonoBehaviour
 
     private void HandleLevelFailed()
     {
+        PauseManager.Instance.StopGameplay();
+
         Debug.Log("[GameUIFlowController] Outcome: FAIL → show Dead Canvas");
         ShowDeadCanvas();
     }
@@ -102,6 +104,8 @@ public class GameUIFlowController : MonoBehaviour
         // Gameplay resumes; no result UI shown here.
         Debug.Log("[GameUIFlowController] DeadCanvas: Revive chosen → resume gameplay.");
         HideDeadCanvasIfNeeded();
+        PauseManager.Instance.ResumeGameplay();
+
     }
 
     private void HandleNotReviveChosen()

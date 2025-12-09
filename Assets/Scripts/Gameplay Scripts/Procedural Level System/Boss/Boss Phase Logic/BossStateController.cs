@@ -44,6 +44,9 @@ public class BossStateController : MonoBehaviour
     [Header("Pinata")]
     [SerializeField, Tooltip("Seconds to wait after boss breaks before starting pinata (defeat pause).")]
     private float breakToPinataDelay = 3.0f;
+
+    [SerializeField, Tooltip("Duration of the pinata phase before it ends automatically.")]
+    private float pinataDuration = 10f;
     #endregion
 
     #region Private
@@ -125,20 +128,7 @@ public class BossStateController : MonoBehaviour
 
         OnFightStarted?.Invoke();
 
-        // === TEMP TEST ===
-        // Automatically go to pinata after 5 seconds (for testing only)
-        StartCoroutine(TestGoToPinataAfterDelay());
-        // =================
     }
-
-    // === TEMP TEST ===
-    private IEnumerator TestGoToPinataAfterDelay()
-    {
-        yield return PauseAwareCoroutine.Delay(5f);
-        Debug.Log("[BossStateController] TEST: Auto switching to Pinata state.");
-        HandleBossBroken(); // simulate boss defeat
-    }
-    // =================
 
     private void HandleBossBroken()
     {
@@ -162,8 +152,20 @@ public class BossStateController : MonoBehaviour
 
         ChangeState(BossState.Pinata);
         OnPinataStarted?.Invoke();
+
+        // Start the timer coroutine
+        StartCoroutine(PinataTimerRoutine());
     }
 
+    private IEnumerator PinataTimerRoutine()
+    {
+        // Wait for the pinata duration, respecting pause
+        yield return PauseAwareCoroutine.Delay(pinataDuration);
+
+        // Automatically end pinata
+        Debug.Log($"[BossStateController] Pinata duration ({pinataDuration}s) elapsed — ending pinata.");
+        EndPinata();
+    }
 
     public void EndPinata()
     {
