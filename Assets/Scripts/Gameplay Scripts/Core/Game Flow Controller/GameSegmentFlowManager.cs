@@ -66,7 +66,6 @@ public class GameSegmentFlowManager : MonoBehaviour
     {
         if (sequencer == null) TryGetComponent(out sequencer);
         if (inputController == null) inputController = FindFirstObjectByType<InputReaderController>();
-        // WeaponDriver is optional by design—do not auto-find to avoid wrong instance in multi-player.
 
         if (sequencer == null) Debug.LogError("[GameSegmentFlowManager] Missing LevelSegmentSequencer reference.");
         if (inputController == null) Debug.LogError("[GameSegmentFlowManager] Missing InputReaderController reference.");
@@ -109,12 +108,15 @@ public class GameSegmentFlowManager : MonoBehaviour
     {
         if (segment == null)
             return;
-
+        Debug.Log("[Game Segment Flow] : We are at the segment " + segment.name);
         // Deferred starter equip (only if a WeaponDriver is provided)
         if (!equipStarterOnSceneStart && !starterEquipped && optionalWeaponDriver != null)
         {
             if (IsCombat(segment.SegmentType))
+            {
                 EquipStarterImmediate();
+            }
+
             else
                 StartCoroutine(EquipStarterIfAvailableAfterDelay()); // no-op if already equipped
         }

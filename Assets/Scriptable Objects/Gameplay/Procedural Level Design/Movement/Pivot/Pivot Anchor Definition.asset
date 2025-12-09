@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultAnchorKey: RingA
   angularSpeedDegPerSec: 90
-  verticalSpeed: 4
+  verticalSpeed: 1
   anchorPrefab: {fileID: -4954494207566711159, guid: 6e0db9f7d70484bc383e0e61f8a9ca82, type: 3}
   useDummyAsAnchor: 1
   destroyDummyAfterPrefab: 1

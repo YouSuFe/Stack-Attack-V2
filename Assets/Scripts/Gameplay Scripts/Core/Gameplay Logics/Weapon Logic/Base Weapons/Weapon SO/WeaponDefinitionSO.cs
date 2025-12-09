@@ -31,6 +31,9 @@ public class WeaponDefinitionSO : ScriptableObject
     [Tooltip("Number of projectiles fired per trigger.")]
     [SerializeField] private int baseProjectileAmount = 1;
 
+    [Tooltip("Base damage when hit an enemy.")]
+    [SerializeField] private int baseDamage = 1;
+
     [Tooltip("Number of enemies or objects a projectile can pierce through before being destroyed.")]
     [SerializeField] private int basePiercing = 0;
 
@@ -69,6 +72,7 @@ public class WeaponDefinitionSO : ScriptableObject
 
     public float BaseFireRatePerSecond => baseFireRatePerSecond;
     public int BaseProjectileAmount => baseProjectileAmount;
+    public int BaseDamage => baseDamage;
     public int BasePiercing => basePiercing;
     public bool SupportsAutoFire => supportsAutoFire;
 

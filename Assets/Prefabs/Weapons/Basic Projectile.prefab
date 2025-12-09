@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa34fded89b64e4588ef714d43cf662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  damageAmount: 5
   maxLifetimeSeconds: 8
   startingPiercing: 0
   hitCountPolicy: 0
@@ -116,7 +116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3278800934699952955}
@@ -265,15 +265,15 @@ TrailRenderer:
         time: 0
         value: 0
         inSlope: -0.25
-        outSlope: 0.25
+        outSlope: 0.5
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.25
-        inSlope: 0.25
+        value: 0.5
+        inSlope: 0.5
         outSlope: -0.25
         tangentMode: 5
         weightedMode: 0

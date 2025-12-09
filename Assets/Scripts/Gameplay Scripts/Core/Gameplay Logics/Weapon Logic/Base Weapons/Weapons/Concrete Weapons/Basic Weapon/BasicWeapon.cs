@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class BasicWeapon : BaseWeapon
 {
-    [Header("Basic Damage")]
-    [SerializeField] private int damagePerBasic = 1;         // simple per-shot damage
-
     private Transform fireOrigin;
     private float horizontalSpacing = 0.7f;
     private float secondRowVerticalOffset = 0.15f;
@@ -88,7 +85,7 @@ public class BasicWeapon : BaseWeapon
             IProjectile projectile = (IProjectile)projectileBase;
             projectile.Initialize(
                 owner: GetOwner() != null ? GetOwner() : gameObject,
-                damageAmount: damagePerBasic,
+                damageAmount: damage,
                 piercing: GetPiercing(),
                 policy: policy
             );

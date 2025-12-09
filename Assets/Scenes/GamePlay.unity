@@ -1111,7 +1111,7 @@ MonoBehaviour:
   runtimeRoot: {fileID: 0}
   autoRunOnStart: 1
   segmentTimeoutSeconds: 0
-  verboseLogging: 0
+  verboseLogging: 1
 --- !u!4 &113781641
 Transform:
   m_ObjectHideFlags: 0
@@ -15875,7 +15875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c383c0b04b9aa4ff496bba13cd770469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conveyorSpeed: 2
+  conveyorSpeed: 1
 --- !u!4 &1730995009
 Transform:
   m_ObjectHideFlags: 0
@@ -16276,7 +16276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63fcbd04029104fbb94b1d6434d2d0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
 --- !u!1 &1767311599
 GameObject:
   m_ObjectHideFlags: 0

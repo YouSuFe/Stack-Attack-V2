@@ -7,7 +7,7 @@ using UnityEngine.Audio;
 /// Persistent playlist-based music system with logarithmic crossfade.
 /// - Holds two playlists: Menu and Gameplay.
 /// - Swaps playlists by mode without restarting if already active.
-/// - Uses 2 AudioSources (current/previous) for smooth crossfade.
+/// - Uses 2 AudioSources (A/B) for smooth crossfade.
 /// - Auto-plays next track when current ends.
 /// </summary>
 public class MusicManager : PersistentSingleton<MusicManager>
@@ -46,10 +46,15 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     private readonly Queue<AudioClip> playlist = new();
 
-    private AudioSource current;
-    private AudioSource previous;
+    // Two fixed sources
+    private AudioSource sourceA;
+    private AudioSource sourceB;
 
-    private float fading; // 0 = no fade, >0 = active fade timer
+    // Current active music source and fading-out source
+    private AudioSource activeSource;
+    private AudioSource fadingOutSource;
+
+    private float fadingTimer; // >0 while a crossfade is active
     private MusicMode currentMode = MusicMode.None;
 
     #endregion
@@ -59,17 +64,28 @@ public class MusicManager : PersistentSingleton<MusicManager>
     protected override void Awake()
     {
         base.Awake();
-        // Ensure we have at least one AudioSource ready.
-        current = gameObject.GetOrAdd<AudioSource>();
-        ConfigureSource(current);
+
+        // Create exactly two AudioSources and keep them forever.
+        sourceA = gameObject.AddComponent<AudioSource>();
+        sourceB = gameObject.AddComponent<AudioSource>();
+
+        ConfigureSource(sourceA);
+        ConfigureSource(sourceB);
+
+        sourceA.volume = 0f;
+        sourceB.volume = 0f;
+
+        activeSource = null;
+        fadingOutSource = null;
+        fadingTimer = 0f;
     }
 
     private void Update()
     {
         HandleCrossFade();
 
-        // If current finished, play next.
-        if (current != null && !current.isPlaying && fading <= 0f && playlist.Count > 0)
+        // When the active track finishes and no fade is happening, advance playlist.
+        if (activeSource != null && !activeSource.isPlaying && fadingTimer <= 0f && playlist.Count > 0)
         {
             PlayNextTrack();
         }
@@ -132,7 +148,7 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
         playlist.Enqueue(clip);
 
-        if (current != null && !current.isPlaying && fading <= 0f)
+        if (activeSource == null || (!activeSource.isPlaying && fadingTimer <= 0f))
         {
             PlayNextTrack();
         }
@@ -145,16 +161,21 @@ public class MusicManager : PersistentSingleton<MusicManager>
     {
         ClearPlaylistInternal();
 
-        if (current != null)
-            current.Stop();
-
-        if (previous != null)
+        if (activeSource != null)
         {
-            Destroy(previous);
-            previous = null;
+            activeSource.Stop();
+            activeSource.clip = null;
+            activeSource.volume = 0f;
         }
 
-        fading = 0f;
+        if (fadingOutSource != null)
+        {
+            fadingOutSource.Stop();
+            fadingOutSource.clip = null;
+            fadingOutSource.volume = 0f;
+        }
+
+        fadingTimer = 0f;
         currentMode = MusicMode.None;
     }
 
@@ -179,47 +200,57 @@ public class MusicManager : PersistentSingleton<MusicManager>
     {
         if (clip == null) return;
 
-        // If current already playing this exact track, do nothing.
-        if (current != null && current.isPlaying && current.clip == clip)
+        // If already playing this clip on the active source, do nothing.
+        if (activeSource != null && activeSource.clip == clip && activeSource.isPlaying)
             return;
 
-        // Cleanup any leftover previous source
-        if (previous != null)
+        // Decide which physical AudioSource will be the new active
+        AudioSource newSource = (activeSource == sourceA) ? sourceB : sourceA;
+
+        newSource.clip = clip;
+
+        // First track or no crossfade configured
+        if (activeSource == null || crossFadeTime <= 0f)
         {
-            Destroy(previous);
-            previous = null;
-        }
+            // Hard switch: stop old, play new at full volume.
+            if (activeSource != null)
+            {
+                activeSource.Stop();
+                activeSource.volume = 0f;
+            }
 
-        // Move current → previous
-        if (current != null)
+            newSource.volume = 1f;
+            newSource.Play();
+
+            activeSource = newSource;
+            fadingOutSource = null;
+            fadingTimer = 0f;
+        }
+        else
         {
-            previous = current;
+            // Crossfade: new starts at 0, old fades out.
+            newSource.volume = 0f;
+            newSource.Play();
+
+            fadingOutSource = activeSource;
+            activeSource = newSource;
+            fadingTimer = crossFadeTime;
         }
-
-        // Create a new current source
-        current = gameObject.GetOrAdd<AudioSource>();
-        ConfigureSource(current);
-
-        current.clip = clip;
-        current.volume = 0f; // fade-in from zero
-        current.Play();
-
-        fading = Mathf.Max(0.01f, crossFadeTime);
     }
 
     private void ConfigureSource(AudioSource source)
     {
         if (source == null) return;
 
-        source.loop = false; // playlist handles looping
         source.playOnAwake = false;
+        source.loop = false; // playlist handles looping
         source.outputAudioMixerGroup = musicMixerGroup;
 
-        // keep music consistent / clean
+        // Keep music clean and 2D
         source.bypassEffects = true;
         source.bypassListenerEffects = true;
         source.dopplerLevel = 0f;
-        source.spatialBlend = 0f; // 2D music
+        source.spatialBlend = 0f;
     }
 
     #endregion
@@ -228,34 +259,28 @@ public class MusicManager : PersistentSingleton<MusicManager>
 
     private void HandleCrossFade()
     {
-        if (fading <= 0f) return;
+        if (fadingTimer <= 0f || activeSource == null || fadingOutSource == null)
+            return;
 
-        fading -= Time.unscaledDeltaTime;
-        float t = 1f - Mathf.Clamp01(fading / crossFadeTime);
+        fadingTimer -= Time.unscaledDeltaTime;
+        float t = 1f - Mathf.Clamp01(fadingTimer / crossFadeTime);
 
-        // logarithmic fraction for nicer fade curve
+        // nicer curve using your ToLogarithmicFraction() extension
         float logT = t.ToLogarithmicFraction();
 
-        if (previous != null)
-            previous.volume = 1f - logT;
+        fadingOutSource.volume = 1f - logT;
+        activeSource.volume = logT;
 
-        if (current != null)
-            current.volume = logT;
-
-        if (fading <= 0f)
+        if (fadingTimer <= 0f)
         {
-            // Fade done; kill previous
-            if (previous != null)
-            {
-                previous.Stop();
-                Destroy(previous);
-                previous = null;
-            }
+            // Fade completed: stop and clear the old source
+            fadingOutSource.Stop();
+            fadingOutSource.volume = 0f;
+            fadingOutSource.clip = null;
+            fadingOutSource = null;
 
-            if (current != null)
-                current.volume = 1f;
-
-            fading = 0f;
+            activeSource.volume = 1f;
+            fadingTimer = 0f;
         }
     }
 

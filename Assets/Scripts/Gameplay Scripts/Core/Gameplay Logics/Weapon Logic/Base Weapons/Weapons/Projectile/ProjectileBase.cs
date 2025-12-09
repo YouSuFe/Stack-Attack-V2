@@ -4,14 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile, IPausable, IPoolDespawnable
 {
-    [Header("Damage")]
-    [SerializeField] private int damageAmount = 1;
 
     [Header("Lifetime")]
     [SerializeField] private float maxLifetimeSeconds = 6f;
-
-    [Header("Piercing")]
-    [SerializeField] private int startingPiercing = 0;
 
     [Header("Hit Counting")]
     [Tooltip("How this projectile contributes to the hit-based charge bar.")]
@@ -24,6 +19,9 @@ public abstract class ProjectileBase : MonoBehaviour, IDamageDealer, IProjectile
     public HitCountPolicy HitCountPolicy => hitCountPolicy;
     public WeaponType SourceWeapon { get; private set; } = WeaponType.Basic;
     public int RemainingPiercing => remainingPiercing;
+
+    private int damageAmount = 1;
+    private int startingPiercing = 0;
 
     private float lifeTimer;
     private int remainingPiercing;

@@ -29,6 +29,7 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
     public bool CanAutoFire => autoFireEnabled;
     public bool IsReadyToFire => Time.time >= nextFireTimeSeconds && canAttack;
 
+    protected int damage = 1;
 
     /// <summary>Called by WeaponDriver immediately after creation.</summary>
     public void SetProjectilePoolService(ProjectilePoolService service)
@@ -48,6 +49,7 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon
 
         fireRatePerSecond = definition.BaseFireRatePerSecond;
         projectileAmount = definition.BaseProjectileAmount;
+        damage = definition.BaseDamage;
         piercing = definition.BasePiercing;
         autoFireEnabled = definition.SupportsAutoFire;
 

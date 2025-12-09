@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30884bda8b537453d86172f842620ca7, type: 3}
   m_Name: Straight Down Definition
   m_EditorClassIdentifier: 
-  verticalSpeed: 10
+  verticalSpeed: 1

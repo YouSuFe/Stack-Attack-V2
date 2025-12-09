@@ -29,6 +29,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
 
     [SerializeField, Tooltip("Sound played when this enemy dies.")]
     private SoundData deathSound;
+
+
+    public int currentHealthValue =0;
     #endregion
 
     #region Private Fields
@@ -74,6 +77,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     public void InitializeHealth(int computedMaxHealth)
     {
         maxHealth = Mathf.Max(1, computedMaxHealth);
+        currentHealthValue = currentHealth;
         currentHealth = maxHealth;
         isAlive = true;
 
@@ -92,7 +96,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
 
         int applied = Mathf.Max(1, Mathf.Abs(damageAmount));
         currentHealth = Mathf.Max(0, currentHealth - applied);
-
+        currentHealthValue = currentHealth;
         Debug.Log($"[EnemyHealth] -{applied} from {(damageSource ? damageSource.name : "Unknown")} => {currentHealth}/{maxHealth}");
 
         // Play hit sound for this damage event (even if it kills the enemy)

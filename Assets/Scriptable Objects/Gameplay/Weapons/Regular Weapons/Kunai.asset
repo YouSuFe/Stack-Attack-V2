@@ -18,8 +18,9 @@ MonoBehaviour:
   projectileMotionType: 0
   hitCountPolicy: 0
   patternType: 2
-  baseFireRatePerSecond: 0.7
+  baseFireRatePerSecond: 1.5
   baseProjectileAmount: 3
+  baseDamage: 5
   basePiercing: 0
   supportsAutoFire: 1
   horizontalSimultaneousLimit: 6

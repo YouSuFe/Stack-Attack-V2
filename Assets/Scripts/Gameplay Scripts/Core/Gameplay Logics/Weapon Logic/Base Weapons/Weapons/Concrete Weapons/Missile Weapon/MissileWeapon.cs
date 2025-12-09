@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class MissileWeapon : BaseWeapon
 {
-    [Header("Damage")]
-    [SerializeField] private int damagePerMissile = 2;
-
     [Header("Angle")]
     [SerializeField, Range(0f, 5f)] private float angleJitterDegrees = 1.5f;
 
@@ -90,7 +87,7 @@ public class MissileWeapon : BaseWeapon
             IProjectile projectile = (IProjectile)projectileBase;
             projectile.Initialize(
                 owner: GetOwner() != null ? GetOwner() : gameObject,
-                damageAmount: damagePerMissile,
+                damageAmount: damage,
                 piercing: GetPiercing(),
                 policy: policy
             );

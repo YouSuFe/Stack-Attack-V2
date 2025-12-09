@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class KunaiWeapon : BaseWeapon
 {
-    [Header("Fan Damage")]
-    [SerializeField] private int damagePerKunai = 1;         // simple per-shot damage
-
     private Transform fireOrigin;
     private float fanStepDegrees = 5f;
 
@@ -84,7 +81,7 @@ public class KunaiWeapon : BaseWeapon
             IProjectile projectile = (IProjectile)projectileBase;
             projectile.Initialize(
                 owner: GetOwner() != null ? GetOwner() : gameObject,
-                damageAmount: damagePerKunai,
+                damageAmount: damage,
                 piercing: GetPiercing(),
                 policy: policy
             );

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1108681049971871258}
-  - component: {fileID: 8811870335047647335}
   - component: {fileID: 4773106874129434010}
+  - component: {fileID: 8811870335047647335}
   m_Layer: 7
   m_Name: Shuriken
   m_TagString: Projectile
@@ -35,29 +35,6 @@ Transform:
   - {fileID: 4422059228654461407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8811870335047647335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326078946460496859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b2f9570b4195463c870d61e6b18b34b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 1
-  maxLifetimeSeconds: 6
-  startingPiercing: 0
-  hitCountPolicy: 0
-  trailRenderer: {fileID: 0}
-  forwardSpeed: 5
-  sineAmplitude: 0.7
-  sineFrequencyHz: 2.5
-  phaseOffsetRadians: 0
-  minRotationSpeed: 200
-  maxRotationSpeed: 600
 --- !u!61 &4773106874129434010
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -104,6 +81,29 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
+--- !u!114 &8811870335047647335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326078946460496859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2f9570b4195463c870d61e6b18b34b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 5
+  maxLifetimeSeconds: 6
+  startingPiercing: 0
+  hitCountPolicy: 0
+  trailRenderer: {fileID: 6380485989228475919}
+  forwardSpeed: 5
+  sineAmplitude: 0.7
+  sineFrequencyHz: 2.5
+  phaseOffsetRadians: 0
+  minRotationSpeed: 200
+  maxRotationSpeed: 600
 --- !u!1 &5714532426931844846
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +131,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1108681049971871258}
