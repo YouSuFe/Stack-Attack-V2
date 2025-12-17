@@ -28,6 +28,8 @@ public class PlayerReviveController : MonoBehaviour
     private void HandleReviveRequested()
     {
         playerHealth?.Revive();
+
+        LevelContextBinder.Instance?.ResetOutcomeHandled();
     }
 }
 

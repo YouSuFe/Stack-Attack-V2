@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
+    [Header("Player")]
+    [SerializeField] private GameObject playerVisuals;
+
     [Header("Hearts (no max cap)")]
     [SerializeField] private int startingHearts = 3;
 
@@ -48,8 +51,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         int previousHearts = CurrentHearts;
         CurrentHearts = Mathf.Max(0, CurrentHearts - damageAmount);
 
-        Debug.Log($"[TakeDamage] Previous Health: {previousHearts}, Damage: {damageAmount}, Current Health: {CurrentHearts}");
-
         OnDamaged?.Invoke(CurrentHearts, damageAmount, damageSource);
 
         if (CurrentHearts <= 0)
@@ -67,15 +68,8 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         if (!IsAlive) return;
         if (healAmount <= 0) return;
 
-        CurrentHearts += healAmount; // no max cap
         OnHealed?.Invoke(CurrentHearts, healAmount);
-    }
-
-    public void AddHearts(int additionalHearts)
-    {
-        if (additionalHearts <= 0) return;
-        CurrentHearts += additionalHearts; // no cap
-        OnHealed?.Invoke(CurrentHearts, additionalHearts);
+        CurrentHearts += healAmount; // no max cap
     }
 
     public void ForceInvulnerability(float durationSeconds)
@@ -93,8 +87,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     {
         OnDied?.Invoke();
         // Disable gameplay here or notify GameManager via event subscribers.
-        Debug.Log("[PlayerHealth] Player is dead.");
-        gameObject.SetActive(false);
+        playerVisuals.SetActive(false);
     }
 
     public void Revive()
@@ -103,23 +96,22 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         IsInvulnerable = true;
 
         // Reactivate player if disabled
-        if (!gameObject.activeSelf)
-            gameObject.SetActive(true);
+        if (!playerVisuals.activeSelf)
+            playerVisuals.SetActive(true);
 
         // Make player invulnerable for a short period after revive
         StartInvulnerability();
 
+        // Trigger healing event for UI updates
+        OnHealed?.Invoke(CurrentHearts, startingHearts);
+
         // Restore health 
         CurrentHearts = startingHearts;
-
-        // Trigger healing event for UI updates
-        OnHealed?.Invoke(CurrentHearts, 3);
-
-        Debug.Log("[PlayerHealth] Player revived with 3 hearts and temporary invulnerability.");
     }
 
     private void StartInvulnerability()
     {
+        Debug.LogError("We entered invulnurability almost");
         if (invulnerabilityCoroutine != null)
             StopCoroutine(invulnerabilityCoroutine);
 
@@ -131,6 +123,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         IsInvulnerable = true;
         OnInvulnerabilityStarted?.Invoke(duration);
 
+        Debug.LogError("We entered invulnurability but not sure if works.");
         if (shieldVisualRoot != null) shieldVisualRoot.SetActive(true);
 
         float timeRemaining = duration;
@@ -140,8 +133,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         float blinkHalfPeriod = (shieldBlinkFrequencyHz > 0f) ? (0.5f / shieldBlinkFrequencyHz) : 0.1f;
         bool shieldVisible = true;
 
-        while (timeRemaining > 0f && !PauseManager.Instance.IsGameplayStopped)
+        while (timeRemaining > 0f)
         {
+
+            // If gameplay is paused, don't decrease timers or blink.
+            if (PauseManager.Instance.IsGameplayStopped)
+            {
+                yield return null;
+                continue;
+            }
+
             float dt = Time.deltaTime;
             timeRemaining -= dt;
 

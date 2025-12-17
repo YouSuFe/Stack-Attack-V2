@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider2D))]
-public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
     #region Serialized
     [Header("Lifecycle")]
@@ -18,10 +18,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     [Header("FX (Optional)")]
     [SerializeField, Tooltip("Optional death VFX prefab to spawn at death.")]
     private GameObject deathEffect;
-
-    [Header("Damage Gates")]
-    [SerializeField, Tooltip("If true, ignores damage while paused.")]
-    private bool ignoreDamageWhenPaused = true;
 
     [Header("Audio")]
     [SerializeField, Tooltip("Sound played when this enemy takes damage (non-lethal hit).")]
@@ -38,7 +34,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     private int maxHealth = 1;
     private int currentHealth = 1;
     private bool isAlive;
-    private bool isPaused;
     #endregion
 
     #region Properties
@@ -58,18 +53,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     /// Args: currentHealth, maxHealth.
     /// </summary>
     public event Action<int, int> OnHealthChanged;
-    #endregion
-
-    #region Unity
-    private void OnEnable()
-    {
-        PauseManager.Instance?.Register(this);
-    }
-
-    private void OnDisable()
-    {
-        PauseManager.Instance?.Unregister(this);
-    }
     #endregion
 
     #region Initialization
@@ -92,7 +75,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
     public void TakeDamage(int damageAmount, GameObject damageSource)
     {
         if (!isAlive) return;
-        if (ignoreDamageWhenPaused && isPaused) return;
 
         int applied = Mathf.Max(1, Mathf.Abs(damageAmount));
         currentHealth = Mathf.Max(0, currentHealth - applied);
@@ -143,21 +125,4 @@ public class EnemyHealth : MonoBehaviour, IDamageable, IPausable
         }
     }
     #endregion
-
-    #region IPausable (Pause)
-    public void OnStopGameplay()
-    {
-        isPaused = true;
-    }
-
-    public void OnResumeGameplay()
-    {
-        isPaused = false;
-    }
-    #endregion
-
-#if UNITY_EDITOR
-    [ContextMenu("Debug/Apply 1 Damage")]
-    private void DebugDamage() => TakeDamage(1, null);
-#endif
 }

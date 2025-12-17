@@ -5075,7 +5075,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 6577852958344576935}
   m_Father: {fileID: 6136333600577354325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6948478081456431935
@@ -5158,12 +5159,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5012816360905578783}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.39, y: 1.39, z: 1.39}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 6136333600577354325}
+  m_Father: {fileID: 1223131862073162709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7778390359121152849
 SpriteRenderer:
@@ -5320,7 +5321,6 @@ Transform:
   m_Children:
   - {fileID: 7826751277207541595}
   - {fileID: 1223131862073162709}
-  - {fileID: 6577852958344576935}
   - {fileID: 2317315163981799754}
   - {fileID: 3487699044086942894}
   - {fileID: 5388607127932422898}
@@ -5426,6 +5426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790f336eb161744219441bd38d341da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerVisuals: {fileID: 4927923598107665638}
   startingHearts: 3
   invulnerabilityDurationSeconds: 4
   shieldVisualRoot: {fileID: 5012816360905578783}

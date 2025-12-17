@@ -92,7 +92,7 @@ public class PlayerHealthUI : MonoBehaviour
 
     private void HandleHealed(int currentHearts, int healAmount)
     {
-        RebuildTo(currentHearts);
+        RebuildTo(currentHearts + healAmount);
     }
 
     private void HandleDied()
@@ -114,6 +114,7 @@ public class PlayerHealthUI : MonoBehaviour
         // Add hearts if needed
         while (activeHearts.Count < targetCount)
         {
+            Debug.LogWarning($"{activeHearts.Count} have active hearths. We will add until {targetCount}");
             GameObject heart = Instantiate(heartPrefab, heartsContainer);
             heart.transform.localScale = Vector3.one;
             heart.SetActive(true);

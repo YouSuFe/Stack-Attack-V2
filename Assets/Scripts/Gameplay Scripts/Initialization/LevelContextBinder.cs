@@ -201,5 +201,10 @@ public class LevelContextBinder : MonoBehaviour
         def = CurrentLevelDefinition ?? LevelService.Instance?.CurrentLevel;
         return def != null;
     }
+
+    public void ResetOutcomeHandled()
+    {
+        outcomeHandled = false;
+    }
     #endregion
 }
