@@ -152,6 +152,9 @@ public class ProjectilePoolService : MonoBehaviour
     {
         if (instance == null) return;
 
+        if (!activeInstances.Contains(instance))
+            return;
+
         ProjectileBase prefabKey;
         if (!prefabByInstance.TryGetValue(instance, out prefabKey))
         {
