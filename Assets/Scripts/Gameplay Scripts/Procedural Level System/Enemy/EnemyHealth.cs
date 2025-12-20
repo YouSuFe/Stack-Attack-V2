@@ -55,6 +55,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public event Action<int, int> OnHealthChanged;
     #endregion
 
+    private void Update()
+    {
+        Debug.Log($"Enemy {name} has ~{currentHealth}~ health.");
+    }
+
     #region Initialization
     /// <summary>Called once at spawn by EnemyInitializer.</summary>
     public void InitializeHealth(int computedMaxHealth)

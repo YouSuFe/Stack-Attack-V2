@@ -829,7 +829,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1051973637
   m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &2766139808568623864
@@ -884,7 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88c049561a612495db9c4fc88f9247f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 0}
+  enemyHealth: {fileID: -3609158823353936284}
   healthText: {fileID: 8863325364566783383}
   showMaxHealth: 1
 --- !u!114 &9005744006428909786
@@ -1210,7 +1210,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
   deathEffect: {fileID: 0}
-  ignoreDamageWhenPaused: 1
   hitSound:
     clip: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}

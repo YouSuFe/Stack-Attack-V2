@@ -409,7 +409,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1051973637
   m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &1575987044603161925
@@ -1036,7 +1036,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnDeath: 1
   deathEffect: {fileID: 0}
-  ignoreDamageWhenPaused: 1
   hitSound:
     clip: {fileID: 8300000, guid: 37fb2ade76250d64aaa7abebfded8b1e, type: 3}
     mixerGroup: {fileID: 24300002, guid: 46862c3832f6c481cb791d490b866d6b, type: 2}

@@ -35,9 +35,6 @@ public class ResultFailureView : ResultViewBase
     [SerializeField, Tooltip("Continue/Collect button.")]
     private Button continueButton;
 
-    [SerializeField, Tooltip("Continue text or container.")]
-    private GameObject continueContainer;
-
     [Header("Reached Text Formatting")]
     [SerializeField, Tooltip("If true and a value is provided, formats reachedText as \"REACHED {X}%\".")]
     private bool formatReachedAsPercent = true;
@@ -55,7 +52,7 @@ public class ResultFailureView : ResultViewBase
     #endregion
 
     #region Cached CGs
-    private CanvasGroup bgCg, stageCg, lostCg, iconCg, reachedCg, collectRewardsCg, gridCg, doubleBtnCg, continueCg;
+    private CanvasGroup bgCg, stageCg, lostCg, iconCg, reachedCg, collectRewardsCg, gridCg, doubleBtnCg, continueBtnCg;
     #endregion
 
     #region Base Overrides
@@ -69,7 +66,7 @@ public class ResultFailureView : ResultViewBase
         collectRewardsCg = EnsureCg(collectRewardsText ? collectRewardsText.gameObject : null);
         gridCg = EnsureCg(rewardsGridRoot ? rewardsGridRoot.gameObject : null);
         doubleBtnCg = EnsureCg(doubleRewardsButton ? doubleRewardsButton.gameObject : null);
-        continueCg = EnsureCg(continueContainer ? continueContainer.gameObject : null);
+        continueBtnCg = EnsureCg(continueButton ? continueButton.gameObject : null);
     }
 
     protected override CanvasGroup GetBackgroundCanvasGroup() => bgCg;
@@ -85,7 +82,7 @@ public class ResultFailureView : ResultViewBase
             collectRewardsCg,
             gridCg,
             doubleBtnCg,
-            continueCg
+            continueBtnCg
         };
     }
 
