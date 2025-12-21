@@ -101,6 +101,7 @@ public class SpecialSkillDriver : MonoBehaviour, IPausable
         if (specialDefinition == null || isActive) return;
         if (!isInCombat) return;
         if (currentCharge < specialDefinition.RequiredCharge) return;
+        if (isPaused) return;
 
         if (activeSkill != null && activeSkill.TryActivate())
         {

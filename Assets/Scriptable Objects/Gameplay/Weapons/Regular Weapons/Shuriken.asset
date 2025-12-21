@@ -20,7 +20,7 @@ MonoBehaviour:
   patternType: 1
   baseFireRatePerSecond: 1
   baseProjectileAmount: 4
-  baseDamage: 5
+  baseDamage: 2
   basePiercing: 0
   supportsAutoFire: 1
   horizontalSimultaneousLimit: 10

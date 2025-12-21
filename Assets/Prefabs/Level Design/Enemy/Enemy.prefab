@@ -466,7 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealth: {fileID: -3609158823353936284}
   healthText: {fileID: 2271249669264826244}
-  showMaxHealth: 1
+  showMaxHealth: 0
 --- !u!114 &7025699195584918039
 MonoBehaviour:
   m_ObjectHideFlags: 0

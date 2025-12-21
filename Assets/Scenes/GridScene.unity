@@ -3187,8 +3187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccdea826ff1a46feb4769445fd233bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridConfig: {fileID: 11400000, guid: 1cee0fd99af0f450a9a0cd219226d96d, type: 2}
-  levelDefinition: {fileID: 11400000, guid: e8f2d32dc11be4dd5baa083704fc3c51, type: 2}
+  gridConfig: {fileID: 11400000, guid: 0c5f100204bb449aa8bd86c48483d36e, type: 2}
+  levelDefinition: {fileID: 11400000, guid: 55d5cfabbc04f4b42905b18bac9e078e, type: 2}
   enemyPalette: {fileID: 11400000, guid: b850201ec0e524ad2b02b611aaa96a36, type: 2}
   drawSegmentBands: 1
   labelSegments: 1

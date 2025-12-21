@@ -1,0 +1,1405 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97afe99b6befb4fe6ae31eeb92fe093e, type: 3}
+  m_Name: Enemy1 Segment
+  m_EditorClassIdentifier: 
+  spaceAlignOverride: 3
+  segmentType: 0
+  lengthInRows: 45
+  spawnTable:
+  - rowOffset: 0
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 0
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 0
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 1
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 1
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 1
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 2
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 2
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 2
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7f9dc772d8e454cf9bcaa21f742431b4, type: 2}
+  - rowOffset: 4
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 4
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 4
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 4
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 5
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 5
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 5
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 5
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 6
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 6
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 6
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 6
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 8
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 8
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 8
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 8
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 9
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 9
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 9
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 9
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 10
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 10
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 10
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 10
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 0f564c9598ddc440cb275420665fd627, type: 2}
+  - rowOffset: 12
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 12
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 12
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 12
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 13
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 13
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 13
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 13
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 14
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 14
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 14
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 14
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 19
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 18
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 17
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 16
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 15
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 15
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 16
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 18
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 19
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 17
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 17
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 19
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 15
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 0
+    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
+  - rowOffset: 21
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 21
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 22
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 22
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 23
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 23
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 24
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 24
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 25
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 26
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 27
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 27
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 28
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 28
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: e6b330d1614ef44ac92e8830e7978e39, type: 2}
+  - rowOffset: 29
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 29
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 30
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 30
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 32
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 32
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 32
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 32
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 32
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 33
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 33
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 33
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 33
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 33
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 34
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 34
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 34
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 34
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 34
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 36
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 36
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 36
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 36
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 36
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 37
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 37
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 37
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 38
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: c815d88be82fc4b2498a52bb32b3e421, type: 2}
+  - rowOffset: 40
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 40
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 40
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 40
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 40
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 41
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 41
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 41
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 41
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 41
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 42
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 42
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 42
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 42
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 42
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 43
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 43
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 43
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 43
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 43
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 44
+    column: 0
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 44
+    column: 1
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 44
+    column: 2
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 44
+    column: 3
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 44
+    column: 4
+    spawnType: 0
+    payload: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  - rowOffset: 31
+    column: 2
+    spawnType: 6
+    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+    count: 1
+    spacing: 1
+    tags: []
+    enemyColor:
+      hue: 4
+      tone: 1
+    enemyDefinition: {fileID: 11400000, guid: 03922187a3f554a0fa78e8e788c73bf2, type: 2}
+  stripes: []

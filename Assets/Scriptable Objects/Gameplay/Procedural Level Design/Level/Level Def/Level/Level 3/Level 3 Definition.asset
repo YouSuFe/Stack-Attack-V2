@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091785b8df3574660bbf4724c20d9a93, type: 3}
+  m_Name: Level 3 Definition
+  m_EditorClassIdentifier: 
+  segments:
+  - {fileID: 11400000, guid: f2f1df0d595ca4962b2dabc40ea40cf4, type: 2}
+  - {fileID: 11400000, guid: 6256061d4c26a4d6aa745ab9342272e9, type: 2}
+  - {fileID: 11400000, guid: f2f1df0d595ca4962b2dabc40ea40cf4, type: 2}
+  - {fileID: 11400000, guid: 77b139f843e0145649905fdbb38fb90f, type: 2}
+  - {fileID: 11400000, guid: f2f1df0d595ca4962b2dabc40ea40cf4, type: 2}
+  - {fileID: 11400000, guid: 11f73a900af344da4b24d55640091183, type: 2}
+  - {fileID: 11400000, guid: f2f1df0d595ca4962b2dabc40ea40cf4, type: 2}
+  - {fileID: 11400000, guid: a712ff3cbd22b4eb9944ff8e7f560bb3, type: 2}
+  rewardDefinition: {fileID: 11400000, guid: 3e8f47bf3e0224a4b993bb464456c7f0, type: 2}

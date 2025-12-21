@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 425a99d3d90e04821b91d94df01096de, type: 3}
-  m_Name: LevelRewardDefinition
+  m_Name: Level 2 LevelRewardDefinition
   m_EditorClassIdentifier: 
-  coinValuePerPickup: 5
-  maxExpOnSuccess: 8
-  minExpOnFail: 1
+  coinValuePerPickup: 2
+  maxExpOnSuccess: 6
+  minExpOnFail: 2

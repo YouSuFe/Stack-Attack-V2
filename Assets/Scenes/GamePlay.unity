@@ -1373,7 +1373,7 @@ MonoBehaviour:
   dragDuration: 1
   allowedLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   allowedTags:
   - Enemy
   - Coin
@@ -4232,7 +4232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &497009733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7303,7 +7303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9988,7 +9988,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1170963669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17057,7 +17057,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3b4eb09f95a8470448b72eae0dc370ab, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b76b0241f0cb4cd1abd5bf186b34fb3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21269,8 +21269,8 @@ SceneRoots:
   - {fileID: 1170963670}
   - {fileID: 680979612}
   - {fileID: 908296643}
-  - {fileID: 312581718}
   - {fileID: 1191236787}
+  - {fileID: 312581718}
   - {fileID: 2109368965}
   - {fileID: 380224482}
   - {fileID: 1835357367}

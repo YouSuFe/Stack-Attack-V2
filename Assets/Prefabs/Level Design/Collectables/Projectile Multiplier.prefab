@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 926936805
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: -7694390989524306891, guid: 3a6a8e0830eb34b77b625d42b3957baa, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -97,11 +97,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1219001166492042318}
   - component: {fileID: 3140773601718180923}
-  - component: {fileID: 4586247319178813521}
   - component: {fileID: 6815570804048178596}
+  - component: {fileID: -818912924447389503}
+  - component: {fileID: 4586247319178813521}
   m_Layer: 0
   m_Name: Projectile Multiplier
-  m_TagString: Untagged
+  m_TagString: Multiplier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,26 +171,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4586247319178813521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525332354413432264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de886fdd408644f2785d44480d996e06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  totalProjectileCountAfterDuplication: 2
-  duplicateRadialJitterRadius: 0.08
-  basicHorizontalSpacing: 0.5
-  kunaiDuplicateAngleJitterDegrees: 5
-  kunaiLateralBaseSpacing: 0.35
-  missileDuplicateAngleJitterDegrees: 2.5
-  missileDuplicatePhaseJitterRadians: 0.35
-  missileLateralBaseSpacing: 0.06
 --- !u!50 &6815570804048178596
 Rigidbody2D:
   serializedVersion: 5
@@ -217,6 +198,71 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
+--- !u!114 &-818912924447389503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525332354413432264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301d0f1c378d84a3ca45bd9e6b276585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stagingLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  usePrefabLayerAsGameplay: 1
+  gameplayLayerOverride:
+    serializedVersion: 2
+    m_Bits: 0
+  defaultDragDuration: 0.5
+  easeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  category: 0
+--- !u!114 &4586247319178813521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1525332354413432264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de886fdd408644f2785d44480d996e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalProjectileCountAfterDuplication: 2
+  duplicateRadialJitterRadius: 0.08
+  basicHorizontalSpacing: 0.5
+  kunaiDuplicateAngleJitterDegrees: 5
+  kunaiLateralBaseSpacing: 0.35
+  missileDuplicateAngleJitterDegrees: 2.5
+  missileDuplicatePhaseJitterRadians: 0.35
+  missileLateralBaseSpacing: 0.06
 --- !u!1 &5768164117115028315
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +337,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 926936805
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 5c26ccd5d16e14688b708101dd2ac849, type: 3}
   m_Color: {r: 0, g: 1, b: 1, a: 0.6117647}

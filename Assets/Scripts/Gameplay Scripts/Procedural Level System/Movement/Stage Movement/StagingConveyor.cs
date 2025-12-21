@@ -49,7 +49,7 @@ public class StagingConveyor : MonoBehaviour, IPausable
     {
         if (isPaused) return;
             
-        float delta = Time.deltaTime * conveyorSpeed;
+        float delta = conveyorSpeed * Time.deltaTime;
         for (int i = 0; i < agents.Count; i++)
         {
             var agent = agents[i];
