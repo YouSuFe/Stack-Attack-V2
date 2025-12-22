@@ -111,7 +111,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 
     private void StartInvulnerability()
     {
-        Debug.LogError("We entered invulnurability almost");
         if (invulnerabilityCoroutine != null)
             StopCoroutine(invulnerabilityCoroutine);
 
@@ -123,7 +122,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         IsInvulnerable = true;
         OnInvulnerabilityStarted?.Invoke(duration);
 
-        Debug.LogError("We entered invulnurability but not sure if works.");
         if (shieldVisualRoot != null) shieldVisualRoot.SetActive(true);
 
         float timeRemaining = duration;

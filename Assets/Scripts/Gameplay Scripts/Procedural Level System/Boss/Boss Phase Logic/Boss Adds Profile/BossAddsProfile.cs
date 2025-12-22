@@ -23,7 +23,7 @@ public class BossAddsProfile : ScriptableObject
     public float laneSpacing = 1.0f;
 
     [Tooltip("Spawn Y = camera top + this offset.")]
-    public float topYOffset = 0.25f;
+    public float topYOffset = 1f;
 
     [Serializable]
     public class WeightedPrefab

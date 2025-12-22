@@ -36,7 +36,10 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
     #region Unity
     private void Update()
     {
-        if (!isActive) return;
+        if (!isActive)
+        {
+            Debug.Log("It is not active " + name,this);
+        }
         if (isPaused) return;
 
         if (verticalSpeed > 0f)

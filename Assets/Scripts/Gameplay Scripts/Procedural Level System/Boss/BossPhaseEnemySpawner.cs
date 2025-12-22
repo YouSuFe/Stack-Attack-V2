@@ -46,8 +46,8 @@ public class BossPhaseEnemySpawner : MonoBehaviour
     [SerializeField, Tooltip("Camera to compute top Y and center X. If null, Camera.main is used.")]
     private Camera targetCamera;
 
-    [SerializeField, Tooltip("Fallback top Y offset if caller doesn't provide one.")]
-    private float topYOffset = 0.25f;
+    [Tooltip("Fallback top Y offset if caller doesn't provide one.")]
+    private float topYOffset = 1f;
     #endregion
 
     #region Per-owner tracking
@@ -127,16 +127,17 @@ public class BossPhaseEnemySpawner : MonoBehaviour
         {
             var acts = go.GetComponents<IStageActivatable>();
             for (int k = 0; k < acts.Length; k++) acts[k].ArmAtEntry(pos);
+            for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
 
-            bool paused = PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped;
-            if (paused)
-            {
-                for (int k = 0; k < acts.Length; k++) acts[k].PauseMover();
-            }
-            else
-            {
-                for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
-            }
+            //bool paused = PauseManager.Instance != null && PauseManager.Instance.IsGameplayStopped;
+            //if (paused)
+            //{
+            //    for (int k = 0; k < acts.Length; k++) acts[k].PauseMover();
+            //}
+            //else
+            //{
+            //    for (int k = 0; k < acts.Length; k++) acts[k].ResumeMover();
+            //}
         }
 
         if (go.TryGetComponent(out EnemyInitializer initializer))

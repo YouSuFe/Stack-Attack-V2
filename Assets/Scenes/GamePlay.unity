@@ -4327,6 +4327,7 @@ GameObject:
   - component: {fileID: 511415620}
   - component: {fileID: 511415621}
   - component: {fileID: 511415623}
+  - component: {fileID: 511415624}
   m_Layer: 0
   m_Name: Border Top
   m_TagString: Untagged
@@ -4407,6 +4408,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd8a770a609437d867815af5994e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &511415624
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511415619}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &524159403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4418,6 +4446,7 @@ GameObject:
   - component: {fileID: 524159404}
   - component: {fileID: 524159405}
   - component: {fileID: 524159407}
+  - component: {fileID: 524159408}
   m_Layer: 0
   m_Name: Border Right
   m_TagString: Untagged
@@ -4498,6 +4527,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd8a770a609437d867815af5994e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &524159408
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524159403}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &530763942
 GameObject:
   m_ObjectHideFlags: 0
@@ -6367,6 +6423,7 @@ GameObject:
   - component: {fileID: 820840266}
   - component: {fileID: 820840267}
   - component: {fileID: 820840269}
+  - component: {fileID: 820840270}
   m_Layer: 0
   m_Name: Border Bottom
   m_TagString: Untagged
@@ -6447,6 +6504,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd8a770a609437d867815af5994e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &820840270
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820840265}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &837972632
 GameObject:
   m_ObjectHideFlags: 0
@@ -9528,9 +9612,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultEnemyPrefab: {fileID: 7133992487809149930, guid: 879c73b3acd224eb5ba6a6606c8b6843, type: 3}
-  defaultMovement: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+  defaultMovement: {fileID: 11400000, guid: d6971f35bff3c4cf2869012355ca0686, type: 2}
   targetCamera: {fileID: 2025328705}
-  topYOffset: 0.25
 --- !u!4 &1048667053
 Transform:
   m_ObjectHideFlags: 0
@@ -11918,6 +12001,7 @@ GameObject:
   - component: {fileID: 1325365972}
   - component: {fileID: 1325365973}
   - component: {fileID: 1325365975}
+  - component: {fileID: 1325365976}
   m_Layer: 0
   m_Name: Border Left
   m_TagString: Untagged
@@ -11998,6 +12082,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0fd8a770a609437d867815af5994e01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1325365976
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325365971}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1340055914
 GameObject:
   m_ObjectHideFlags: 0
@@ -12264,8 +12375,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseManager: {fileID: 1206572569}
-  pauseToggleButton: {fileID: 907079342}
   pauseUiRoot: {fileID: 744143227}
+  pauseToggleButton: {fileID: 907079342}
+  stageText: {fileID: 1638678743}
   resumeButton: {fileID: 1458992024}
   goToMenuButton: {fileID: 900824338}
 --- !u!1 &1370398098
@@ -21084,14 +21196,6 @@ PrefabInstance:
       propertyPath: gameplayCamera
       value: 
       objectReference: {fileID: 2025328705}
-    - target: {fileID: 3605749147578434397, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: m_SortMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3605749147578434397, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: m_RenderAlignment
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6136333600577354325, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -21140,30 +21244,6 @@ PrefabInstance:
       propertyPath: projectilePoolService
       value: 
       objectReference: {fileID: 1875104285}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.70980394
-      objectReference: {fileID: 0}
-    - target: {fileID: 8974679343077867420, guid: 1b356e9675ef147299b3e0066679ffbf, type: 3}
-      propertyPath: InitialModule.startLifetime.minScalar
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

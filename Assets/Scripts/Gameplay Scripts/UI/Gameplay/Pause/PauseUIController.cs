@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using PixeLadder.EasyTransition;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -20,13 +21,16 @@ public class PauseUIController : MonoBehaviour
     [SerializeField, Tooltip("Pause manager that controls gameplay pause/resume.")]
     private PauseManager pauseManager;
 
-    [SerializeField, Tooltip("HUD button that the player taps to open the pause menu.")]
-    private Button pauseToggleButton;
-
     [SerializeField, Tooltip("Root GameObject of the Pause UI (shown when paused).")]
     private GameObject pauseUiRoot;
 
-    [Header("Pause UI Buttons")]
+    [SerializeField, Tooltip("HUD button that the player taps to open the pause menu.")]
+    private Button pauseToggleButton;
+
+    [Header("Pause UI")]
+    [SerializeField, Tooltip("Stage text that shows which level player on.")]
+    private TMP_Text stageText;
+
     [SerializeField, Tooltip("Button inside Pause UI to resume gameplay.")]
     private Button resumeButton;
 
@@ -109,6 +113,8 @@ public class PauseUIController : MonoBehaviour
     {
         if (pauseUiRoot != null)
             pauseUiRoot.SetActive(paused);
+
+        stageText.text = $"Stage {LevelContextBinder.Instance.CurrentLevelNumber1Based}";
 
         // Optional UX: disable the HUD pause button while the menu is up
         if (pauseToggleButton != null)

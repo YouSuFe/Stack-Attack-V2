@@ -634,7 +634,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1240
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -661,12 +661,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
+  m_fontSize: 0.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 1
+  m_fontSizeMax: 0.4
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -1095,8 +1095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 795cd0b58b35c40019c71f962c7bab78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  definition: {fileID: 11400000, guid: 361e93c01e2ed4430a6f4e92d42a65fe, type: 2}
-  fallbackHealth: 20
+  definition: {fileID: 11400000, guid: 072be8f676baa40daacf065b39b3caa8, type: 2}
+  fallbackHealth: 40
 --- !u!114 &5184367690249955576
 MonoBehaviour:
   m_ObjectHideFlags: 0

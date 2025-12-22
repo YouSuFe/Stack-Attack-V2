@@ -17,10 +17,10 @@ MonoBehaviour:
   waveCountRange: {x: 1, y: 4}
   laneCount: 5
   laneSpacing: 1
-  topYOffset: 0.25
+  topYOffset: 1
   prefabs: []
   movements:
-  - movement: {fileID: 11400000, guid: f8435433df67c4650ae3c05697463f86, type: 2}
+  - movement: {fileID: 11400000, guid: d6971f35bff3c4cf2869012355ca0686, type: 2}
     weight: 0.8
-  - movement: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
+  - movement: {fileID: 11400000, guid: 4cc98b690c71c4efaa862b66b07ee05c, type: 2}
     weight: 0.2
