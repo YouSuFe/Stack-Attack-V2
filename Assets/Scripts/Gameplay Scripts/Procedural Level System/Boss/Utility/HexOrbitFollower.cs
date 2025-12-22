@@ -36,6 +36,7 @@ public class HexOrbitFollower : MonoBehaviour, IStageActivatable, IPausable
 
     #region Private
     private bool isActive;
+    private bool isPaused;
     private Vector3[] corners = new Vector3[6];
     private int currentCornerIndex;
     private float pauseTimer;
@@ -89,12 +90,12 @@ public class HexOrbitFollower : MonoBehaviour, IStageActivatable, IPausable
             PauseManager.Instance.Unregister(this);
     }
 
-    public void OnStopGameplay() => PauseMover();
-    public void OnResumeGameplay() => ResumeMover();
+    public void OnStopGameplay() => isPaused = true;
+    public void OnResumeGameplay() => isPaused = false;
 
     private void Update()
     {
-        if (!isActive || center == null) return;
+        if (!isActive || center == null || isPaused) return;
 
         // Rebuild only if center moved (prevents jitter/teleport)
         if (stickToCenter)

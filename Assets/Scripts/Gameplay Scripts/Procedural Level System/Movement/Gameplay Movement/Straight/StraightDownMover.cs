@@ -26,7 +26,7 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
         // No baseline capture needed for straight down.
     }
 
-    public void  ResumeMover() => isActive = true;
+    public void ResumeMover() => isActive = true;
 
     public void OnStopGameplay() => isPaused = true;
 
@@ -36,10 +36,7 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
     #region Unity
     private void Update()
     {
-        if (!isActive)
-        {
-            Debug.Log("It is not active " + name,this);
-        }
+        if (!isActive) return;
         if (isPaused) return;
 
         if (verticalSpeed > 0f)

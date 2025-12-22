@@ -940,26 +940,4 @@ MonoBehaviour:
       hue: 0
       tone: 0
     enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
-  - rowOffset: 25
-    column: 2
-    spawnType: 6
-    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
-    count: 1
-    spacing: 1
-    tags: []
-    enemyColor:
-      hue: 0
-      tone: 0
-    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
-  - rowOffset: 5
-    column: 2
-    spawnType: 6
-    payload: {fileID: 11400000, guid: 47b0eeac4d74a4956900e4e2ddd481e9, type: 2}
-    count: 1
-    spacing: 1
-    tags: []
-    enemyColor:
-      hue: 0
-      tone: 0
-    enemyDefinition: {fileID: 11400000, guid: 7cabe14265e3f446595b5a1a066c4ed3, type: 2}
   stripes: []
