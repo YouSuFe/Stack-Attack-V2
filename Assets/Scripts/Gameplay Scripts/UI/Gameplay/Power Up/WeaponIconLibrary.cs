@@ -18,6 +18,7 @@ public class WeaponIconLibrary : ScriptableObject
     [Header("Fallbacks")]
     [SerializeField] private Sprite defaultWeaponIcon;
     [SerializeField] private Sprite defaultUpgradeIcon;
+    [SerializeField] private Sprite defaultAllWeaponsUpgradeIcon;
 
     public Sprite GetWeaponIcon(WeaponType type)
     {
@@ -31,6 +32,11 @@ public class WeaponIconLibrary : ScriptableObject
     public Sprite GetUpgradeIcon()
     {
         return defaultUpgradeIcon != null ? defaultUpgradeIcon : defaultWeaponIcon;
+    }
+
+    public Sprite GetAllWeaponsUpgradeIcon()
+    {
+        return defaultAllWeaponsUpgradeIcon != null ? defaultAllWeaponsUpgradeIcon : defaultUpgradeIcon;
     }
 }
 

@@ -55,11 +55,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public event Action<int, int> OnHealthChanged;
     #endregion
 
-    private void Update()
-    {
-        Debug.Log($"Enemy {name} has ~{currentHealth}~ health.");
-    }
-
     #region Initialization
     /// <summary>Called once at spawn by EnemyInitializer.</summary>
     public void InitializeHealth(int computedMaxHealth)
@@ -84,7 +79,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         int applied = Mathf.Max(1, Mathf.Abs(damageAmount));
         currentHealth = Mathf.Max(0, currentHealth - applied);
         currentHealthValue = currentHealth;
-        Debug.Log($"[EnemyHealth] -{applied} from {(damageSource ? damageSource.name : "Unknown")} => {currentHealth}/{maxHealth}");
 
         // Play hit sound for this damage event (even if it kills the enemy)
         if (hitSound != null)

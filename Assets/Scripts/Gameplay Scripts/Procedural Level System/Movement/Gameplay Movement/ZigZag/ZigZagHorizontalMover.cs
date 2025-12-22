@@ -19,6 +19,8 @@ public class ZigZagHorizontalMover : MonoBehaviour, IStageActivatable, IPausable
     private float startX;
     private float timer;
     private bool isActive = false;
+    private bool isPaused = false;
+
     #endregion
 
 
@@ -36,12 +38,14 @@ public class ZigZagHorizontalMover : MonoBehaviour, IStageActivatable, IPausable
             PauseManager.Instance.Unregister(this);
     }
 
-    public void OnStopGameplay() => PauseMover();
-    public void OnResumeGameplay() => ResumeMover();
+    public void OnStopGameplay() => isPaused = true;
+
+    public void OnResumeGameplay() => isPaused = false;
 
     private void Update()
     {
         if (!isActive) return;
+        if (isPaused) return;
 
         timer += Time.deltaTime;
 

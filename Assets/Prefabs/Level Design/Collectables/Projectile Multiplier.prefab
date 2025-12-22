@@ -159,7 +159,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.24751362}
   m_SpriteTilingProperty:
     border: {x: 0.29999998, y: 0.01, z: 0.29999998, w: 0.01}
     pivot: {x: 0.5, y: 0.5}
@@ -169,7 +169,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.50497276}
   m_EdgeRadius: 0
 --- !u!50 &6815570804048178596
 Rigidbody2D:
@@ -262,7 +262,7 @@ MonoBehaviour:
   kunaiLateralBaseSpacing: 0.35
   missileDuplicateAngleJitterDegrees: 2.5
   missileDuplicatePhaseJitterRadians: 0.35
-  missileLateralBaseSpacing: 0.06
+  missileLateralBaseSpacing: 0.5
 --- !u!1 &5768164117115028315
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1051973637
   m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &8691936552391250232

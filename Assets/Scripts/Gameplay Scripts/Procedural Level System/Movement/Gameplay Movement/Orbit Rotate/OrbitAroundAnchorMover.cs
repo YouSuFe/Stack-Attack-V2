@@ -18,6 +18,7 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable, IPausabl
     private float radius;
     private float personalY;
     private bool isActive = false;
+    private bool isPaused = false;
     private bool armed = false;       // baseline captured?
     #endregion
 
@@ -54,7 +55,7 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable, IPausabl
 
     private void Update()
     {
-        if (!isActive || anchor == null) return;
+        if (!isActive || anchor == null || isPaused) return;
 
         // Optional per-unit descent
         if (personalVerticalSpeed != 0f)
@@ -182,7 +183,8 @@ public class OrbitAroundAnchorMover : MonoBehaviour, IStageActivatable, IPausabl
         armed = false;
     }
 
-    public void OnStopGameplay() => PauseMover();
-    public void OnResumeGameplay() => ResumeMover();
+    public void OnStopGameplay() => isPaused = true;
+
+    public void OnResumeGameplay() => isPaused = false;
     #endregion
 }

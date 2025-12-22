@@ -155,6 +155,9 @@ public class PowerupPanelUIController : MonoBehaviour
         if (offer.upgrade != null && offer.upgrade.Scope == WeaponUpgradeScope.SpecificWeapon)
             return weaponIconLibrary.GetWeaponIcon(offer.upgrade.TargetWeaponType);
 
+        if (offer.upgrade != null && offer.upgrade.Scope == WeaponUpgradeScope.AllWeapons)
+            return weaponIconLibrary.GetAllWeaponsUpgradeIcon();
+
         return weaponIconLibrary.GetUpgradeIcon();
     }
 

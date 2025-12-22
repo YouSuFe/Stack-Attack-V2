@@ -68,9 +68,7 @@ public class PauseUIController : MonoBehaviour
     #region Button Handlers
     private void OnPauseToggleClicked()
     {
-        Debug.Log("Something is not wrong.");
         if (pauseManager == null) return;
-        Debug.Log("Something is wrong.");
 
         // Always pause & open the menu when tapping the HUD pause button
         if (!pauseManager.IsGameplayStopped)

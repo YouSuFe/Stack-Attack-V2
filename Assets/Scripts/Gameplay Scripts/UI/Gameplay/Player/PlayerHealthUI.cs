@@ -52,6 +52,11 @@ public class PlayerHealthUI : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        RebuildTo(playerHealth.CurrentHearts);
+    }
+
     private void OnEnable()
     {
         Subscribe();

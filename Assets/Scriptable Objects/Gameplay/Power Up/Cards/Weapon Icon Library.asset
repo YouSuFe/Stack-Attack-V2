@@ -19,5 +19,6 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: bec51c4a764694f5e835e81e7a14d1b8, type: 3}
   - weaponType: 1
     sprite: {fileID: 21300000, guid: dad3a32f6e3a4459ba69d629ee1d75c1, type: 3}
-  defaultWeaponIcon: {fileID: -6630107450281793048, guid: 9eb20d20c60934640aeb934f42664ff9, type: 3}
-  defaultUpgradeIcon: {fileID: -6630107450281793048, guid: 9eb20d20c60934640aeb934f42664ff9, type: 3}
+  defaultWeaponIcon: {fileID: 21300000, guid: bb3794a1832b0424fb040216348267d3, type: 3}
+  defaultUpgradeIcon: {fileID: 21300000, guid: bb3794a1832b0424fb040216348267d3, type: 3}
+  defaultAllWeaponsUpgradeIcon: {fileID: 21300000, guid: 5bf10db6482634b4bb146ae1113225b9, type: 3}

@@ -11,6 +11,7 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
 
     #region Private Fields
     private bool isActive = false;
+    private bool isPaused = false;
     #endregion
 
     #region Public API
@@ -25,16 +26,18 @@ public class StraightDownMover : MonoBehaviour, IStageActivatable, IPausable
         // No baseline capture needed for straight down.
     }
 
-    public void ResumeMover() => isActive = true;
+    public void  ResumeMover() => isActive = true;
 
-    public void OnStopGameplay() => PauseMover();
-    public void OnResumeGameplay() => ResumeMover();
+    public void OnStopGameplay() => isPaused = true;
+
+    public void OnResumeGameplay() => isPaused = false;
     #endregion
 
     #region Unity
     private void Update()
     {
         if (!isActive) return;
+        if (isPaused) return;
 
         if (verticalSpeed > 0f)
             transform.position += Vector3.down * (verticalSpeed * Time.deltaTime);

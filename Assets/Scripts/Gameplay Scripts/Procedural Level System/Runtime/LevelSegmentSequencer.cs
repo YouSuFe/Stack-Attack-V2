@@ -629,11 +629,6 @@ public class LevelSegmentSequencer : MonoBehaviour
             var alpha = sr.color.a;
             sr.color = new Color(color.r, color.g, color.b, alpha);
         }
-
-        // Debug: log info about what just happened
-        Debug.Log($"[LevelSegmentSequencer] Applied enemy color {color} to '{obj.name}'. " +
-                  $"SpriteRenderers found: {spriteRenderers.Length}. " +
-                  $"First renderer: '{spriteRenderers[0].name}', newColor={spriteRenderers[0].color}", obj);
     }
 
     #endregion

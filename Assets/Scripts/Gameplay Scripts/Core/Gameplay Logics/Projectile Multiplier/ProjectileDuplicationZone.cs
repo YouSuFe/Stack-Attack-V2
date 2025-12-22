@@ -36,7 +36,7 @@ public class ProjectileDuplicationZone : MonoBehaviour, IPausable, IInitializabl
     [SerializeField, Range(0f, Mathf.PI)] private float missileDuplicatePhaseJitterRadians = 0.35f;
 
     [Tooltip("Base lateral spacing (world units) for Missile duplicates. Scales per duplicate index to create nice separation.")]
-    [SerializeField, Range(0f, 0.5f)] private float missileLateralBaseSpacing = 0.06f;
+    [SerializeField, Range(0f, 0.5f)] private float missileLateralBaseSpacing = 0.25f;
 
     #endregion
 

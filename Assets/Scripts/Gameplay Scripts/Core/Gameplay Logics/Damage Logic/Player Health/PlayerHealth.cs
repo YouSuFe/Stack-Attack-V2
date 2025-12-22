@@ -106,7 +106,7 @@ public class PlayerHealth : MonoBehaviour, IDamageable
         OnHealed?.Invoke(CurrentHearts, startingHearts);
 
         // Restore health 
-        CurrentHearts = startingHearts;
+        CurrentHearts += startingHearts;
     }
 
     private void StartInvulnerability()
