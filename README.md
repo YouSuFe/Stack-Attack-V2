@@ -1,18 +1,18 @@
-# 🔫 Stack-Attack Style Prototype (Unity 2D)
+#  Stack-Attack Style Prototype (Unity 2D)
 
 This Unity project is a **modular hyper-casual shooter prototype** inspired by *Stack Attack* / *Vampire Survivors* vibes.  
 It emphasizes clean, extensible architecture using **ScriptableObjects**, **interfaces**, and **modular weapon logic** — now with **Unity’s built-in object pooling** for high-perf projectiles.
 
 ---
 
-## 🎮 Core Features
+##  Core Features
 
-### 🧍 Player Movement
+###  Player Movement
 - **Touch/Mouse drag** movement via the **New Input System**.
 - `PlayerDragMover` uses `Rigidbody2D (Kinematic, Interpolate)` for smooth horizontal sliding.
 - All input is centralized in `InputReader` (ScriptableObject) + `InputReaderController` (Mono) to keep gameplay decoupled from input actions.
 
-### 🔫 Weapon System (Data-Driven)
+###  Weapon System (Data-Driven)
 - Each weapon is defined by a **WeaponDefinitionSO** and collected in a **WeaponCatalog**.
 - `WeaponDriver` equips weapons at runtime, handles **fire input** (tap = fire once, hold = auto; release = stop), and applies **upgrades** (fire rate %, amount +, piercing +).
 - Implemented weapons:
@@ -20,7 +20,7 @@ It emphasizes clean, extensible architecture using **ScriptableObjects**, **inte
   2. **MissileWeapon** – Alternating left/right muzzles; sine/cosine arcs; burst schedules respecting fire-rate windows.
   3. **KunaiWeapon** – “Fan sequential” shots with adjustable step degrees and max spread.
 
-### 💥 Projectiles, Damage & Hit Counting
+###  Projectiles, Damage & Hit Counting
 - `ProjectileBase` (inherits `PooledProjectile`) implements:
   - **IDamageDealer** (exposes `DamageAmount`, `Owner`)
   - **IProjectile** (`Initialize(owner, damage, pierce, policy)`)
@@ -40,17 +40,17 @@ It emphasizes clean, extensible architecture using **ScriptableObjects**, **inte
   - `Continuous` – damage **every N seconds** (`TickIntervalSeconds`, default 1.0s)
 - Laser hits can **refill the bar**; optional per-activation “count once per enemy” for balanced pacing.
 
-### 🛡️ Health & Invulnerability
+###  Health & Invulnerability
 - `PlayerHealth` supports hearts, invulnerability window, shield visual toggle + blink at tail end.
 - Implements `IDamageable` to receive projectile & enemy contact damage.
 
-### 👾 Enemy (Test)
+###  Enemy (Test)
 - `TestEnemy` implements **IDamageable + IDamageDealer**.
 - Moves toward player; deals contact damage with per-target cooldown; logs damage & death.
 
 ---
 
-## 🚀 High-Performance Pooling
+##  High-Performance Pooling
 
 ### Why built-in pooling?
 Uses `UnityEngine.Pool.ObjectPool<T>` for zero-GC, typed pools with lifecycle hooks.
@@ -60,9 +60,3 @@ Uses `UnityEngine.Pool.ObjectPool<T>` for zero-GC, typed pools with lifecycle ho
 - **`ProjectileBase : PooledProjectile`**: replaces all `Destroy()` calls with `Despawn()`, resets state in `OnFetchedFromPool()`.
 - **`ProjectilePoolHub`**: owns **one pool per projectile prefab**, supports **prewarm**, **capacity** and hierarchy parenting.
 - **Weapons** request instances via the hub instead of `Instantiate()`.
-
-### Usage (weapon side)
-Replace:
-```csharp
-// OLD
-// GameObject go = Instantiate(projectilePrefab, pos, rot);
