@@ -32,7 +32,7 @@ It emphasizes clean, extensible architecture using **ScriptableObjects**, **inte
   - `IDamageable.TakeDamage(...)` is called
   - **HitEventBus** raises a “player hit” event to charge specials
 
-### ⚡ Special Skill System (Laser)
+### Special Skill System (Laser)
 - **Hit-based charge** (not damage-based). `SpecialSkillDriver` listens to `HitEventBus`.
 - **No cooldown**. Fires **only on input release** and **only in combat** when bar is full; empties bar on fire.
 - `LaserSkill` modes:
